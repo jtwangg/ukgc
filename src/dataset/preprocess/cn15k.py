@@ -13,7 +13,7 @@ import pandas as pd
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/cn15k'
+path = 'dataset/ukg/cn15k_0.7test'
 dataset = pd.read_json(f'{path}/test_1hop_conffilter.json')
 path_nodes = f'{path}/nodes'
 path_edges = f'{path}/edges'

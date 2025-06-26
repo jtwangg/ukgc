@@ -6,11 +6,12 @@ import random
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/nl27k'
+path = 'dataset/ukg/nl27k_0.7test'
 path_nodes = f'{path}/nodes'
 path_edges = f'{path}/edges'
 path_graphs= f'{path}/graphs'
 
+SUBGRAPH_SIZE = 50
 
 
 
@@ -40,8 +41,8 @@ class NL27kBaselineDataset(Dataset):
         edges['src'] = edges['src'].map(node_id_to_attr)
         edges['dst'] = edges['dst'].map(node_id_to_attr)
 
-        # 随机选择 50 行，如果行数不足 50 则选择全部行
-        sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
+        # 随机选择 SUBGRAPH_SIZE 行，如果行数不足 SUBGRAPH_SIZE 则选择全部行
+        sampled_edges = edges.sample(n=min(SUBGRAPH_SIZE, len(edges)), random_state=42)
         desc = sampled_edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
 
         if isinstance(data['answer'], list):

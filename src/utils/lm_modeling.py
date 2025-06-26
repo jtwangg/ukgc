@@ -1,4 +1,6 @@
 import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+
 from tqdm import tqdm
 import gensim
 import torch
@@ -8,7 +10,7 @@ from transformers import AutoModel, AutoTokenizer
 from torch.utils.data import DataLoader
 import numpy as np
 
-pretrained_repo = '/data/jtwang/large-language-models/all-roberta-large-v1'
+pretrained_repo = 'sentence-transformers/all-roberta-large-v1'
 batch_size = 256  # Adjust the batch size as needed
 
 

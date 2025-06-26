@@ -9,7 +9,7 @@ import random
 from io import StringIO
 
 model_name = 'sbert'
-path = 'dataset/ukg/cn15k'
+path = 'dataset/ukg/cn15k_0.7test'
 dataset = pd.read_json(f'{path}/test_1hop_conffilter.json')
 
 path_nodes = f'{path}/nodes'
@@ -109,7 +109,7 @@ class CN15kDataset(Dataset):
 
 if __name__ == '__main__':
 
-    # preprocess()
+    preprocess()
 
     dataset = CN15kDataset()
 

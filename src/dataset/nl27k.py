@@ -9,7 +9,7 @@ import random
 from io import StringIO
 
 model_name = 'sbert'
-path = 'dataset/ukg/nl27k'
+path = 'dataset/ukg/nl27k_0.7test'
 dataset = pd.read_json(f'{path}/test_1hop_conffilter.json')
 
 path_nodes = f'{path}/nodes'
