@@ -1,0 +1,32 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  94987
+# val samples:  8143
+# test samples:  9191
+nl27k process retrival by pcst
+id: 26914
+question: Question: richard_grasso mutualproxyfor what?
+Only output your answer without any explanation.
+Answer: 
+label: new_york_stock_exchange
+graph: Data(x=[3, 1024], edge_index=[2, 6], edge_attr=[6, 1024], num_nodes=3)
+desc: src,edge_attr,dst
+richard_grasso,mutualproxyfor,new_york_stock_exchange
+richard_grasso,controlledbyagent,new_york_stock_exchange
+richard_grasso,personleadsorganization,new_york_stock_exchange
+nyse,synonymfor,new_york_stock_exchange
+new_york_stock_exchange,agentcontrols,richard_grasso
+new_york_stock_exchange,synonymfor,nyse
+
+# train: 94987
+# val: 8143
+# test: 9191
+ppi5k preprocess
+# train samples:  28702
+# val samples:  2326
+# test samples:  2634
+ppi5k process retrival by pcst

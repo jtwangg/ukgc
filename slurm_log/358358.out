@@ -1,0 +1,28 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  94987
+# val samples:  8143
+# test samples:  9191
+nl27k process retrival by pcst
+id: 64649
+question: Question: virgin_atlantic organizationterminatedperson what?
+Only output your answer without any explanation.
+Answer: 
+label: richard_branson
+graph: Data(x=[4, 1024], edge_index=[2, 7], edge_attr=[7, 1024], num_nodes=4)
+desc: src,edge_attr,dst
+virgin_atlantic,organizationterminatedperson,richard_branson
+virgin_atlantic,organizationterminatedperson,richard
+virgin_atlantic,organizationhasperson,richard
+richard,personterminatedbyorganization,virgin_atlantic
+virgin_atlantic,organizationhastopmember,richard
+richard,personleadsorganization,virgin_atlantic
+richard_branson,personterminatedbyorganization,virgin_records
+
+# train: 94987
+# val: 8143
+# test: 9191

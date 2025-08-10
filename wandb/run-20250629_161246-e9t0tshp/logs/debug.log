@@ -1,0 +1,88 @@
+2025-06-29 16:12:46,182 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Current SDK version is 0.15.4
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Configure stats pid to 3013329
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Loading settings from /seu_share/home/qiguilin/220236147/.config/wandb/settings
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Loading settings from /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/settings
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'api_key': '***REDACTED***'}
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train.py', 'program': '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py'}
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_init.py:_log_setup():507] Logging user logs to /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/run-20250629_161246-e9t0tshp/logs/debug.log
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_init.py:_log_setup():508] Logging internal logs to /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/run-20250629_161246-e9t0tshp/logs/debug-internal.log
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_init.py:init():547] calling init triggers
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {'model_name': 'pt_llm', 'project': 'project_g_retriever', 'seed': 0, 'dataset': 'ppi5k_baseline', 'lr': 1e-05, 'wd': 0.05, 'patience': 2, 'batch_size': 8, 'grad_steps': 2, 'num_epochs': 10, 'warmup_epochs': 1, 'eval_batch_size': 16, 'llm_model_name': '7b_chat', 'llm_model_path': '', 'llm_frozen': 'True', 'llm_num_virtual_tokens': 10, 'output_dir': 'output', 'max_txt_len': 512, 'max_new_tokens': 32, 'max_memory': [80], 'gnn_model_name': 'gt', 'gnn_num_layers': 4, 'gnn_in_dim': 1024, 'gnn_hidden_dim': 1024, 'gnn_num_heads': 4, 'gnn_dropout': 0.0}
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_init.py:init():596] starting backend
+2025-06-29 16:12:46,183 INFO    MainThread:3013329 [wandb_init.py:init():600] setting up manager
+2025-06-29 16:12:46,186 INFO    MainThread:3013329 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-06-29 16:12:46,189 INFO    MainThread:3013329 [wandb_init.py:init():606] backend started and connected
+2025-06-29 16:12:46,194 INFO    MainThread:3013329 [wandb_init.py:init():703] updated telemetry
+2025-06-29 16:12:46,393 INFO    MainThread:3013329 [wandb_init.py:init():736] communicating run to backend with 60.0 second timeout
+2025-06-29 16:13:04,417 INFO    Thread-1  :3013329 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/socket.py", line 966, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7ff215b322b0>: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff215b322b0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 320, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/lib/gql_request.py", line 55, in execute
+    request = self.session.post(self.url, **post_args)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/sessions.py", line 635, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7ff215b322b0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2025-06-29 16:13:46,399 ERROR   MainThread:3013329 [wandb_init.py:init():762] encountered error: Run initialization has timed out after 60.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+2025-06-29 16:13:48,415 ERROR   MainThread:3013329 [wandb_init.py:init():1170] Run initialization has timed out after 60.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/wandb_init.py", line 1152, in init
+    run = wi.init()
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/wandb_init.py", line 768, in init
+    raise error
+wandb.errors.CommError: Run initialization has timed out after 60.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+2025-06-29 16:13:49,418 WARNING MsgRouterThr:3013329 [router.py:message_loop():77] message_loop has been closed

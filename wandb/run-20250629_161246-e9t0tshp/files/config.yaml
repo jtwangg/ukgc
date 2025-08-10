@@ -1,0 +1,110 @@
+wandb_version: 1
+
+model_name:
+  desc: null
+  value: pt_llm
+project:
+  desc: null
+  value: project_g_retriever
+seed:
+  desc: null
+  value: 0
+dataset:
+  desc: null
+  value: ppi5k_baseline
+lr:
+  desc: null
+  value: 1.0e-05
+wd:
+  desc: null
+  value: 0.05
+patience:
+  desc: null
+  value: 2
+batch_size:
+  desc: null
+  value: 8
+grad_steps:
+  desc: null
+  value: 2
+num_epochs:
+  desc: null
+  value: 10
+warmup_epochs:
+  desc: null
+  value: 1
+eval_batch_size:
+  desc: null
+  value: 16
+llm_model_name:
+  desc: null
+  value: 7b_chat
+llm_model_path:
+  desc: null
+  value: ''
+llm_frozen:
+  desc: null
+  value: 'True'
+llm_num_virtual_tokens:
+  desc: null
+  value: 10
+output_dir:
+  desc: null
+  value: output
+max_txt_len:
+  desc: null
+  value: 512
+max_new_tokens:
+  desc: null
+  value: 32
+max_memory:
+  desc: null
+  value:
+  - 80
+gnn_model_name:
+  desc: null
+  value: gt
+gnn_num_layers:
+  desc: null
+  value: 4
+gnn_in_dim:
+  desc: null
+  value: 1024
+gnn_hidden_dim:
+  desc: null
+  value: 1024
+gnn_num_heads:
+  desc: null
+  value: 4
+gnn_dropout:
+  desc: null
+  value: 0.0
+_wandb:
+  desc: null
+  value:
+    python_version: 3.9.21
+    cli_version: 0.15.4
+    framework: huggingface
+    huggingface_version: 4.30.2
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1751184766.19009
+    t:
+      1:
+      - 1
+      - 11
+      - 49
+      - 51
+      - 55
+      - 71
+      - 77
+      - 98
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.9.21
+      5: 0.15.4
+      6: 4.30.2
+      8:
+      - 5

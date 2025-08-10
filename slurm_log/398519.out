@@ -1,0 +1,52 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+cn15k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  41712
+# val samples:  3430
+# test samples:  3935
+cn15k process retrival by pcst
+id: 26099
+question: Question: baby relatedto what?
+Only output your answer without any explanation.
+Answer: 
+label: child
+graph: Data(x=[24, 1024], edge_index=[2, 31], edge_attr=[31, 1024], num_nodes=24)
+desc: src,edge_attr,dst
+baby,atlocation,womb
+egg,relatedto,baby
+child,relatedto,small_person
+seed,relatedto,baby
+doll,relatedto,child
+child,relatedto,small
+baby,relatedto,small
+child,relatedto,kid
+baby,relatedto,child
+play,relatedto,child
+adopt,relatedto,child
+baby,relatedto,young
+girl,relatedto,child
+baby,relatedto,little
+boy,relatedto,child
+kitten,relatedto,baby
+child,relatedto,boy
+baby,relatedto,kid
+baby,relatedto,person
+child,relatedto,parents
+child,relatedto,person
+son,relatedto,child
+baby,relatedto,tiny
+child,relatedto,little
+child,relatedto,baby
+child,relatedto,son
+baby,relatedto,new
+chick,relatedto,baby
+cry,relatedto,baby
+child,relatedto,girl
+nest,relatedto,baby
+
+# train: 41712
+# val: 3430
+# test: 3935

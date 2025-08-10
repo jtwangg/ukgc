@@ -1,0 +1,82 @@
+2025-06-29 16:12:46,189 INFO    StreamThr :3013880 [internal.py:wandb_internal():86] W&B internal server running at pid: 3013880, started at: 2025-06-29 16:12:46.188419
+2025-06-29 16:12:46,190 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: status
+2025-06-29 16:12:46,194 INFO    WriterThread:3013880 [datastore.py:open_for_write():85] open: /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/run-20250629_161246-e9t0tshp/run-e9t0tshp.wandb
+2025-06-29 16:12:46,195 DEBUG   SenderThread:3013880 [sender.py:send():369] send: header
+2025-06-29 16:12:46,395 DEBUG   SenderThread:3013880 [sender.py:send():369] send: run
+2025-06-29 16:12:51,395 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:12:56,396 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:01,396 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:04,918 INFO    SenderThread:3013880 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/socket.py", line 966, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connection.py", line 358, in connect
+    self.sock = conn = self._new_conn()
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7fe58481b1f0>: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/adapters.py", line 489, in send
+    resp = conn.urlopen(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fe58481b1f0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/internal/internal_api.py", line 320, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/wandb/sdk/lib/gql_request.py", line 55, in execute
+    request = self.session.post(self.url, **post_args)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/sessions.py", line 635, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/requests/adapters.py", line 565, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7fe58481b1f0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2025-06-29 16:13:06,396 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:11,396 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:16,397 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:21,397 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:26,398 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:31,398 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:36,398 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:41,399 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: keepalive
+2025-06-29 16:13:46,399 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: cancel
+2025-06-29 16:13:46,399 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: cancel
+2025-06-29 16:13:46,399 DEBUG   SenderThread:3013880 [sender.py:send():378] Record cancelled: run
+2025-06-29 16:13:46,399 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: status_report
+2025-06-29 16:13:48,418 DEBUG   HandlerThread:3013880 [handler.py:handle_request():144] handle_request: shutdown
+2025-06-29 16:13:48,418 INFO    HandlerThread:3013880 [handler.py:finish():854] shutting down handler
+2025-06-29 16:13:49,399 INFO    SenderThread:3013880 [sender.py:finish():1526] shutting down sender
+2025-06-29 16:13:49,400 INFO    WriterThread:3013880 [datastore.py:close():298] close: /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/run-20250629_161246-e9t0tshp/run-e9t0tshp.wandb

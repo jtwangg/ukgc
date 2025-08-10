@@ -11,7 +11,7 @@ import pandas as pd
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/nl27k_0.85train'
+path = 'dataset/ukg/train_50neighbor/nl27k_0.85train'
 
 train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')
 val_df = pd.read_json(f'{path}/val_1hop_conffilter.json')

@@ -22,17 +22,19 @@ def main(args):
 
     # Step 1: Set up wandb
     seed = args.seed
-    wandb.init(project=f"{args.project}",
-               name=f"{args.dataset}_{args.model_name}_seed{seed}",
-               config=args)
-
+    # wandb.init(project=f"{args.project}",
+    #            name=f"{args.dataset}_{args.model_name}_seed{seed}",
+    #            config=args)
+    print('start seed everything...')
     seed_everything(seed=args.seed)
+    print('end seed everything!')
     print(args)
 
     dataset = load_dataset[args.dataset]()
     idx_split = dataset.get_idx_split()
 
     # Step 2: Build Node Classification Dataset
+    print('start load dataset...')
     train_dataset = [dataset[i] for i in idx_split['train']]
     val_dataset = [dataset[i] for i in idx_split['val']]
     test_dataset = [dataset[i] for i in idx_split['test']]
@@ -40,8 +42,10 @@ def main(args):
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn)
     val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn)
     test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn)
+    print('end load dataset!')
 
     # Step 3: Build Model
+    print('start load model...')
     args.llm_model_path = llama_model_path[args.llm_model_name]
     model = load_model[args.model_name](graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
 
@@ -55,12 +59,12 @@ def main(args):
     print(f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}")
 
     # Step 5. Training
+    print('start training...')
     num_training_steps = args.num_epochs * len(train_loader)
     progress_bar = tqdm(range(num_training_steps))
     best_val_loss = float('inf')
 
     for epoch in range(args.num_epochs):
-
         model.train()
         epoch_loss, accum_loss = 0., 0.
 
@@ -80,14 +84,15 @@ def main(args):
 
             if (step + 1) % args.grad_steps == 0:
                 lr = optimizer.param_groups[0]["lr"]
-                wandb.log({'Lr': lr})
-                wandb.log({'Accum Loss': accum_loss / args.grad_steps})
+                # wandb.log({'Lr': lr})
+                # wandb.log({'Accum Loss': accum_loss / args.grad_steps})
+                print(f'Lr: {lr}, Accum Loss: {accum_loss / args.grad_steps}')
                 accum_loss = 0.
 
             progress_bar.update(1)
 
         print(f"Epoch: {epoch}|{args.num_epochs}: Train Loss (Epoch Mean): {epoch_loss / len(train_loader)}")
-        wandb.log({'Train Loss (Epoch Mean)': epoch_loss / len(train_loader)})
+        # wandb.log({'Train Loss (Epoch Mean)': epoch_loss / len(train_loader)})
 
         val_loss = 0.
         eval_output = []
@@ -98,7 +103,7 @@ def main(args):
                 val_loss += loss.item()
             val_loss = val_loss/len(val_loader)
             print(f"Epoch: {epoch}|{args.num_epochs}: Val Loss: {val_loss}")
-            wandb.log({'Val Loss': val_loss})
+            # wandb.log({'Val Loss': val_loss})
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
@@ -134,12 +139,13 @@ def main(args):
     # Step 6. Post-processing & compute metrics
     acc = eval_funcs[args.dataset](path)
     print(f'Test Acc {acc}')
-    wandb.log({'Test Acc': acc})
+    # wandb.log({'Test Acc': acc})
 
 
 if __name__ == "__main__":
-
+    print('start load args ...')
     args = parse_args_llama()
+    print('end load args!')
 
     main(args)
     torch.cuda.empty_cache()

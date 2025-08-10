@@ -1,0 +1,52 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+ppi5k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  28702
+# val samples:  2326
+# test samples:  2634
+ppi5k process retrival by pcst
+id: 17086
+question: Question: 883_dvmf_2888 binding what?
+Only output your answer without any explanation.
+Answer: 
+label: 883_dvmf_0477
+graph: Data(x=[18, 1024], edge_index=[2, 31], edge_attr=[31, 1024], num_nodes=18)
+desc: src,edge_attr,dst
+883_dvmf_2248,binding,883_dvmf_2888
+883_dvmf_2835,binding,883_dvmf_0477
+883_dvmf_2888,binding,883_dvmf_0087
+883_dvmf_0477,binding,883_dvmf_1455
+883_dvmf_2888,binding,883_dvmf_0098
+883_dvmf_1455,binding,883_dvmf_0477
+883_dvmf_2888,binding,883_dvmf_0089
+883_dvmf_0477,binding,883_dvmf_2835
+883_dvmf_1453,binding,883_dvmf_2888
+883_dvmf_2888,binding,883_dvmf_0969
+883_dvmf_2888,binding,883_dvmf_1451
+883_dvmf_2888,binding,883_dvmf_0084
+883_dvmf_0082,binding,883_dvmf_2888
+883_dvmf_0091,binding,883_dvmf_2888
+883_dvmf_0081,binding,883_dvmf_2888
+883_dvmf_0477,binding,883_dvmf_2873
+883_dvmf_0087,binding,883_dvmf_2888
+883_dvmf_2873,binding,883_dvmf_0477
+883_dvmf_0969,binding,883_dvmf_2888
+883_dvmf_2888,binding,883_dvmf_0082
+883_dvmf_2888,binding,883_dvmf_0477
+883_dvmf_0084,binding,883_dvmf_2888
+883_dvmf_0094,binding,883_dvmf_2888
+883_dvmf_2888,binding,883_dvmf_0081
+883_dvmf_2888,binding,883_dvmf_2248
+883_dvmf_0089,binding,883_dvmf_2888
+883_dvmf_2888,binding,883_dvmf_1453
+883_dvmf_0477,binding,883_dvmf_2248
+883_dvmf_0095,binding,883_dvmf_2888
+883_dvmf_2248,binding,883_dvmf_0477
+883_dvmf_2888,binding,883_dvmf_0094
+
+# train: 28702
+# val: 2326
+# test: 2634

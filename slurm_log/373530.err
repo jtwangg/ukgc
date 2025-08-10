@@ -1,0 +1,38 @@
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:12<00:12, 12.46s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.16s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:19<00:00,  9.65s/it]
+  0%|          | 0/35875 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py", line 150, in <module>
+    main(args)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py", line 74, in main
+    loss = model(batch)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/model/graph_llm.py", line 164, in forward
+    outputs = self.model(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/accelerate/hooks.py", line 175, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 688, in forward
+    outputs = self.model(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 578, in forward
+    layer_outputs = decoder_layer(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/accelerate/hooks.py", line 175, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 292, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/accelerate/hooks.py", line 175, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/models/llama/modeling_llama.py", line 226, in forward
+    attn_weights = torch.max(
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.22 GiB (GPU 0; 79.21 GiB total capacity; 75.49 GiB already allocated; 1.17 GiB free; 77.19 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+  0%|          | 0/35875 [00:07<?, ?it/s]

@@ -1,0 +1,5 @@
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+  0%|          | 0/33662 [00:00<?, ?it/s] 33%|███▎      | 10999/33662 [00:00<00:00, 109976.99it/s] 68%|██████▊   | 22917/33662 [00:00<00:00, 115383.37it/s]100%|██████████| 33662/33662 [00:00<00:00, 116111.67it/s]

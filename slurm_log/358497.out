@@ -1,0 +1,28 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+cn15k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  41712
+# val samples:  3430
+# test samples:  3935
+cn15k process retrival by pcst
+id: 44051
+question: Question: label isa what?
+Only output your answer without any explanation.
+Answer: 
+label: distinguish
+graph: Data(x=[8, 1024], edge_index=[2, 7], edge_attr=[7, 1024], num_nodes=8)
+desc: src,edge_attr,dst
+name,isa,label
+tag,isa,label
+stigmatize,isa,label
+label,isa,marker
+call,isa,label
+address,isa,label
+label,isa,description
+
+# train: 41712
+# val: 3430
+# test: 3935

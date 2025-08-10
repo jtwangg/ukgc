@@ -12,7 +12,7 @@ import pandas as pd
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/ppi5k_0.7train'
+path = 'dataset/ukg/train_50neighbor/ppi5k_0.7train'
 
 train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')
 val_df = pd.read_json(f'{path}/val_1hop_conffilter.json')
@@ -122,8 +122,8 @@ def generate_split():
         file.write('\n'.join(map(str, test_indices)))
 
 if __name__ == '__main__':
-    # step_one()
-    # step_two()
+    step_one()
+    step_two()
     generate_split()
 
 

@@ -1,0 +1,44 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+cn15k process retrival by pcst
+id: 9222
+question: Question: carol isa what?
+Only output your answer without any explanation.
+Answer: 
+label: sing
+graph: Data(x=[4, 1024], edge_index=[2, 3], edge_attr=[3, 1024], num_nodes=4)
+desc: src,edge_attr,dst
+charles,relatedto,carol
+christmas_carol,relatedto,carol
+carol,isa,song
+
+# train: 0
+# val: 0
+# test: 12536
+cn15k process retrival by random sample 50 triples
+id: 7387
+question: Question: basement partof what?
+Only output your answer without any explanation.
+Answer: 
+label: house
+graph: Data(x=[17, 1024], edge_index=[2, 16], edge_attr=[16, 1024], num_nodes=17)
+desc: src,edge_attr,dst
+house,relatedto,building
+backyard,atlocation,house
+porch,partof,house
+basement,partof,building
+loft,partof,house
+house,partof,assets
+house,partof,street
+walls,partof,house
+entranceway,partof,house
+attic,partof,house
+living_room,partof,house
+garden,partof,house
+shower,partof,house
+roof,partof,house
+library,partof,house
+nail,partof,house
+
+# train: 0
+# val: 0
+# test: 12536
