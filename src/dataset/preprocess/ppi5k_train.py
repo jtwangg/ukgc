@@ -2,7 +2,7 @@ import os
 # os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import torch
 import pandas as pd
-
+import numpy as np
 from tqdm import tqdm
 from torch_geometric.data.data import Data
 
@@ -12,7 +12,7 @@ import pandas as pd
 
 
 model_name = 'sbert'
-path = '/data/jtwang/G-Retriever/dataset/ukg/ppi5k_0.7train'
+path = 'dataset/ukg/ppi5k_0.7train'
 
 train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')
 val_df = pd.read_json(f'{path}/val_1hop_conffilter.json')
@@ -122,9 +122,9 @@ def generate_split():
         file.write('\n'.join(map(str, test_indices)))
 
 if __name__ == '__main__':
-    step_one()
-    step_two()
-    generate_split(len(dataset), f'{path}/split', 0.999, 0.999)
+    # step_one()
+    # step_two()
+    generate_split()
 
 
 

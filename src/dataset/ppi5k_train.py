@@ -9,8 +9,12 @@ import random
 from io import StringIO
 
 model_name = 'sbert'
-path = 'dataset/ukg/ppi5k'
-dataset = pd.read_json(f'{path}/test_1hop_conffilter.json')
+path = 'dataset/ukg/ppi5k_0.7train'
+
+train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')
+val_df = pd.read_json(f'{path}/val_1hop_conffilter.json')
+test_df = pd.read_json(f'{path}/test_1hop_conffilter.json')
+dataset = pd.concat([train_df, val_df, test_df], ignore_index=True)
 
 path_nodes = f'{path}/nodes'
 path_edges = f'{path}/edges'
@@ -51,7 +55,7 @@ class PPI5kDataset(Dataset):
         self.prompt = 'Please answer the given question.'
         self.graph = None
         self.graph_type = 'Knowledge Graph'
-        self.dataset = pd.read_json(f'{path}/test_1hop_conffilter.json')
+        self.dataset = dataset
         self.q_embs = torch.load(f'{path}/q_embs.pt')
 
     def __len__(self):

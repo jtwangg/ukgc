@@ -1,23 +1,22 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import torch
 import pandas as pd
-
+import numpy as np
 from tqdm import tqdm
 from torch_geometric.data.data import Data
 
 from src.utils.lm_modeling import load_model, load_text2embedding
 import pandas as pd
-import numpy as np
 
 
 model_name = 'sbert'
-
 path = 'dataset/ukg/nl27k_0.85train'
-train_dataset = pd.read_json(f'{path}/train_1hop_conffilter.json')
-val_dataset = pd.read_json(f'{path}/val_1hop_conffilter.json')
-test_dataset = pd.read_json(f'{path}/test_1hop_conffilter.json')
-dataset = pd.concat([train_dataset, val_dataset, test_dataset], ignore_index=True)
+
+train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')
+val_df = pd.read_json(f'{path}/val_1hop_conffilter.json')
+test_df = pd.read_json(f'{path}/test_1hop_conffilter.json')
+dataset = pd.concat([train_df, val_df, test_df], ignore_index=True)
 
 path_nodes = f'{path}/nodes'
 path_edges = f'{path}/edges'
@@ -95,16 +94,14 @@ def step_two():
         torch.save(pyg_graph, f'{path_graphs}/{index}.pt')
 
 
+
 def generate_split():
     """
     生成train, val, test的索引，保存到split文件夹下
     """
-    train_indices = np.arange(len(train_dataset))
-    val_indices = np.arange(len(val_dataset)) + len(train_dataset)
-    test_indices = np.arange(len(test_dataset)) + len(train_dataset) + len(val_dataset)
-
-    # Fix bug: remove the indices of the empty graphs from the val indices
-    val_indices = [i for i in val_indices if i != 2937]
+    train_indices = np.arange(len(train_df))
+    val_indices = np.arange(len(val_df)) + len(train_df)
+    test_indices = np.arange(len(test_df)) + len(train_df) + len(val_df)
 
     print("# train samples: ", len(train_indices))
     print("# val samples: ", len(val_indices))
@@ -122,10 +119,6 @@ def generate_split():
 
     with open(f'{path}/split/test_indices.txt', 'w') as file:
         file.write('\n'.join(map(str, test_indices)))
-
-
-
-
 
 if __name__ == '__main__':
     step_one()
