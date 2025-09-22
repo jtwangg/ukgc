@@ -36,10 +36,10 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
-echo "nl27k"
-echo "G-Retriever with random sampled 50 triples"
-python3 train.py --dataset ppi5k_baseline --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 2096 --max_memory 80,80
+# echo "ppi5k"
+# echo "G-Retriever with random sampled 50 triples"
+# python3 train.py --dataset ppi5k_baseline --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 2096 --max_memory 80,80
 
-echo "nl27k"
+echo "ppi5k"
 echo "G-Retriever"
 python3 train.py --dataset ppi5k --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 2096 --max_memory 80,80

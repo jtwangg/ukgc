@@ -1,0 +1,16 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+ppi5k
+G-Retriever
+start load args ...
+end load args!
+start seed everything...
+end seed everything!
+Namespace(model_name='graph_llm', project='project_g_retriever', seed=0, dataset='ppi5k', lr=1e-05, wd=0.05, patience=2, batch_size=2, grad_steps=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=2096, max_new_tokens=32, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0)
+start load dataset...
+end load dataset!
+start load model...
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+trainable params: 31485952 || all params: 6769901568 || trainable%: 0.4650872938659542
+start training...
