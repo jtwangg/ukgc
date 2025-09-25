@@ -1,0 +1,25 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+Question-Only
+############# cn15k_baseline #############
+Namespace(model_name='inference_llm', project='project_g_retriever', seed=0, dataset='cn15k_baseline_conf', lr=1e-05, wd=0.05, patience=2, batch_size=8, grad_steps=2, num_epochs=10, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=0, max_new_tokens=32, max_memory=[80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0)
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/cn15k_baseline_conf/model_name_inference_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_10_seed0.csv
+Test Acc (0.08134679778625717, 0.22909948723584272)
+Textual Graph random sample 50 tripels + Question
+############# cn15k_baseline #############
+Namespace(model_name='inference_llm', project='project_g_retriever', seed=0, dataset='cn15k_baseline_conf', lr=1e-05, wd=0.05, patience=2, batch_size=8, grad_steps=2, num_epochs=10, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=2096, max_new_tokens=32, max_memory=[80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0)
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/cn15k_baseline_conf/model_name_inference_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_2096_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_10_seed0.csv
+Test Acc (0.04103382837578283, 0.167547069396325)
+Textual Graph optimized by pcst + Question
+############# cn15k #############
+Namespace(model_name='inference_llm', project='project_g_retriever', seed=0, dataset='cn15k_conf', lr=1e-05, wd=0.05, patience=2, batch_size=8, grad_steps=2, num_epochs=10, warmup_epochs=1, eval_batch_size=4, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=2096, max_new_tokens=32, max_memory=[80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0)
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/cn15k_conf/model_name_inference_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_2096_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_10_seed0.csv
+Test Acc (0.07392972805940037, 0.22154906948061365)

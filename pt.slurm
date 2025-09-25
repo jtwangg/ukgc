@@ -26,17 +26,17 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
-# prompt tuning with question-only
 # echo "prompt tuning with question-only"
-# python3 train.py --dataset cn15k_baseline --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80
+# python3 train.py --dataset ppi5k_baseline_conf --model_name pt_llm --num_epochs 5 --batch_size 16 --max_txt_len 0 --max_memory 80,80
 
 
-# prompt tuning with random sampled 50 triples
 echo "prompt tuning with random sampled 50 triples"
-python3 train.py --dataset cn15k_baseline --model_name pt_llm --num_epochs 5 --batch_size 2 --max_txt_len 2096 --max_memory 80,80
+python3 train.py --dataset ppi5k_baseline_conf --model_name pt_llm --num_epochs 5 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
 
 
-# prompt tuning with pcst retrieval
 echo "prompt tuning with pcst retrieval"
-python3 train.py --dataset cn15k --model_name pt_llm --num_epochs 5 --max_txt_len 2096 --batch_size 2 --max_memory 80,80
+python3 train.py --dataset ppi5k_conf --model_name pt_llm --num_epochs 5 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+
+
+
 
