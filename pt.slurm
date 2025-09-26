@@ -26,17 +26,27 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
-# echo "prompt tuning with question-only"
-# python3 train.py --dataset ppi5k_baseline_conf --model_name pt_llm --num_epochs 5 --batch_size 16 --max_txt_len 0 --max_memory 80,80
+echo "prompt tuning with question-only"
+python3 train.py --dataset nl27k_baseline_conf --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80
 
 
 echo "prompt tuning with random sampled 50 triples"
-python3 train.py --dataset ppi5k_baseline_conf --model_name pt_llm --num_epochs 5 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+python3 train.py --dataset nl27k_baseline_conf --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
 
 
 echo "prompt tuning with pcst retrieval"
-python3 train.py --dataset ppi5k_conf --model_name pt_llm --num_epochs 5 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+python3 train.py --dataset nl27k_conf --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
 
 
 
+# llm_froze=False, LoRA finetuning
+echo "prompt tuning with question-only"
+python3 train.py --dataset nl27k_baseline_conf --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
 
+
+echo "prompt tuning with random sampled 50 triples"
+python3 train.py --dataset nl27k_baseline_conf --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+
+
+echo "prompt tuning with pcst retrieval"
+python3 train.py --dataset nl27k_conf --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False

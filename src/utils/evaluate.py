@@ -134,11 +134,17 @@ def get_ukg_cp_mse_mae(path):
     mse = []
     mae = []
     pattern = r'\d+\.\d+'
+    pattern2 = r'\d+\.\d+%'
 
     for pred, label in zip(df['pred'], df['label']):
+        pred, label = str(pred), str(label)
         try:
-            conf = re.findall(pattern, pred)[0]
-            conf = float(conf)
+            if re.search(pattern2, pred):
+                conf = re.findall(pattern, str(pred))[0]
+                conf = float(conf) * 0.01
+            else:
+                conf = re.findall(pattern, str(pred))[0]
+                conf = float(conf)
             label = float(label)
             mse.append((conf - label)**2)
             mae.append(abs(conf - label))
@@ -174,5 +180,5 @@ eval_funcs = {
 
 
 if __name__ == "__main__":
-    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_conf/model_name_inference_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_10_seed0.csv'
+    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/ppi5k_conf/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_1600_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_5_seed0.csv'
     print(get_ukg_cp_mse_mae(path))

@@ -50,10 +50,7 @@ class CN15kBaselineConfDataset(Dataset):
         sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
         desc = sampled_edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
 
-        if isinstance(data['confidence'], list):
-            label = ('|').join(data['confidence'])
-        else:
-            label = data['confidence']
+        label = str(round(data['confidence'], 3))
 
         return {
             'id': index,

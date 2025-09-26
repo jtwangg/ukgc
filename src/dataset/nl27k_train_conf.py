@@ -90,10 +90,7 @@ class NL27kConfDataset(Dataset):
 
 
 
-        if isinstance(data['confidence'], list):
-            label = ('|').join(data['confidence'])
-        else:
-            label = data['confidence']
+        label = str(round(data['confidence'], 3))
 
         return {
             'id': index,

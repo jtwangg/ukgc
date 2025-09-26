@@ -90,7 +90,7 @@ class PPI5kConfDataset(Dataset):
 
 
 
-        label = str(data['confidence'])
+        label = str(round(data['confidence'], 3))
 
         return {
             'id': index,
