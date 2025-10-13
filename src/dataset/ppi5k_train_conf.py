@@ -9,7 +9,7 @@ import random
 from io import StringIO
 
 model_name = 'sbert'
-path = 'dataset/ukg/train_50neighbor/confidence_prediction/ppi5k_0.7train'
+path = 'dataset/ukg/train_50neighbor/confidence_prediction_conffilter/ppi5k_0.7train'
 path_wo_conf = 'dataset/ukg/train_50neighbor/ppi5k_0.7train'
 
 train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')

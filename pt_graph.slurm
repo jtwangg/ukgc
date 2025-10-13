@@ -26,20 +26,23 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
-# G-Retriever
-# echo "G-Retriever"
-# python3 train.py --dataset cn15k --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 2096 --max_memory 80,80
-
-# echo "G-Retriever with random sampled 50 triples"
-# python3 train.py --dataset cn15k_baseline --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 2096 --max_memory 80,80
 
 
 
 
-echo "ppi5k"
-echo "G-Retriever with random sampled 50 triples"
-python3 train.py --dataset ppi5k_baseline_conf --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+# echo "cn15k random sampled 50 triples"
+# python3 train.py --dataset cn15k_baseline_conf --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
 
-echo "ppi5k"
-echo "G-Retriever"
-python3 train.py --dataset ppi5k_conf --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+# echo "cn15k G-Retriever"
+# python3 train.py --dataset cn15k_conf --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+
+
+# echo "cn15k random sampled 50 triples"
+# python3 train.py --dataset cn15k_baseline_conf --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+
+# echo "cn15k G-Retriever"
+# python3 train.py --dataset cn15k_conf --model_name graph_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+
+
+
+

@@ -29,16 +29,21 @@ wandb offline
 # echo "cn15k process retrival by pcst"
 # python3 -m src.dataset.cn15k_train_conf
 
-
-
 # echo "nl27k preprocess"
 # python3 -m src.dataset.preprocess.nl27k_train_conf
-echo "nl27k process retrival by pcst"
-python3 -m src.dataset.nl27k_train_conf
-
-
+# echo "nl27k process retrival by pcst"
+# python3 -m src.dataset.nl27k_train_conf
 
 # echo "ppi5k preprocess"
 # python3 -m src.dataset.preprocess.ppi5k_train_conf
-echo "ppi5k process retrival by pcst"
-python3 -m src.dataset.ppi5k_train_conf
+# echo "ppi5k process retrival by pcst"
+# python3 -m src.dataset.ppi5k_train_conf
+
+
+
+
+
+echo "nl27k preprocess"
+python3 -m src.dataset.preprocess.nl27k_train_cp
+# echo "nl27k process retrival by pcst"
+# python3 -m src.dataset.nl27k_train_cp

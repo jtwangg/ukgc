@@ -11,7 +11,7 @@ import pandas as pd
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/train_50neighbor/confidence_prediction/nl27k_0.85train'
+path = 'dataset/ukg/train_50neighbor/confidence_prediction_conffilter/nl27k_0.85train'
 
 train_df = pd.read_json(f'{path}/train_1hop_conffilter.json')
 val_df = pd.read_json(f'{path}/val_1hop_conffilter.json')
@@ -63,7 +63,8 @@ def step_two():
     print('Encoding questions...')
     q_embs = text2embedding(model, tokenizer, device, questions)
     torch.save(q_embs, f'{path}/q_embs.pt')
-
+    
+    # 与链接预测的数据共享graph，graph中只有高置信度数据
     # # encode graphs
     # print('Encoding graphs...')
     # os.makedirs(path_graphs, exist_ok=True)
