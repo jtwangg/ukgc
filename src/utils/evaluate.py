@@ -154,7 +154,19 @@ def get_ukg_cp_mse_mae(path):
         return 0.0
     else:
         return sum(mse)/len(mse), sum(mae)/len(mae), len(mse)/len(df)
-        
+
+
+
+def get_ukg_tc_acc(path):
+    df = pd.read_json(path, lines=True)
+    same = 0
+    for pred, label in zip(df['pred'], df['label']):
+        pred, label = str(pred).lower().strip(), str(label).lower().strip()
+        # print(pred, label)
+        if pred == label:
+            same += 1
+    return same / len(df)
+
 
 
 eval_funcs = {
@@ -175,10 +187,12 @@ eval_funcs = {
     'nl27k_baseline_conf': get_ukg_cp_mse_mae,
     'ppi5k_conf': get_ukg_cp_mse_mae,
     'ppi5k_baseline_conf': get_ukg_cp_mse_mae,
+
+    'nl27k_baseline_tc': get_ukg_tc_acc,
 }
 
 
 
 if __name__ == "__main__":
-    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/ppi5k_baseline_conf/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1600_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
-    print(get_ukg_cp_mse_mae(path))
+    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_tc/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
+    print(get_ukg_tc_acc(path))
