@@ -19,7 +19,7 @@ path_graphs= f'{path}/graphs'
 
 
 
-class NL27kBaselineTCDataset(Dataset):
+class NL27kBaselineTCDataset2(Dataset):
     def __init__(self):
         super().__init__()
         self.prompt = 'Please answer the given question.\nAnswer:'
@@ -51,7 +51,7 @@ class NL27kBaselineTCDataset(Dataset):
 
         # 随机选择 50 行，如果行数不足 50 则选择全部行
         sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
-        desc = edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
+        desc = edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst', 'weight'])
 
         label = (data['answer'].astype(float) >= 0.85).astype(str)
 
@@ -77,9 +77,9 @@ class NL27kBaselineTCDataset(Dataset):
 
 
 if __name__ == '__main__':
-    dataset = NL27kBaselineTCDataset()
+    dataset = NL27kBaselineTCDataset2()
 
-    data = dataset[1]
+    data = dataset[100]
     for k, v in data.items():
         print(f'{k}: {v}')
 

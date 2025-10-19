@@ -1,6 +1,7 @@
 from src.model.llm import LLM
 from src.model.pt_llm import PromptTuningLLM
 from src.model.graph_llm import GraphLLM
+from src.model.llm_newloss import LLM_newloss
 
 
 load_model = {
@@ -8,6 +9,7 @@ load_model = {
     "inference_llm": LLM,
     "pt_llm": PromptTuningLLM,
     "graph_llm": GraphLLM,
+    "llm_newloss": LLM_newloss,
 }
 
 # Replace the following with the model paths

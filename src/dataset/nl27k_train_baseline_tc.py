@@ -53,11 +53,13 @@ class NL27kBaselineTCDataset(Dataset):
         desc = edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst', 'weight'])
 
         label = (data['answer'].astype(float) >= 0.85).astype(str)
+        confidence = data['answer']
 
         return {
             'id': index,
             'question': question,
             'label': label,
+            'confidence': confidence,
             'graph': graph,
             'desc': desc,
         }
@@ -78,7 +80,7 @@ class NL27kBaselineTCDataset(Dataset):
 if __name__ == '__main__':
     dataset = NL27kBaselineTCDataset()
 
-    data = dataset[1]
+    data = dataset[100]
     for k, v in data.items():
         print(f'{k}: {v}')
 

@@ -75,7 +75,8 @@ class NL27kBaselineCPDataset(Dataset):
 if __name__ == '__main__':
     dataset = NL27kBaselineCPDataset()
 
-    data = dataset[1]
+    idx = 101
+    data = dataset[idx]
     for k, v in data.items():
         print(f'{k}: {v}')
 

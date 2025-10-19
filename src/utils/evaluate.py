@@ -2,6 +2,7 @@ import json
 import pandas as pd
 import re
 import string
+from sklearn.metrics import accuracy_score, f1_score
 
 
 def get_accuracy_gqa(path):
@@ -159,13 +160,39 @@ def get_ukg_cp_mse_mae(path):
 
 def get_ukg_tc_acc(path):
     df = pd.read_json(path, lines=True)
-    same = 0
+    
+    valid_preds = []
+    valid_labels = []
+    total_count = len(df)
+    
     for pred, label in zip(df['pred'], df['label']):
-        pred, label = str(pred).lower().strip(), str(label).lower().strip()
-        # print(pred, label)
-        if pred == label:
-            same += 1
-    return same / len(df)
+        # 统一处理为小写并去除空格
+        pred_clean = str(pred).lower().strip()
+        label_clean = str(label).lower().strip()
+        
+        # 检查预测值是否为有效取值（true/false）
+        if pred_clean in ['true', 'false'] and label_clean in ['true', 'false']:
+            # 转换为布尔值以便计算
+            valid_preds.append(pred_clean == 'true')
+            valid_labels.append(label_clean == 'true')
+    
+    # 计算有效数据占比
+    valid_count = len(valid_preds)
+    valid_ratio = valid_count / total_count if total_count > 0 else 0
+    
+    # 计算有效数据上的指标
+    if valid_count == 0:
+        acc = 0.0
+        f1 = 0.0
+    else:
+        acc = accuracy_score(valid_labels, valid_preds)
+        f1 = f1_score(valid_labels, valid_preds, average='binary')
+
+    print(f"Accuracy: {acc:.5f}")
+    print(f"F1: {f1:.5f}")
+    print(f"valid_ratio: {valid_ratio:.5f}")
+
+    return acc
 
 
 
@@ -175,6 +202,7 @@ eval_funcs = {
     # "scene_graphs_baseline": get_accuracy_gqa,
     # "webqsp": get_accuracy_webqsp,
     # "webqsp_baseline": get_accuracy_webqsp,
+
     "ppi5k": get_accuracy_ukg_single_answer,
     "ppi5k_baseline": get_accuracy_ukg_single_answer,
     "nl27k": get_accuracy_ukg_single_answer,
@@ -194,5 +222,5 @@ eval_funcs = {
 
 
 if __name__ == "__main__":
-    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_tc/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
+    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_tc/model_name_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
     print(get_ukg_tc_acc(path))

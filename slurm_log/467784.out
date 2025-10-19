@@ -1,0 +1,20 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k process retrival by pcst
+id: 100
+question: Question: What is the probability that the fact "dunkin__donuts_center proxyof providence" is true? Only output a number between 0 and 1 without any explanation.
+Answer: 
+label: 0.437
+graph: Data(x=[5, 1024], edge_index=[2, 8], edge_attr=[8, 1024], num_nodes=5, edge_weight=[8])
+desc: src,edge_attr,dst,weight
+providence,mutualproxyfor,new,0.964
+providence,proxyfor,new,0.929
+providence,proxyfor,dunkin__donuts_center,0.437
+providence,proxyfor,rhodeisland,0.437
+rhode_island,proxyof,providence,0.999
+rhodeisland,proxyof,providence,0.437
+dunkin__donuts_center,proxyof,providence,0.437
+providence,proxyfor,rhode_island,0.999
+
+# train: 149100
+# val: 12278
+# test: 14034
