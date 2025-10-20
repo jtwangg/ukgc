@@ -74,22 +74,15 @@ class LLM_newloss(torch.nn.Module):
         self.word_embedding = self.model.model.get_input_embeddings()
         
         # 可学习的温度系数，初始化为1.0
-        self.temperature = torch.nn.Parameter(torch.ones(1))
+        self.temperature = torch.nn.Parameter(torch.ones(1)).to(self.model.device)
         
         # 保存损失权重
         self.original_loss_weight = 1.0
         self.custom_loss_weight = 0.1
 
         # 解析 True / False 的词ID，避免硬编码
-        true_id = self.tokenizer.convert_tokens_to_ids("True")
-        false_id = self.tokenizer.convert_tokens_to_ids("False")
-        # 回退方案：如果未能直接转换，则使用编码的最后一个子词ID
-        if true_id is None or true_id == 0 and hasattr(self.tokenizer, 'unk_token_id') and self.tokenizer.unk_token_id is not None and true_id == self.tokenizer.unk_token_id:
-            encoded_true = self.tokenizer("True", add_special_tokens=False).input_ids
-            true_id = encoded_true[-1] if len(encoded_true) > 0 else 0
-        if false_id is None or false_id == 0 and hasattr(self.tokenizer, 'unk_token_id') and self.tokenizer.unk_token_id is not None and false_id == self.tokenizer.unk_token_id:
-            encoded_false = self.tokenizer("False", add_special_tokens=False).input_ids
-            false_id = encoded_false[-1] if len(encoded_false) > 0 else 0
+        true_id = self.tokenizer("True", add_special_tokens=False).input_ids[0]
+        false_id = self.tokenizer("False", add_special_tokens=False).input_ids[0]
         self.true_token_id = true_id
         self.false_token_id = false_id
 

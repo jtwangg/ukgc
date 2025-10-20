@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from torch.nn.utils import clip_grad_norm_
 
 from src.model import load_model, llama_model_path
-from src.dataset import load_dataset
+
 from src.utils.evaluate import eval_funcs
 from src.config import parse_args_llama
 from src.utils.ckpt import _save_checkpoint, _reload_best_model
@@ -19,7 +19,8 @@ from src.utils.lr_schedule import adjust_learning_rate
 
 
 def main(args):
-
+    from src.dataset import load_dataset
+    
     # Step 1: Set up wandb
     seed = args.seed
     # wandb.init(project=f"{args.project}",

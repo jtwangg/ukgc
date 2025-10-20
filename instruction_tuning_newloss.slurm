@@ -30,11 +30,11 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 # llm_froze=False, LoRA finetuning
 echo "instruction tuning with question-only, llm_froze=False"
-python3 train.py --dataset nl27k_baseline_tc --model_name llm_newloss --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
+python3 train.py --dataset nl27k_baseline_tc --model_name llm_newloss --max_new_tokens 1 --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
 
 
 echo "instruction tuning with random sampled 50 triples, llm_froze=False"
-python3 train.py --dataset nl27k_baseline_tc --model_name llm_newloss --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
+python3 train.py --dataset nl27k_baseline_tc --model_name llm_newloss --max_new_tokens 1 --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
 
 
 # echo "instruction tuning with pcst retrieval, llm_froze=False"
