@@ -2,3 +2,31 @@
   warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
 /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
   warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.48s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.23s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.57s/it]
+  0%|          | 0/27954 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py", line 150, in <module>
+    main(args)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py", line 74, in main
+    loss = model(batch)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/model/llm_newloss.py", line 182, in forward
+    true_false_logits = generation_logits[:, [self.true_token_id, self.false_token_id]] / self.temperature  # [batch_size, 2]
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+  0%|          | 0/27954 [00:07<?, ?it/s]
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.35s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.19s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:13<00:00,  6.52s/it]
+  0%|          | 0/223650 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py", line 150, in <module>
+    main(args)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train.py", line 74, in main
+    loss = model(batch)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/model/llm_newloss.py", line 182, in forward
+    true_false_logits = generation_logits[:, [self.true_token_id, self.false_token_id]] / self.temperature  # [batch_size, 2]
+RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+  0%|          | 0/223650 [00:06<?, ?it/s]
