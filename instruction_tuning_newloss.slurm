@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=instruction_tuning    # 作业在调度系统中的作业名为myFirstJob
+#SBATCH --job-name=instruction_tuning_newloss    # 作业在调度系统中的作业名为myFirstJob
 #SBATCH --partition=qigl     # 作业提交的指定队列/分区为normal_test
 #SBATCH --nodes=1                   # 申请节点数为1,如果作业不能跨节点(MPI)运行, 申请的节点数应不超过1
 #SBATCH --ntasks-per-node=1         # 每节点任务数，GPU任务不需要修改
@@ -23,18 +23,18 @@ wandb offline
 
 
 export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
-
+export PYTHONUNBUFFERED=1
 
 
 
 
 # llm_froze=False, LoRA finetuning
 echo "instruction tuning with question-only, llm_froze=False"
-python3 train.py --dataset nl27k_baseline_tc --model_name llm_newloss --max_new_tokens 1 --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
+stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_tc --model_name llm_newloss --max_new_tokens 1 --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
 
 
 echo "instruction tuning with random sampled 50 triples, llm_froze=False"
-python3 train.py --dataset nl27k_baseline_tc --model_name llm_newloss --max_new_tokens 1 --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
+stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_tc --model_name llm_newloss --max_new_tokens 1 --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
 
 
 # echo "instruction tuning with pcst retrieval, llm_froze=False"

@@ -23,30 +23,30 @@ wandb offline
 
 
 export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
+export PYTHONUNBUFFERED=1
 
 
+# echo "prompt tuning with question-only"
+# stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80
 
-echo "prompt tuning with question-only"
-python3 train.py --dataset nl27k_baseline_tc --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80
 
-
-echo "prompt tuning with random sampled 50 triples"
-python3 train.py --dataset nl27k_baseline_tc --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+# echo "prompt tuning with random sampled 50 triples"
+# stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80
 
 
 # echo "prompt tuning with pcst retrieval"
-# python3 train.py --dataset cn15k_conf --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80
+# stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80
 
 
 
 # llm_froze=False, LoRA finetuning
 echo "prompt tuning with question-only, llm_froze=False"
-python3 train.py --dataset nl27k_baseline_tc --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
+stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
 
 
 echo "prompt tuning with random sampled 50 triples, llm_froze=False"
-python3 train.py --dataset nl27k_baseline_tc --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
 
 
-# echo "prompt tuning with pcst retrieval, llm_froze=False"
-# python3 train.py --dataset cn15k_conf --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+echo "prompt tuning with pcst retrieval, llm_froze=False"
+stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False

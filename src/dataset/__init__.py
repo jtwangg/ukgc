@@ -24,6 +24,7 @@
 # from src.dataset.ppi5k_train_baseline_conf import PPi5kBaselineConfDataset
 
 from src.dataset.nl27k_train_baseline_tc import NL27kBaselineTCDataset
+from src.dataset.nl27k_train_baseline_cp import NL27kBaselineCPDataset
 
 load_dataset = {
     # 'expla_graphs': ExplaGraphsDataset,
@@ -48,5 +49,6 @@ load_dataset = {
     # 'ppi5k_baseline_conf': PPi5kBaselineConfDataset,
 
     'nl27k_baseline_tc': NL27kBaselineTCDataset,
+    'nl27k_baseline_cp': NL27kBaselineCPDataset,
 
 }

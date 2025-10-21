@@ -49,7 +49,7 @@ class NL27kBaselineCPDataset(Dataset):
         # sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
         desc = edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst', 'weight'])
 
-        label = data['answer']
+        label = data['answer'].astype(str)
 
         return {
             'id': index,

@@ -87,7 +87,7 @@ class NL27kCPDataset(Dataset):
         # 生成 desc 字符串
         desc = edge_df.to_csv(index=False, columns=['src', 'edge_attr', 'dst', 'weight'])
 
-        label = data['answer']
+        label = data['answer'].astype(str)
 
         return {
             'id': index,

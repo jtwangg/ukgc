@@ -2,7 +2,7 @@ import json
 import pandas as pd
 import re
 import string
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, mean_squared_error, mean_absolute_error
 
 
 def get_accuracy_gqa(path):
@@ -132,11 +132,10 @@ def get_accuracy_ukg_single_answer(path):
 
 def get_ukg_cp_mse_mae(path):
     df = pd.read_json(path, lines=True)
-    mse = []
-    mae = []
-    pattern = r'0\.\d+'
-    pattern2 = r'\d+\.\d+%'
-
+    pattern = r'\d\.\d+'
+    pattern2 = r'\d\.\d+%'
+    pred_confs = []
+    true_confs = []
     for pred, label in zip(df['pred'], df['label']):
         pred, label = str(pred), str(label)
         try:
@@ -147,14 +146,20 @@ def get_ukg_cp_mse_mae(path):
                 conf = re.findall(pattern, str(pred))[0]
                 conf = float(conf)
             label = float(label)
-            mse.append((conf - label)**2)
-            mae.append(abs(conf - label))
+            if conf <= 1.0:
+                pred_confs.append(conf)
+                true_confs.append(label)
         except:
             continue
-    if len(mse) == 0:
+    if len(pred_confs) == 0:
         return 0.0
     else:
-        return sum(mse)/len(mse), sum(mae)/len(mae), len(mse)/len(df)
+        mse, mae = mean_squared_error(true_confs, pred_confs), mean_absolute_error(true_confs, pred_confs)
+        valid_ratio = len(pred_confs) / len(df)
+        print(f"MSE: {mse:.5f}")
+        print(f"MAE: {mae:.5f}")
+        print(f"valid_ratio: {valid_ratio:.5f}")
+        return mse
 
 
 
@@ -209,6 +214,7 @@ eval_funcs = {
     "nl27k_baseline": get_accuracy_ukg_single_answer,
     "cn15k": get_accuracy_ukg_single_answer,
     "cn15k_baseline": get_accuracy_ukg_single_answer,
+
     'cn15k_conf': get_ukg_cp_mse_mae,
     'cn15k_baseline_conf': get_ukg_cp_mse_mae,
     'nl27k_conf': get_ukg_cp_mse_mae,
@@ -216,11 +222,20 @@ eval_funcs = {
     'ppi5k_conf': get_ukg_cp_mse_mae,
     'ppi5k_baseline_conf': get_ukg_cp_mse_mae,
 
+    # 'cn15k_cp': get_ukg_cp_mse_mae,
+    # 'cn15k_baseline_cp': get_ukg_cp_mse_mae,
+    # 'nl27k_cp': get_ukg_cp_mse_mae,
+    'nl27k_baseline_cp': get_ukg_cp_mse_mae,
+    # 'ppi5k_cp': get_ukg_cp_mse_mae,
+    # 'ppi5k_baseline_cp': get_ukg_cp_mse_mae,
+
+
     'nl27k_baseline_tc': get_ukg_tc_acc,
+
 }
 
 
 
 if __name__ == "__main__":
-    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_tc/model_name_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
-    print(get_ukg_tc_acc(path))
+    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_cp/model_name_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
+    print(get_ukg_cp_mse_mae(path))

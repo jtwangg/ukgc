@@ -49,7 +49,7 @@ class NL27kBaselineTCDataset(Dataset):
         edges['weight'] = (edges['weight'].astype(float) >= 0.85).astype(str)
 
         # 随机选择 50 行，如果行数不足 50 则选择全部行
-        sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
+        # sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
         desc = edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst', 'weight'])
 
         label = (data['answer'].astype(float) >= 0.85).astype(str)

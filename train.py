@@ -7,28 +7,29 @@ import json
 import pandas as pd
 from torch.utils.data import DataLoader
 from torch.nn.utils import clip_grad_norm_
-
-from src.model import load_model, llama_model_path
-
-from src.utils.evaluate import eval_funcs
-from src.config import parse_args_llama
-from src.utils.ckpt import _save_checkpoint, _reload_best_model
-from src.utils.collate import collate_fn
-from src.utils.seed import seed_everything
-from src.utils.lr_schedule import adjust_learning_rate
+import time
+from torch.utils.data import Subset
 
 
 def main(args):
+    print("start import from src/ ...")
+    start = time.time()
     from src.dataset import load_dataset
+    from src.model import load_model, llama_model_path
+    from src.utils.evaluate import eval_funcs
+    
+    from src.utils.ckpt import _save_checkpoint, _reload_best_model
+    from src.utils.collate import collate_fn
+    from src.utils.seed import seed_everything
+    from src.utils.lr_schedule import adjust_learning_rate
+    print(f"end import from src! cost {(time.time()-start):.1f}s")
     
     # Step 1: Set up wandb
     seed = args.seed
     # wandb.init(project=f"{args.project}",
     #            name=f"{args.dataset}_{args.model_name}_seed{seed}",
     #            config=args)
-    print('start seed everything...')
     seed_everything(seed=args.seed)
-    print('end seed everything!')
     print(args)
 
     dataset = load_dataset[args.dataset]()
@@ -36,19 +37,26 @@ def main(args):
 
     # Step 2: Build Node Classification Dataset
     print('start load dataset...')
-    train_dataset = [dataset[i] for i in idx_split['train']]
-    val_dataset = [dataset[i] for i in idx_split['val']]
-    test_dataset = [dataset[i] for i in idx_split['test']]
+    start = time.time()
+    # train_dataset = [dataset[i] for i in idx_split['train']]
+    # val_dataset = [dataset[i] for i in idx_split['val']]
+    # test_dataset = [dataset[i] for i in idx_split['test']]
+    train_dataset = Subset(dataset, idx_split['train'])
+    val_dataset = Subset(dataset, idx_split['val'])
+    test_dataset = Subset(dataset, idx_split['test'])
+    print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
-    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn)
-    val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn)
-    test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn)
-    print('end load dataset!')
+    train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
+    val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
+    test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
+    print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
     # Step 3: Build Model
     print('start load model...')
+    start = time.time()
     args.llm_model_path = llama_model_path[args.llm_model_name]
     model = load_model[args.model_name](graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
+    print(f'end load model! cost {(time.time()-start):.1f}s')
 
     # Step 4 Set Optimizer
     params = [p for _, p in model.named_parameters() if p.requires_grad]
@@ -145,8 +153,10 @@ def main(args):
 
 if __name__ == "__main__":
     print('start load args ...')
+    start = time.time()
+    from src.config import parse_args_llama
     args = parse_args_llama()
-    print('end load args!')
+    print(f'end load args! cost {(time.time()-start):.1f}s')
 
     main(args)
     torch.cuda.empty_cache()
