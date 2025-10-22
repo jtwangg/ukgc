@@ -237,5 +237,5 @@ eval_funcs = {
 
 
 if __name__ == "__main__":
-    path = '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/output/nl27k_baseline_cp/model_name_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
+    path = 'output/nl27k_baseline_cp/model_name_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
     print(get_ukg_cp_mse_mae(path))

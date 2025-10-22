@@ -1,2 +1,3 @@
 dataset/ukg
-output/
+output/**/*.pth
+output/**/*_traindataset.csv

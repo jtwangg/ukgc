@@ -1,0 +1,7 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+prompt tuning with pcst retrieval
+start load args ...
+end load args! cost 0.0s
+start import from src/ ...
+end import from src! cost 39.4s
+Namespace(model_name='pt_llm', project='project_g_retriever', seed=0, dataset='nl27k_cp', lr=1e-05, wd=0.05, patience=2, batch_size=2, grad_steps=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=32, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0)

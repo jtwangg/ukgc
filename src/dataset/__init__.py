@@ -25,6 +25,10 @@
 
 from src.dataset.nl27k_train_baseline_tc import NL27kBaselineTCDataset
 from src.dataset.nl27k_train_baseline_cp import NL27kBaselineCPDataset
+from src.dataset.nl27k_train_cp import NL27kCPDataset
+from src.dataset.ppi5k_train_baseline_cp import PPI5kBaselineCPDataset
+from src.dataset.ppi5k_train_cp import PPI5kCPDataset
+
 
 load_dataset = {
     # 'expla_graphs': ExplaGraphsDataset,
@@ -50,5 +54,9 @@ load_dataset = {
 
     'nl27k_baseline_tc': NL27kBaselineTCDataset,
     'nl27k_baseline_cp': NL27kBaselineCPDataset,
+    'nl27k_cp': NL27kCPDataset,
+    'ppi_baseline_cp': PPI5kBaselineCPDataset,
+    'ppi5k_cp': PPI5kCPDataset,
+
 
 }

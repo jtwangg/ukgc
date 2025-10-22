@@ -1,0 +1,35 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+ppi5k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  230916
+# val samples:  19017
+# test samples:  21720
+ppi5k process retrival by pcst
+id: 101
+question: Question: What is the probability that the fact "882_dvu0508 catalysis 882_dvu2927" is true? Only output a number between 0 and 1 without any explanation.
+Answer: 
+label: 0.589
+graph: Data(x=[14, 1024], edge_index=[2, 15], edge_attr=[15, 1024], num_nodes=14, edge_weight=[15])
+desc: src,edge_attr,dst,weight
+882_dvu1318,binding,882_dvu2927,0.896
+882_dvu1325,catalysis,882_dvu0508,0.254
+882_dvu2921,catalysis,882_dvu2927,0.915
+882_dvu2927,catalysis,882_dvu0839,0.816
+882_dvu2927,catalysis,882_dvu2535,0.923
+882_dvu1308,catalysis,882_dvu2927,0.922
+882_dvu2927,catalysis,882_dvu0881,0.73
+882_dvu0508,catalysis,882_dvu0835,0.406
+882_dvu1303,catalysis,882_dvu2927,0.913
+882_dvu0508,catalysis,882_dvu2924,0.594
+882_dvu0504,catalysis,882_dvu0508,0.581
+882_dvu0508,catalysis,882_dvu1310,0.581
+882_dvu0839,catalysis,882_dvu0508,0.786
+882_dvu1310,catalysis,882_dvu2927,0.923
+882_dvu1310,catalysis,882_dvu0508,0.581
+
+# train: 230916
+# val: 19017
+# test: 21720

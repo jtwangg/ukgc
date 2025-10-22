@@ -1,0 +1,61 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+ppi5k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+Empty graph at index 20440
+Empty graph at index 70629
+Empty graph at index 117220
+Empty graph at index 156854
+Empty graph at index 156907
+Empty graph at index 163657
+Empty graph at index 179449
+Empty graph at index 205378
+Empty graph at index 211287
+Empty graph at index 212593
+Empty graph at index 227907
+Empty graph at index 230486
+Empty graph at index 230920
+# train samples:  230929
+# val samples:  19017
+# test samples:  21720
+ppi5k process retrival by pcst
+Empty graph at index 20440
+Empty graph at index 70629
+Empty graph at index 117220
+Empty graph at index 156854
+Empty graph at index 156907
+Empty graph at index 163657
+Empty graph at index 179449
+Empty graph at index 205378
+Empty graph at index 211287
+Empty graph at index 212593
+Empty graph at index 227907
+Empty graph at index 230486
+Empty graph at index 230920
+id: 101
+question: Question: What is the probability that the fact "882_dvu0508 catalysis 882_dvu2927" is true? Only output a number between 0 and 1 without any explanation.
+Answer: 
+label: 0.589
+graph: Data(x=[15, 1024], edge_index=[2, 15], edge_attr=[15, 1024], num_nodes=15, edge_weight=[15])
+desc: src,edge_attr,dst,weight
+882_dvu2927,binding,882_dvu1797,0.161
+882_dvu1303,reaction,882_dvu2927,0.913
+882_dvu0957,catalysis,882_dvu2927,0.823
+882_dvu2927,catalysis,882_dvu1325,0.872
+882_dvu1304,catalysis,882_dvu0508,0.581
+882_dvu1325,catalysis,882_dvu0508,0.254
+882_dvu2927,catalysis,882_dvu2924,0.916
+882_dvu0839,catalysis,882_dvu2927,0.816
+882_dvu1304,catalysis,882_dvu2927,0.92
+882_dvu1310,catalysis,882_dvu0508,0.581
+882_dvu2519,catalysis,882_dvu2927,0.783
+882_dvu2921,catalysis,882_dvu2927,0.915
+882_dvu0835,catalysis,882_dvu2927,0.923
+882_dvu2927,catalysis,882_dvu1322,0.92
+882_dvu2925,catalysis,882_dvu0508,0.581
+
+# train: 230929
+# val: 19017
+# test: 21720
