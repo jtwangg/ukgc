@@ -39,8 +39,8 @@ stdbuf -o0 -e0 deepspeed train_dsp.py \
     --model_name llm \
     --max_txt_len 1900 \
     --max_memory 80,80 \
-    --llm_frozen False 
-    --deepspeed --deepspeed_config ds_config.json \
+    --llm_frozen False \
+    --deepspeed_config ds_config.json \
 
 
 # echo "instruction tuning with pcst retrieval, llm_froze=False"

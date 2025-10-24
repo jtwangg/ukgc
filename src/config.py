@@ -44,5 +44,9 @@ def parse_args_llama():
     parser.add_argument("--gnn_num_heads", type=int, default=4)
     parser.add_argument("--gnn_dropout", type=float, default=0.0)
 
+    # deepspeed
+    parser.add_argument('--local_rank', type=int, default=-1, help='local rank passed from distributed launcher')
+    parser.add_argument('--deepspeed_config', type=str, default='ds_config.json', help='deepspeed_config path')
+
     args = parser.parse_args()
     return args

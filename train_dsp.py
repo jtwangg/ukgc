@@ -71,13 +71,13 @@ def main(args):
 
     # Step 5: Calculate training steps and update DeepSpeed config
     num_training_steps = num_epochs * len(train_loader)
-    warmup_steps = int(args.warmup_epochs * len(train_loader))
+    # warmup_steps = int(args.warmup_epochs * len(train_loader))
     # Update DeepSpeed config with calculated steps
-    ds_config['scheduler']['params']['warmup_num_steps'] = warmup_steps
-    ds_config['scheduler']['params']['total_num_steps'] = num_training_steps
-    ds_config['scheduler']['params']['warmup_min_lr'] = 0
-    ds_config['scheduler']['params']['warmup_max_lr'] = ds_config['optimizer']['params']['lr']
-    print(f'Training steps: {num_training_steps}, Warmup steps: {warmup_steps}')
+    # ds_config['scheduler']['params']['warmup_num_steps'] = warmup_steps
+    # ds_config['scheduler']['params']['total_num_steps'] = num_training_steps
+    # ds_config['scheduler']['params']['warmup_min_lr'] = 0
+    # ds_config['scheduler']['params']['warmup_max_lr'] = ds_config['optimizer']['params']['lr']
+    # print(f'Training steps: {num_training_steps}, Warmup steps: {warmup_steps}')
 
 
 

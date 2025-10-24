@@ -96,8 +96,9 @@ class LLM(torch.nn.Module):
         # encode special tokens
         eos_tokens = self.tokenizer(EOS, add_special_tokens=False)
         eos_user_tokens = self.tokenizer(EOS_USER, add_special_tokens=False)
-        bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0])
-        pad_embeds = self.word_embedding(torch.tensor(self.tokenizer.pad_token_id)).unsqueeze(0)
+        # target_device = self.word_embedding.weight.device
+        bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0].to(self.word_embedding.weight.device))
+        pad_embeds = self.word_embedding(torch.tensor(self.tokenizer.pad_token_id).to(self.word_embedding.weight.device)).unsqueeze(0)
 
         batch_size = len(samples['id'])
         batch_inputs_embeds = []
@@ -107,7 +108,7 @@ class LLM(torch.nn.Module):
             # Add bos & eos token
             label_input_ids = labels.input_ids[i][:self.max_new_tokens] + eos_tokens.input_ids
             input_ids = descriptions.input_ids[i][:self.max_txt_len] + questions.input_ids[i] + eos_user_tokens.input_ids + label_input_ids
-            inputs_embeds = self.word_embedding(torch.tensor(input_ids).to(self.model.device))
+            inputs_embeds = self.word_embedding(torch.tensor(input_ids).to(self.word_embedding.weight.device))
             inputs_embeds = torch.cat([bos_embeds, inputs_embeds], dim=0)
 
             batch_inputs_embeds.append(inputs_embeds)
