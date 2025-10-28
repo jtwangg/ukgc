@@ -87,7 +87,7 @@ class PPI5kCPDataset(Dataset):
         # 生成 desc 字符串
         desc = edge_df.to_csv(index=False, columns=['src', 'edge_attr', 'dst', 'weight'])
 
-        label = data['answer'].astype(str)
+        label = f"{float(data['answer']):.3f}"
 
         return {
             'id': index,
@@ -111,7 +111,7 @@ class PPI5kCPDataset(Dataset):
 
 if __name__ == '__main__':
 
-    preprocess()
+    # preprocess()
 
     dataset = PPI5kCPDataset()
 

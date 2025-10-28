@@ -55,7 +55,7 @@ load_dataset = {
     'nl27k_baseline_tc': NL27kBaselineTCDataset,
     'nl27k_baseline_cp': NL27kBaselineCPDataset,
     'nl27k_cp': NL27kCPDataset,
-    'ppi_baseline_cp': PPI5kBaselineCPDataset,
+    'ppi5k_baseline_cp': PPI5kBaselineCPDataset,
     'ppi5k_cp': PPI5kCPDataset,
 
 

@@ -29,13 +29,13 @@ export PYTHONUNBUFFERED=1
 
 
 # llm_froze=False, LoRA finetuning
-echo "instruction tuning with question-only, llm_froze=False"
-stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_baseline_cp --model_name llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
+# echo "instruction tuning with question-only, llm_froze=False"
+# stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_baseline_cp --model_name llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
 
 
-# echo "instruction tuning with random sampled 50 triples, llm_froze=False"
-# stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_baseline_cp --model_name llm --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
+echo "instruction tuning with random sampled 50 triples, llm_froze=False"
+stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_baseline_cp --model_name llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
 
 
-# echo "instruction tuning with pcst retrieval, llm_froze=False"
-# stdbuf -o0 -e0 python3 -u train.py --dataset nl27k_cp --model_name llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+echo "instruction tuning with pcst retrieval, llm_froze=False"
+stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_cp --model_name llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False

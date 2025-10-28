@@ -29,7 +29,7 @@ class LLM(torch.nn.Module):
         print('Loading LLAMA')
         kwargs = {
             "max_memory": {i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
-            "device_map": "auto",
+            # "device_map": "auto",
             "revision": "main",
         }
         self.tokenizer = AutoTokenizer.from_pretrained(args.llm_model_path, use_fast=False, revision=kwargs["revision"])

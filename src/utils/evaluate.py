@@ -146,7 +146,7 @@ def get_ukg_cp_mse_mae(path):
                 conf = re.findall(pattern, str(pred))[0]
                 conf = float(conf)
             label = float(label)
-            if conf <= 1.0:
+            if 0.0 <= conf <= 1.0:
                 pred_confs.append(conf)
                 true_confs.append(label)
         except:
@@ -222,20 +222,21 @@ eval_funcs = {
     'ppi5k_conf': get_ukg_cp_mse_mae,
     'ppi5k_baseline_conf': get_ukg_cp_mse_mae,
 
-    # 'cn15k_cp': get_ukg_cp_mse_mae,
-    # 'cn15k_baseline_cp': get_ukg_cp_mse_mae,
-    # 'nl27k_cp': get_ukg_cp_mse_mae,
+    'cn15k_cp': get_ukg_cp_mse_mae,
+    'cn15k_baseline_cp': get_ukg_cp_mse_mae,
+    'nl27k_cp': get_ukg_cp_mse_mae,
     'nl27k_baseline_cp': get_ukg_cp_mse_mae,
-    # 'ppi5k_cp': get_ukg_cp_mse_mae,
-    # 'ppi5k_baseline_cp': get_ukg_cp_mse_mae,
+    'ppi5k_cp': get_ukg_cp_mse_mae,
+    'ppi5k_baseline_cp': get_ukg_cp_mse_mae,
 
 
     'nl27k_baseline_tc': get_ukg_tc_acc,
+
 
 }
 
 
 
 if __name__ == "__main__":
-    path = 'output/nl27k_baseline_cp/model_name_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
+    path = 'output/ppi5k_baseline_cp/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_0_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0.csv'
     print(get_ukg_cp_mse_mae(path))
