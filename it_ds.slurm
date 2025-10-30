@@ -24,7 +24,7 @@ wandb offline
 
 export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 export PYTHONUNBUFFERED=1
-
+export NCCL_IB_DISABLE=1
 
 
 # llm_froze=False, LoRA finetuning

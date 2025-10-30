@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=test_instruction_tuning    # 作业在调度系统中的作业名为myFirstJob
+#SBATCH --job-name=instruction_tuning_dsp    # 作业在调度系统中的作业名为myFirstJob
 #SBATCH --partition=qigl     # 作业提交的指定队列/分区为normal_test
 #SBATCH --nodes=1                   # 申请节点数为1,如果作业不能跨节点(MPI)运行, 申请的节点数应不超过1
 #SBATCH --ntasks-per-node=1         # 每节点任务数，GPU任务不需要修改
@@ -19,23 +19,10 @@ module load anaconda3               # 加载相关依赖
 module load cuda-11.8
 source activate g_retriever                 # 如果已经在命令行中激活对应环境，提交脚本时需注释此行，推荐保留此行在base环境下提交任务
 
-wandb offline
-
-
-export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
-
-
-# llm_froze=False, LoRA finetuning
-echo "instruction tuning with question-only, llm_froze=False"
-python3 test.py --dataset nl27k_baseline_tc --model_name llm --num_epochs 3 --batch_size 16 --max_txt_len 0 --max_memory 80,80 --llm_frozen False
-
-
-echo "instruction tuning with random sampled 50 triples, llm_froze=False"
-python3 test.py --dataset nl27k_baseline_tc --model_name llm --num_epochs 3 --batch_size 2 --max_txt_len 1700 --max_memory 80,80 --llm_frozen False
-
-
-# echo "instruction tuning with pcst retrieval, llm_froze=False"
-# python3 train.py --dataset cn15k_conf --model_name llm --num_epochs 3 --batch_size 2 --max_txt_len 1600 --max_memory 80,80 --llm_frozen False
+python -c 'from transformers import AutoModelForCausalLM; \
+from deepspeed.runtime.zero.stage3 import estimate_zero3_model_states_mem_needs_all_live; \
+model = AutoModelForCausalLM.from_pretrained("/seu_share/home/qiguilin/220236147/huggingface_models/Llama-2-7b-chat-hf"); \
+estimate_zero3_model_states_mem_needs_all_live(model, num_gpus_per_node=2, num_nodes=1)'

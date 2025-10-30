@@ -1,3 +1,4 @@
 dataset/ukg
 output/**/*.pth
 output/**/*_traindataset.csv
+src/**/__pycache__/
