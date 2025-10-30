@@ -110,9 +110,48 @@ def main(args):
 
 
 
+    args.llm_model_path = llama_model_path[args.llm_model_name]
+
+    tokenizer = LlamaTokenizer.from_pretrained(args.llm_model_path)
+    tokenizer.pad_token_id = 0
+    tokenizer.padding_side = 'left'
+
+
+
+
+
+
+    # Step 3: Build  Dataset
+    print('start load dataset...')
+    start = time.time()
+    dataset = load_dataset[args.dataset]()
+    idx_split = dataset.get_idx_split()
+
+    
+    # train_dataset = [dataset[i] for i in idx_split['train']]
+    # val_dataset = [dataset[i] for i in idx_split['val']]
+    # test_dataset = [dataset[i] for i in idx_split['test']]
+    train_dataset = Subset(dataset, idx_split['train'])
+    val_dataset = Subset(dataset, idx_split['val'])
+    test_dataset = Subset(dataset, idx_split['test'])
+
+    # Initialize custom data collator
+    data_collator = DataCollatorForCausalLM(tokenizer=tokenizer, max_txt_len=args.max_txt_len, max_new_tokens=args.max_new_tokens)
+
+    # train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
+    # val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
+    test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
+    print(f'end load dataset! cost {(time.time()-start):.1f}s')
+
+
+
+
+
+
 
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
+    print(f'world_size: {world_size}, ddp: {ddp}')
     if ddp:  
         device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}   # distributed data parallel
         # gradient_accumulation_steps = gradient_accumulation_steps // world_size
@@ -120,11 +159,7 @@ def main(args):
         device_map = "auto"   # model parallel
     print(f'device_map: {device_map}')
 
-    args.llm_model_path = llama_model_path[args.llm_model_name]
 
-    tokenizer = LlamaTokenizer.from_pretrained(args.llm_model_path)
-    tokenizer.pad_token_id = 0
-    tokenizer.padding_side = 'left'
 
 
     model = LlamaForCausalLM.from_pretrained(
@@ -161,7 +196,7 @@ def main(args):
     model.print_trainable_parameters()
     
     # sp_model = load_model[args.model_name](model=model, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
-    sp_model = PromptTuningLLM(model=model, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
+    sp_model = PromptTuningLLM(model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
     print(f'end load model! cost {(time.time()-start):.1f}s')
     # trainable_params, all_param = sp_model.print_trainable_params()
     # print(f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}")
@@ -170,27 +205,6 @@ def main(args):
 
 
 
-
-    # Step 3: Build  Dataset
-    print('start load dataset...')
-    dataset = load_dataset[args.dataset]()
-    idx_split = dataset.get_idx_split()
-
-    start = time.time()
-    # train_dataset = [dataset[i] for i in idx_split['train']]
-    # val_dataset = [dataset[i] for i in idx_split['val']]
-    # test_dataset = [dataset[i] for i in idx_split['test']]
-    train_dataset = Subset(dataset, idx_split['train'])
-    val_dataset = Subset(dataset, idx_split['val'])
-    test_dataset = Subset(dataset, idx_split['test'])
-
-    # Initialize custom data collator
-    data_collator = DataCollatorForCausalLM(tokenizer=tokenizer, max_txt_len=args.max_txt_len, max_new_tokens=args.max_new_tokens)
-
-    # train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
-    # val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
-    test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
-    print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
 
 

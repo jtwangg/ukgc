@@ -46,8 +46,8 @@ export PYTHONUNBUFFERED=1
 
 
 
-echo "prompt tuning with pcst retrieval, llm_froze=False"
-stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
+# echo "prompt tuning with pcst retrieval, llm_froze=False"
+# stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
 
 echo "prompt tuning with random sampled 50 triples, llm_froze=False"
-stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
+stdbuf -o0 -e0 python3 -u train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False

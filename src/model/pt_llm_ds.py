@@ -22,6 +22,7 @@ class PromptTuningLLM(PreTrainedModel):
     def __init__(
         self,
         model,
+        tokenizer,
         init_prompt,
         args,
         **kwargs
@@ -31,6 +32,7 @@ class PromptTuningLLM(PreTrainedModel):
         num_virtual_tokens = args.llm_num_virtual_tokens
 
         self.word_embedding = self.model.model.get_input_embeddings()
+        self.tokenizer = tokenizer
 
         # prompt tuning
         init_token_ids = self.tokenizer(init_prompt).input_ids
