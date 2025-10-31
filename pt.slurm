@@ -50,4 +50,7 @@ export PYTHONUNBUFFERED=1
 # stdbuf -o0 -e0 python3 -u train.py --dataset ppi5k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
 
 echo "prompt tuning with random sampled 50 triples, llm_froze=False"
-stdbuf -o0 -e0 python3 -u train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
+# stdbuf -o0 -e0 python3 -u train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 8 --max_txt_len 100 --max_memory 80,80 --llm_frozen False
+deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --micro_batch_size 4 --max_txt_len 100 --max_memory 80,80 --llm_frozen False
+
+# MASTER_PORT=29502 accelerate launch --num_processes=2 train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 8 --max_txt_len 100 --max_memory 80,80 --llm_frozen False

@@ -13,7 +13,7 @@ from torch.nn.utils import clip_grad_norm_
 from torch.utils.data import Subset
 from torch_geometric.data import Batch
 
-from transformers import TrainingArguments, Trainer, DataCollatorWithPadding
+from transformers import TrainingArguments, Trainer, DataCollatorWithPadding, DataCollatorForSeq2Seq
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from transformers import LlamaForCausalLM, LlamaTokenizer
 
@@ -25,6 +25,8 @@ from peft import (
     set_peft_model_state_dict,
 )
 
+print("start import from src/ ...")
+start = time.time()
 from src.dataset import load_dataset
 from src.model import load_model, llama_model_path
 from src.utils.evaluate import eval_funcs
@@ -34,7 +36,7 @@ from src.utils.seed import seed_everything
 from src.utils.lr_schedule import adjust_learning_rate
 from src.config import parse_args_llama
 from src.model.pt_llm_ds import PromptTuningLLM
-
+print(f"end import from src! cost {(time.time()-start):.1f}s")
 
 
 BOS = '<s>[INST]'
@@ -43,53 +45,59 @@ EOS = '</s>'
 IGNORE_INDEX = -100
 
 
-class DataCollatorForCausalLM(DataCollatorWithPadding):
-    def __init__(self, tokenizer, max_txt_len, max_new_tokens):
-        super().__init__(tokenizer=tokenizer, padding=True)
-        self.max_txt_len = max_txt_len
-        self.max_new_tokens = max_new_tokens
-        self.tokenizer = tokenizer
+# class DataCollatorForCausalLM(DataCollatorWithPadding):
+#     def __init__(self, tokenizer, max_txt_len, max_new_tokens):
+#         super().__init__(tokenizer=tokenizer, padding=True)
+#         self.max_txt_len = max_txt_len
+#         self.max_new_tokens = max_new_tokens
+#         self.tokenizer = tokenizer
     
-    def __call__(self, original_batch):
-        batch = {}
-        for k in original_batch[0].keys():
-            batch[k] = [d[k] for d in original_batch]
-        if 'graph' in batch:
-            batch['graph'] = Batch.from_data_list(batch['graph'])
+#     def __call__(self, original_batch):
+#         batch = {}
+#         for k in original_batch[0].keys():
+#             batch[k] = [d[k] for d in original_batch]
+#         if 'graph' in batch:
+#             batch['graph'] = Batch.from_data_list(batch['graph'])
 
-        # encode description, questions and labels
-        questions = self.tokenizer(batch["question"], add_special_tokens=False)
-        descriptions = self.tokenizer(batch["desc"], add_special_tokens=False)
-        labels = self.tokenizer(batch["label"], add_special_tokens=False)
+#         # encode description, questions and labels
+#         questions = self.tokenizer(batch["question"], add_special_tokens=False)
+#         descriptions = self.tokenizer(batch["desc"], add_special_tokens=False)
+#         labels = self.tokenizer(batch["label"], add_special_tokens=False)
 
-        # encode sepcial tokens
-        eos_tokens = self.tokenizer(EOS, add_special_tokens=False)
-        eos_user_tokens = self.tokenizer(EOS_USER, add_special_tokens=False)
-        bos_tokens = self.tokenizer(BOS, add_special_tokens=False)
+#         # encode sepcial tokens
+#         eos_tokens = self.tokenizer(EOS, add_special_tokens=False)
+#         eos_user_tokens = self.tokenizer(EOS_USER, add_special_tokens=False)
+#         bos_tokens = self.tokenizer(BOS, add_special_tokens=False)
 
-        batch_size = len(batch['id'])
-        batch_input_ids = []
-        batch_label_input_ids = []
+#         batch_size = len(batch['id'])
+#         batch_input_ids = []
+#         batch_label_input_ids = []
 
-        for i in range(batch_size):
-            # Add bos & eos token
-            label_input_ids = labels.input_ids[i][:self.max_new_tokens] + eos_tokens.input_ids
-            input_ids = bos_tokens.input_ids + descriptions.input_ids[i][:self.max_txt_len] + questions.input_ids[i] + eos_user_tokens.input_ids + label_input_ids
-            batch_input_ids.append(input_ids)
-            label_input_ids = [IGNORE_INDEX] * (len(input_ids) - len(label_input_ids)) + label_input_ids
-            batch_label_input_ids.append(label_input_ids)
+#         for i in range(batch_size):
+#             # Add bos & eos token
+#             label_input_ids = labels.input_ids[i][:self.max_new_tokens] + eos_tokens.input_ids
+#             input_ids = bos_tokens.input_ids + descriptions.input_ids[i][:self.max_txt_len] + questions.input_ids[i] + eos_user_tokens.input_ids + label_input_ids
+#             batch_input_ids.append(input_ids)
+#             label_input_ids = [IGNORE_INDEX] * (len(input_ids) - len(label_input_ids)) + label_input_ids
+#             batch_label_input_ids.append(label_input_ids)
         
-        max_length = max([len(x) for x in batch_input_ids])
-        for i in range(batch_size):
-            pad_length = max_length - len(batch_input_ids[i])
-            batch_input_ids[i] = [self.tokenizer.pad_token_id] * pad_length + batch_input_ids[i]
-            batch_label_input_ids[i] = [IGNORE_INDEX] * pad_length + batch_label_input_ids[i]
+#         max_length = max([len(x) for x in batch_input_ids])
+#         for i in range(batch_size):
+#             pad_length = max_length - len(batch_input_ids[i])
+#             batch_input_ids[i] = [self.tokenizer.pad_token_id] * pad_length + batch_input_ids[i]
+#             batch_label_input_ids[i] = [IGNORE_INDEX] * pad_length + batch_label_input_ids[i]
         
-        return {
-            "input_ids": torch.tensor(batch_input_ids, dtype=torch.long),
-            "attention_mask": torch.tensor([[1 if token_id != self.tokenizer.pad_token_id else 0 for token_id in ids] for ids in batch_input_ids], dtype=torch.long),
-            "labels": torch.tensor(batch_label_input_ids, dtype=torch.long),
-        }
+#         return {
+#             "input_ids": torch.tensor(batch_input_ids, dtype=torch.long),
+#             "attention_mask": torch.tensor([[1 if token_id != self.tokenizer.pad_token_id else 0 for token_id in ids] for ids in batch_input_ids], dtype=torch.long),
+#             "labels": torch.tensor(batch_label_input_ids, dtype=torch.long),
+#         }
+
+
+
+
+
+
 
 
 
@@ -107,59 +115,24 @@ def main(args):
     print('start load model...')
     start = time.time()
 
-
-
-
     args.llm_model_path = llama_model_path[args.llm_model_name]
 
     tokenizer = LlamaTokenizer.from_pretrained(args.llm_model_path)
     tokenizer.pad_token_id = 0
     tokenizer.padding_side = 'left'
 
-
-
-
-
-
-    # Step 3: Build  Dataset
-    print('start load dataset...')
-    start = time.time()
-    dataset = load_dataset[args.dataset]()
-    idx_split = dataset.get_idx_split()
-
-    
-    # train_dataset = [dataset[i] for i in idx_split['train']]
-    # val_dataset = [dataset[i] for i in idx_split['val']]
-    # test_dataset = [dataset[i] for i in idx_split['test']]
-    train_dataset = Subset(dataset, idx_split['train'])
-    val_dataset = Subset(dataset, idx_split['val'])
-    test_dataset = Subset(dataset, idx_split['test'])
-
-    # Initialize custom data collator
-    data_collator = DataCollatorForCausalLM(tokenizer=tokenizer, max_txt_len=args.max_txt_len, max_new_tokens=args.max_new_tokens)
-
-    # train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
-    # val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
-    test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
-    print(f'end load dataset! cost {(time.time()-start):.1f}s')
-
-
-
-
-
-
-
+    gradient_accumulation_steps = args.batch_size // args.micro_batch_size
     world_size = int(os.environ.get("WORLD_SIZE", 1))
     ddp = world_size != 1
     print(f'world_size: {world_size}, ddp: {ddp}')
     if ddp:  
         device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}   # distributed data parallel
-        # gradient_accumulation_steps = gradient_accumulation_steps // world_size
+        gradient_accumulation_steps = gradient_accumulation_steps // world_size
     else:  
         device_map = "auto"   # model parallel
     print(f'device_map: {device_map}')
 
-
+    args.grad_steps = gradient_accumulation_steps
 
 
     model = LlamaForCausalLM.from_pretrained(
@@ -167,6 +140,7 @@ def main(args):
         torch_dtype=torch.float16,
         low_cpu_mem_usage=True,
         device_map=device_map,
+        max_memory={i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
     )
     if args.llm_frozen == 'True':
         print("Freezing LLAMA!")
@@ -195,6 +169,11 @@ def main(args):
 
     model.print_trainable_parameters()
     
+
+    dataset = load_dataset[args.dataset]()
+    idx_split = dataset.get_idx_split()
+
+
     # sp_model = load_model[args.model_name](model=model, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
     sp_model = PromptTuningLLM(model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
     print(f'end load model! cost {(time.time()-start):.1f}s')
@@ -207,17 +186,68 @@ def main(args):
 
 
 
+    def generate_and_tokenize_prompt(data_point):
+        questions = tokenizer(data_point["question"], add_special_tokens=False)
+        descriptions = tokenizer(data_point["desc"], add_special_tokens=False)
+        labels = tokenizer(data_point["label"], add_special_tokens=False)
+
+        eos_tokens = tokenizer(EOS, add_special_tokens=False)
+        eos_user_tokens = tokenizer(EOS_USER, add_special_tokens=False)
+        # bos_tokens = tokenizer(BOS, add_special_tokens=False)
+
+        label_input_ids = labels.input_ids[:args.max_new_tokens] + eos_tokens.input_ids
+        # input_ids = bos_tokens.input_ids + descriptions.input_ids[:args.max_txt_len] + questions.input_ids + eos_user_tokens.input_ids + label_input_ids
+        input_ids = descriptions.input_ids[:args.max_txt_len] + questions.input_ids + eos_user_tokens.input_ids + label_input_ids
+
+        label_input_ids = [IGNORE_INDEX] * (len(input_ids) - len(label_input_ids)) + label_input_ids
+
+        return {
+            "input_ids": input_ids,
+            "attention_mask": [1 if token_id != tokenizer.pad_token_id else 0 for token_id in input_ids],
+            "labels": label_input_ids,
+        }
+
+    # Step 3: Build  Dataset
+    print('start load dataset...')
+    start = time.time()
+
+
+    
+    # train_dataset = [dataset[i] for i in idx_split['train']]
+    # val_dataset = [dataset[i] for i in idx_split['val']]
+    # test_dataset = [dataset[i] for i in idx_split['test']]
+
+    # train_dataset = Subset(dataset, idx_split['train'])
+    # val_dataset = Subset(dataset, idx_split['val'])
+    test_dataset = Subset(dataset, idx_split['test'])
+
+    # Initialize custom data collator
+    # data_collator = DataCollatorForCausalLM(tokenizer=tokenizer, max_txt_len=args.max_txt_len, max_new_tokens=args.max_new_tokens)
+
+    train_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['train'][:1000]]
+    val_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['val'][:100]]
+
+    # train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
+    # val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
+    test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
+    print(f'end load dataset! cost {(time.time()-start):.1f}s')
+
+
+
+
+
+
 
 
 
     # Step 5. Training
     print('start training...')
 
-    args.micro_batch_size = args.batch_size // args.grad_steps
+    # args.micro_batch_size = args.batch_size // args.grad_steps
     path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}/'
     os.makedirs(path, exist_ok=True)
     print(f'path: {path}')
-
+    print(f'batch_size: {args.batch_size}, micro_batch_size: {args.micro_batch_size}, grad_steps: {args.grad_steps}, world_size: {world_size}')
 
     training_args = TrainingArguments(
         output_dir=path,
@@ -239,7 +269,7 @@ def main(args):
         fp16=True,
         optim="adamw_torch",
         warmup_steps=100,
-        # deepspeed=args.deepspeed
+        deepspeed=args.deepspeed
     )
 
     trainer = Trainer(
@@ -247,7 +277,8 @@ def main(args):
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
-        data_collator=data_collator,
+        # data_collator=data_collator,
+        data_collator=DataCollatorForSeq2Seq(tokenizer, pad_to_multiple_of=8, return_tensors="pt", padding=True)
     )
 
 
