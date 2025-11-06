@@ -47,6 +47,8 @@ class NL27kBaselineDataset(Dataset):
 
         # 随机选择 50 行，如果行数不足 50 则选择全部行
         sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
+        # 过滤尾实体的1-hop邻居
+        # filtered_edges = sampled_edges[~((sampled_edges['src'] == data['answer']) | (sampled_edges['dst'] == data['answer']))]
         desc = sampled_edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
 
         if isinstance(data['answer'], list):

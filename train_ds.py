@@ -6,6 +6,7 @@ import time
 import json
 import pandas as pd
 import sys
+from typing import Any, Dict, List
 
 import torch
 from torch.utils.data import DataLoader
@@ -36,6 +37,7 @@ from src.utils.seed import seed_everything
 from src.utils.lr_schedule import adjust_learning_rate
 from src.config import parse_args_llama
 from src.model.pt_llm_ds import PromptTuningLLM
+from src.model.graph_llm_ds import GraphLLM
 print(f"end import from src! cost {(time.time()-start):.1f}s")
 
 
@@ -45,58 +47,72 @@ EOS = '</s>'
 IGNORE_INDEX = -100
 
 
-# class DataCollatorForCausalLM(DataCollatorWithPadding):
-#     def __init__(self, tokenizer, max_txt_len, max_new_tokens):
-#         super().__init__(tokenizer=tokenizer, padding=True)
-#         self.max_txt_len = max_txt_len
-#         self.max_new_tokens = max_new_tokens
-#         self.tokenizer = tokenizer
+
+class GraphTextCollator(DataCollatorForSeq2Seq):
+    """
+    一个自定义的 collator，用于同时处理文本（由 DataCollatorForSeq2Seq 处理）
+    和图数据（由 PyG 的 Batch.from_data_list 处理）。
+    """
+
+    # **添加 __init__ 方法来接收 fp16 参数**
+    def __init__(self, tokenizer, model=None, padding=True, pad_to_multiple_of=None, return_tensors=None, fp16: bool = False):
+        # 调用父类的构造函数，传入所有必要的参数
+        super().__init__(
+            tokenizer=tokenizer,
+            model=model,
+            padding=padding,
+            pad_to_multiple_of=pad_to_multiple_of,
+            return_tensors=return_tensors,
+        )
+        # **将 fp16 保存为实例属性**
+        self.fp16 = fp16
     
-#     def __call__(self, original_batch):
-#         batch = {}
-#         for k in original_batch[0].keys():
-#             batch[k] = [d[k] for d in original_batch]
-#         if 'graph' in batch:
-#             batch['graph'] = Batch.from_data_list(batch['graph'])
-
-#         # encode description, questions and labels
-#         questions = self.tokenizer(batch["question"], add_special_tokens=False)
-#         descriptions = self.tokenizer(batch["desc"], add_special_tokens=False)
-#         labels = self.tokenizer(batch["label"], add_special_tokens=False)
-
-#         # encode sepcial tokens
-#         eos_tokens = self.tokenizer(EOS, add_special_tokens=False)
-#         eos_user_tokens = self.tokenizer(EOS_USER, add_special_tokens=False)
-#         bos_tokens = self.tokenizer(BOS, add_special_tokens=False)
-
-#         batch_size = len(batch['id'])
-#         batch_input_ids = []
-#         batch_label_input_ids = []
-
-#         for i in range(batch_size):
-#             # Add bos & eos token
-#             label_input_ids = labels.input_ids[i][:self.max_new_tokens] + eos_tokens.input_ids
-#             input_ids = bos_tokens.input_ids + descriptions.input_ids[i][:self.max_txt_len] + questions.input_ids[i] + eos_user_tokens.input_ids + label_input_ids
-#             batch_input_ids.append(input_ids)
-#             label_input_ids = [IGNORE_INDEX] * (len(input_ids) - len(label_input_ids)) + label_input_ids
-#             batch_label_input_ids.append(label_input_ids)
+    def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
         
-#         max_length = max([len(x) for x in batch_input_ids])
-#         for i in range(batch_size):
-#             pad_length = max_length - len(batch_input_ids[i])
-#             batch_input_ids[i] = [self.tokenizer.pad_token_id] * pad_length + batch_input_ids[i]
-#             batch_label_input_ids[i] = [IGNORE_INDEX] * pad_length + batch_label_input_ids[i]
-        
-#         return {
-#             "input_ids": torch.tensor(batch_input_ids, dtype=torch.long),
-#             "attention_mask": torch.tensor([[1 if token_id != self.tokenizer.pad_token_id else 0 for token_id in ids] for ids in batch_input_ids], dtype=torch.long),
-#             "labels": torch.tensor(batch_label_input_ids, dtype=torch.long),
-#         }
+        # 1. 从 features 中分离 graph 和 text
+        graph_list = []
+        text_features = []
 
+        for feature in features:
+            # 弹出 'graph'，这样父类 collator 就不会处理它
+            # feature.pop() 会返回 'graph' 键对应的值，并从字典中移除它
+            graph_data = feature.pop("graph", None)
+            
+            if graph_data is not None:
+                graph_list.append(graph_data)
+            
+            # 剩下的键（input_ids, labels 等）被添加到 text_features
+            text_features.append(feature)
 
+        # 2. 使用父类 DataCollatorForSeq2Seq 来处理所有文本相关的键
+        # 这将自动完成 padding
+        batch = super().__call__(text_features, return_tensors=self.return_tensors)
 
+        # 3. 如果存在图数据，使用 PyG 的 Batch 来打包它们
+        if graph_list:
+            # from_data_list 会将图列表打包成一个单一的、
+            # 包含不相连子图的大图对象 (Batch)
+            batched_graph = Batch.from_data_list(graph_list)
 
-
+            if self.fp16:
+                # 在执行计算前，我们希望输入数据的类型与模型权重（float16）匹配。
+                # 注意：如果您的环境只支持 BF16，则需要改为 torch.bfloat16
+                target_dtype = torch.float16
+                
+                # 转换节点特征 (x) 的数据类型
+                # 这是一个 CPU 到 GPU 的传输，但更重要的是类型转换
+                if hasattr(batched_graph, 'x') and batched_graph.x is not None:
+                    # 确保转换类型
+                    batched_graph.x = batched_graph.x.to(target_dtype)
+                    
+                # 如果您的图数据还有其他张量特征（如边特征 'edge_attr'），也应该一并转换
+                if hasattr(batched_graph, 'edge_attr') and batched_graph.edge_attr is not None:
+                    if batched_graph.edge_attr.is_floating_point():
+                        batched_graph.edge_attr = batched_graph.edge_attr.to(target_dtype)
+            # 将打包好的图添加回 batch 字典
+            batch['graph'] = batched_graph
+            
+        return batch
 
 
 
@@ -140,8 +156,11 @@ def main(args):
         torch_dtype=torch.float16,
         low_cpu_mem_usage=True,
         device_map=device_map,
-        max_memory={i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
+        # max_memory={i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
     )
+    model.gradient_checkpointing_enable()
+    model.config.use_cache = False
+    
     if args.llm_frozen == 'True':
         print("Freezing LLAMA!")
         for name, param in model.named_parameters():
@@ -174,11 +193,11 @@ def main(args):
     idx_split = dataset.get_idx_split()
 
 
-    # sp_model = load_model[args.model_name](model=model, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
-    sp_model = PromptTuningLLM(model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
+    sp_model = load_model[args.model_name](model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
+    # sp_model = GraphLLM(model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
     print(f'end load model! cost {(time.time()-start):.1f}s')
-    # trainable_params, all_param = sp_model.print_trainable_params()
-    # print(f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}")
+    trainable_params, all_param = sp_model.print_trainable_params()
+    print(f"sp_model trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}")
 
 
 
@@ -205,6 +224,7 @@ def main(args):
             "input_ids": input_ids,
             "attention_mask": [1 if token_id != tokenizer.pad_token_id else 0 for token_id in input_ids],
             "labels": label_input_ids,
+            "graph": data_point["graph"]
         }
 
     # Step 3: Build  Dataset
@@ -212,23 +232,11 @@ def main(args):
     start = time.time()
 
 
-    
-    # train_dataset = [dataset[i] for i in idx_split['train']]
-    # val_dataset = [dataset[i] for i in idx_split['val']]
-    # test_dataset = [dataset[i] for i in idx_split['test']]
+    train_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['train']]
+    val_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['val']]
 
-    # train_dataset = Subset(dataset, idx_split['train'])
-    # val_dataset = Subset(dataset, idx_split['val'])
+
     test_dataset = Subset(dataset, idx_split['test'])
-
-    # Initialize custom data collator
-    # data_collator = DataCollatorForCausalLM(tokenizer=tokenizer, max_txt_len=args.max_txt_len, max_new_tokens=args.max_new_tokens)
-
-    train_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['train'][:1000]]
-    val_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['val'][:100]]
-
-    # train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
-    # val_loader = DataLoader(val_dataset, batch_size=args.batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
     test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
     print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
@@ -257,7 +265,7 @@ def main(args):
         learning_rate=args.lr,
         weight_decay=args.wd,
         logging_strategy="steps",
-        logging_steps=args.grad_steps,
+        logging_steps=min(1, args.grad_steps),
         evaluation_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=1,
@@ -266,10 +274,21 @@ def main(args):
         greater_is_better=False,
         seed=args.seed,
         report_to="none",
-        fp16=True,
+        fp16=args.fp16,
         optim="adamw_torch",
-        warmup_steps=100,
-        deepspeed=args.deepspeed
+        # warmup_steps=100,
+        warmup_ratio=0.2,
+        lr_scheduler_type="cosine",
+        deepspeed=args.deepspeed,
+    )
+
+    # 创建自定义 collator 的实例
+    data_collator = GraphTextCollator(
+        tokenizer, 
+        pad_to_multiple_of=8, 
+        return_tensors="pt", 
+        padding=True,
+        fp16=args.fp16,
     )
 
     trainer = Trainer(
@@ -277,8 +296,8 @@ def main(args):
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
-        # data_collator=data_collator,
-        data_collator=DataCollatorForSeq2Seq(tokenizer, pad_to_multiple_of=8, return_tensors="pt", padding=True)
+        data_collator=data_collator,
+        # data_collator=DataCollatorForSeq2Seq(tokenizer, pad_to_multiple_of=8, return_tensors="pt", padding=True)
     )
 
 
@@ -289,6 +308,8 @@ def main(args):
 
     trainer.train()
     _save_checkpoint_nooptim(sp_model, args)
+
+
 
     # num_training_steps = args.num_epochs * len(train_loader)
     # progress_bar = tqdm(range(num_training_steps))
@@ -352,6 +373,7 @@ def main(args):
     torch.cuda.reset_max_memory_allocated()
 
     # Step 5. Evaluating
+    print('start testing...')
     path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}/test_result.csv'
     print(f'path: {path}')
 

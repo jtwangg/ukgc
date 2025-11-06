@@ -9,12 +9,12 @@
 
 
 
-# from src.dataset.ppi5k_train import PPI5kDataset
-# from src.dataset.ppi5k_train_baseline import PPi5kBaselineDataset
-# from src.dataset.nl27k_train import NL27kDataset
-# from src.dataset.nl27k_train_baseline import NL27kBaselineDataset
-# from src.dataset.cn15k_train import CN15kDataset
-# from src.dataset.cn15k_train_baseline import CN15kBaselineDataset
+from src.dataset.ppi5k_train import PPI5kDataset
+from src.dataset.ppi5k_train_baseline import PPi5kBaselineDataset
+from src.dataset.nl27k_train import NL27kDataset
+from src.dataset.nl27k_train_baseline import NL27kBaselineDataset
+from src.dataset.cn15k_train import CN15kDataset
+from src.dataset.cn15k_train_baseline import CN15kBaselineDataset
 
 # from src.dataset.cn15k_train_conf import CN15kConfDataset
 # from src.dataset.cn15k_train_baseline_conf import CN15kBaselineConfDataset
@@ -38,12 +38,12 @@ load_dataset = {
     # 'webqsp_baseline': WebQSPBaselineDataset,
 
 
-    # 'ppi5k': PPI5kDataset,
-    # 'ppi5k_baseline': PPi5kBaselineDataset,
-    # 'nl27k': NL27kDataset,
-    # 'nl27k_baseline': NL27kBaselineDataset,
-    # 'cn15k': CN15kDataset,
-    # 'cn15k_baseline': CN15kBaselineDataset,
+    'ppi5k': PPI5kDataset,
+    'ppi5k_baseline': PPi5kBaselineDataset,
+    'nl27k': NL27kDataset,
+    'nl27k_baseline': NL27kBaselineDataset,
+    'cn15k': CN15kDataset,
+    'cn15k_baseline': CN15kBaselineDataset,
     
     # 'cn15k_conf': CN15kConfDataset,
     # 'cn15k_baseline_conf': CN15kBaselineConfDataset,

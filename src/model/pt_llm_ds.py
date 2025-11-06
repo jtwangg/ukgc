@@ -59,12 +59,12 @@ class PromptTuningLLM(PreTrainedModel):
         else:
             return contextlib.nullcontext()
 
-    def forward(self, input_ids, attention_mask, labels):
+    def forward(self, input_ids, attention_mask, labels, graph=None):
         batch_size, seq_len = input_ids.shape
         token_embeds = self.word_embedding(input_ids)
         bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0].to(self.model.device)).unsqueeze(0).repeat(batch_size, 1, 1).to(token_embeds.device)
         prompt_embeds = self.prompt.unsqueeze(0).repeat(batch_size, 1, 1).to(token_embeds.device)
-        print(bos_embeds.shape, prompt_embeds.shape)
+        # print(bos_embeds.shape, prompt_embeds.shape)
 
         input_embeds = torch.cat((bos_embeds, prompt_embeds, token_embeds), dim=1)
         prompt_length = bos_embeds.shape[1] + prompt_embeds.shape[1]

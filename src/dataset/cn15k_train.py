@@ -116,7 +116,7 @@ class CN15kDataset(Dataset):
 
 if __name__ == '__main__':
 
-    preprocess()
+    # preprocess()
 
     dataset = CN15kDataset()
 

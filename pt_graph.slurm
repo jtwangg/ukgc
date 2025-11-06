@@ -4,7 +4,7 @@
 #SBATCH --partition=qigl     # 作业提交的指定队列/分区为normal_test
 #SBATCH --nodes=1                   # 申请节点数为1,如果作业不能跨节点(MPI)运行, 申请的节点数应不超过1
 #SBATCH --ntasks-per-node=1         # 每节点任务数，GPU任务不需要修改
-#SBATCH --cpus-per-task=20           # V100一张卡默认配置3个CPU核心，gpuB一张卡默认配置12个CPU核心,MIG资源一张卡默认配置6个CPU核心(根据卡数自行调整)
+#SBATCH --cpus-per-task=12           # V100一张卡默认配置3个CPU核心，gpuB一张卡默认配置12个CPU核心,MIG资源一张卡默认配置6个CPU核心(根据卡数自行调整)
 #SBATCH --gres=gpu:2                # 申请一块GPU卡
 #SBATCH -o slurm_log/%J.out                   # 脚本执行的输出将被保存在当 %J.out文件下，%j表示作业号
 #SBATCH -e slurm_log/%J.err                   # 脚本执行的错误日志将被保存在当 %J.err文件下，%j表示作业号
@@ -46,3 +46,71 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+# 489387.out 490654.out 491158.out
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp32, zero2"
+# deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 4 --micro_batch_size 1 --max_txt_len 2000 --llm_frozen False
+
+
+# 490196.out 491180.out
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp32, zero3"
+# deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --deepspeed "ds_config_zero3.json"
+
+
+
+
+
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp32, zero2, accelerate"
+# accelerate launch --num_processes 2 --main_process_port 29503 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 1 --max_txt_len 2000 --max_memory 80,80 --llm_frozen False
+
+
+
+
+# 490198.out 491194.out # 491539.out
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=16"
+# deepspeed --num_gpus=2 --master_port 29503 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 16 --max_txt_len 2000 --llm_frozen False --fp16
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=8"
+# deepspeed --num_gpus=2 --master_port 29503 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --fp16
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=4"
+# deepspeed --num_gpus=2 --master_port 29503 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 4 --max_txt_len 2000 --llm_frozen False --fp16
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=2"
+# deepspeed --num_gpus=2 --master_port 29503 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 2 --max_txt_len 2000 --llm_frozen False --fp16
+
+
+
+
+
+
+# 492582.out
+echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=16"
+deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 16 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed "ds_config_zero2_nocpu.json"
+echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=8"
+deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed "ds_config_zero2_nocpu.json"
+echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=4"
+deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 4 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed "ds_config_zero2_nocpu.json"
+echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=2"
+deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 2 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed "ds_config_zero2_nocpu.json"
+
+
+
+
+
+
+
+
+
+
+
+# 490015.out 
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero3"
+# deepspeed --num_gpus=2 --master_port 29504 train_ds.py --dataset ppi5k_baseline_cp --model_name graph_llm --num_epochs 3 --batch_size 16 --micro_batch_size 1 --max_txt_len 2000 --llm_frozen False --fp16 False --deepspeed "ds_config_zero3.json"

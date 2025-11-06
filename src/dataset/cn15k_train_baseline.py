@@ -47,8 +47,9 @@ class CN15kBaselineDataset(Dataset):
 
         # 随机选择 50 行，如果行数不足 50 则选择全部行
         sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
-        desc = sampled_edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
 
+        desc = sampled_edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
+        filtered_edges = sampled_edges[~((sampled_edges['src'] == label) | (sampled_edges['dst'] == label))]
         if isinstance(data['answer'], list):
             label = ('|').join(data['answer']).lower()
         else:
