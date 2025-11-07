@@ -240,10 +240,11 @@ def main(args):
     print('start load dataset...')
     start = time.time()
 
-    train_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['train']]
-    val_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['val']]
+    # train_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['train']]
+    # val_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['val']]
 
-    test_dataset = Subset(dataset, idx_split['test'])
+    # test_dataset = Subset(dataset, idx_split['test'])
+    test_dataset = [dataset[i] for i in idx_split['test']]
     test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
     print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
@@ -256,65 +257,65 @@ def main(args):
 
 
     # Step 5. Training
-    print('start training...')
+    # print('start training...')
 
     # args.micro_batch_size = args.batch_size // args.grad_steps
     path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}/'
     os.makedirs(path, exist_ok=True)
-    print(f'path: {path}')
-    print(f'batch_size: {args.batch_size}, micro_batch_size: {args.micro_batch_size}, grad_steps: {args.grad_steps}, world_size: {world_size}')
+    # print(f'path: {path}')
+    # print(f'batch_size: {args.batch_size}, micro_batch_size: {args.micro_batch_size}, grad_steps: {args.grad_steps}, world_size: {world_size}')
 
-    training_args = TrainingArguments(
-        output_dir=path,
-        num_train_epochs=args.num_epochs,
-        per_device_train_batch_size=args.micro_batch_size,
-        gradient_accumulation_steps=args.grad_steps,
-        learning_rate=args.lr,
-        weight_decay=args.wd,
-        logging_strategy="steps",
-        logging_steps=max(1, args.grad_steps),
-        evaluation_strategy="epoch",
-        save_strategy="epoch",
-        save_total_limit=1,
-        load_best_model_at_end=True,
-        metric_for_best_model="eval_loss",
-        greater_is_better=False,
-        seed=args.seed,
-        report_to="wandb",
-        fp16=args.fp16,
-        optim="adamw_torch",
-        # warmup_steps=100,
-        warmup_ratio=0.2,
-        lr_scheduler_type="cosine",
-        deepspeed=args.deepspeed,
-    )
+    # training_args = TrainingArguments(
+    #     output_dir=path,
+    #     num_train_epochs=args.num_epochs,
+    #     per_device_train_batch_size=args.micro_batch_size,
+    #     gradient_accumulation_steps=args.grad_steps,
+    #     learning_rate=args.lr,
+    #     weight_decay=args.wd,
+    #     logging_strategy="steps",
+    #     logging_steps=max(1, args.grad_steps),
+    #     evaluation_strategy="epoch",
+    #     save_strategy="epoch",
+    #     save_total_limit=1,
+    #     load_best_model_at_end=True,
+    #     metric_for_best_model="eval_loss",
+    #     greater_is_better=False,
+    #     seed=args.seed,
+    #     report_to="none",
+    #     fp16=args.fp16,
+    #     optim="adamw_torch",
+    #     # warmup_steps=100,
+    #     warmup_ratio=0.2,
+    #     lr_scheduler_type="cosine",
+    #     deepspeed=args.deepspeed,
+    # )
 
-    # 创建自定义 collator 的实例
-    data_collator = GraphTextCollator(
-        tokenizer, 
-        pad_to_multiple_of=8, 
-        return_tensors="pt", 
-        padding=True,
-        fp16=args.fp16,
-    )
+    # # 创建自定义 collator 的实例
+    # data_collator = GraphTextCollator(
+    #     tokenizer, 
+    #     pad_to_multiple_of=8, 
+    #     return_tensors="pt", 
+    #     padding=True,
+    #     fp16=args.fp16,
+    # )
 
-    trainer = Trainer(
-        model=sp_model,
-        args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=val_dataset,
-        data_collator=data_collator,
-        # data_collator=DataCollatorForSeq2Seq(tokenizer, pad_to_multiple_of=8, return_tensors="pt", padding=True)
-    )
+    # trainer = Trainer(
+    #     model=sp_model,
+    #     args=training_args,
+    #     train_dataset=train_dataset,
+    #     eval_dataset=val_dataset,
+    #     data_collator=data_collator,
+    #     # data_collator=DataCollatorForSeq2Seq(tokenizer, pad_to_multiple_of=8, return_tensors="pt", padding=True)
+    # )
 
 
 
-    model.config.use_cache = False
-    if torch.__version__ >= "2" and sys.platform != "win32":
-        model = torch.compile(model)
+    # model.config.use_cache = False
+    # if torch.__version__ >= "2" and sys.platform != "win32":
+    #     model = torch.compile(model)
 
-    trainer.train()
-    _save_checkpoint_nooptim(sp_model, args)
+    # trainer.train()
+    # _save_checkpoint_nooptim(sp_model, args)
 
 
 
@@ -325,7 +326,7 @@ def main(args):
 
     # Step 5. Evaluating
     print('start testing...')
-    path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}_fp16_{args.fp16}/test_result.csv'
+    path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}/test_result.csv'
     print(f'path: {path}')
 
     sp_model = _reload_best_model(sp_model, args)

@@ -11,6 +11,7 @@ from peft import (
     get_peft_model,
     prepare_model_for_kbit_training,
 )
+from torch_geometric.data import Batch
 
 BOS = '<s>[INST]'
 EOS_USER = '[/INST]'
@@ -86,7 +87,7 @@ class GraphLLM(PreTrainedModel):
 
         return g_embeds
 
-    def forward(self, input_ids, attention_mask, labels, graph=None):
+    def forward(self, input_ids, attention_mask, labels, graph=None, graph_path=None):
         # # encode description, questions and labels
         # questions = self.tokenizer(samples["question"], add_special_tokens=False)
         # descriptions = self.tokenizer(samples["desc"], add_special_tokens=False)
@@ -136,11 +137,27 @@ class GraphLLM(PreTrainedModel):
         bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0].to(self.model.device)).unsqueeze(0).repeat(batch_size, 1, 1).to(token_embeds.device)
         
         # encode graph
-        graph_embeds = self.encode_graphs(graph)
+        if graph is not None:
+            graph_embeds = self.encode_graphs(graph)
+        elif graph_path is not None:
+            graph_list = []
+            for gp in graph_path:
+                graph = torch.load(gp)
+                graph_list.append(graph)
+            batched_graph = Batch.from_data_list(graph_list)
+            # 类型转换，for 混合精度训练
+            target_dtype = self.graph_encoder.convs[0].lin_query.weight.dtype
+            if hasattr(batched_graph, 'x') and batched_graph.x is not None:
+                batched_graph.x = batched_graph.x.to(target_dtype)
+            if hasattr(batched_graph, 'edge_attr') and batched_graph.edge_attr is not None:
+                if batched_graph.edge_attr.is_floating_point():
+                    batched_graph.edge_attr = batched_graph.edge_attr.to(target_dtype)
+            graph_embeds = self.encode_graphs(batched_graph)
+
+
         graph_embeds = self.projector(graph_embeds)
         graph_embeds = graph_embeds.unsqueeze(1).to(token_embeds.device)
         # print(f'graph_embeds.shape: {graph_embeds.shape}')
-
         input_embeds = torch.cat((bos_embeds, graph_embeds, token_embeds), dim=1)
         soft_prompt_length = bos_embeds.shape[1] + graph_embeds.shape[1]
         new_attention_mask = torch.cat((torch.ones((batch_size, soft_prompt_length), device=attention_mask.device), attention_mask), dim=1)
@@ -168,7 +185,23 @@ class GraphLLM(PreTrainedModel):
         pad_embeds = self.word_embedding(torch.tensor(self.tokenizer.pad_token_id).to(self.model.device)).unsqueeze(0)
 
         # encode graphs
-        graph_embeds = self.encode_graphs_inference(samples)
+        if samples.get("graph") is not None:
+            graph_embeds = self.encode_graphs(samples["graph"])
+        elif samples.get("graph_path") is not None:
+            graph_list = []
+            for gp in samples["graph_path"]:
+                graph = torch.load(gp)
+                graph_list.append(graph)
+            batched_graph = Batch.from_data_list(graph_list)
+            # 类型转换，for 混合精度训练
+            target_dtype = self.graph_encoder.convs[0].lin_query.weight.dtype
+            if hasattr(batched_graph, 'x') and batched_graph.x is not None:
+                batched_graph.x = batched_graph.x.to(target_dtype)
+            if hasattr(batched_graph, 'edge_attr') and batched_graph.edge_attr is not None:
+                if batched_graph.edge_attr.is_floating_point():
+                    batched_graph.edge_attr = batched_graph.edge_attr.to(target_dtype)
+            graph_embeds = self.encode_graphs(batched_graph)
+        # graph_embeds = self.encode_graphs_inference(samples)
         graph_embeds = self.projector(graph_embeds)
 
         batch_size = len(samples['id'])

@@ -2,6 +2,10 @@ import torch
 import pandas as pd
 from torch.utils.data import Dataset
 import datasets
+import concurrent.futures
+import pickle
+import os
+from tqdm import tqdm
 
 
 model_name = 'sbert'
@@ -17,6 +21,7 @@ path_edges = f'{path}/edges'
 path_graphs= f'{path}/graphs'
 
 
+CACHE_DIR = f'{path}/cache'
 
 
 class PPI5kBaselineCPDataset(Dataset):
@@ -57,6 +62,7 @@ class PPI5kBaselineCPDataset(Dataset):
             'label': label,
             'graph': graph,
             'desc': desc,
+            'graph_path': f'{path_graphs}/{index}.pt',
         }
 
     def get_idx_split(self):
@@ -72,14 +78,66 @@ class PPI5kBaselineCPDataset(Dataset):
         return {'train': train_indices, 'val': val_indices, 'test': test_indices}
 
 
-if __name__ == '__main__':
+def get_data_item_by_index(dataset, index):
+    return dataset[index]
+
+
+def cache_data():
     dataset = PPI5kBaselineCPDataset()
+    idx_split = dataset.get_idx_split()
+    # train_dataset = [dataset[i] for i in idx_split['train']]
+    # val_dataset = [dataset[i] for i in idx_split['val']]
+    # test_dataset = [dataset[i] for i in idx_split['test']]
 
-    idx = 101
-    data = dataset[idx]
-    for k, v in data.items():
-        print(f'{k}: {v}')
+    # # 将数据和对应的文件名后缀存储在一个字典中
+    # data_to_save = {
+    #     'train': train_dataset,
+    #     'val': val_dataset,
+    #     'test': test_dataset
+    # }
 
-    split_ids = dataset.get_idx_split()
-    for k, v in split_ids.items():
-        print(f'# {k}: {len(v)}')
+
+    splits_to_process = {
+        'train': idx_split['train'],
+        'val': idx_split['val'],
+        'test': idx_split['test']
+    }
+    print("开始使用 ProcessPoolExecutor 加载数据...")
+    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
+        data_to_save = {}
+        for split_name, indices in splits_to_process.items():
+            futures = [executor.submit(get_data_item_by_index, dataset, i) for i in indices]
+            for future in tqdm(futures, desc=f"加载 {split_name} 数据"):
+                data_list.append(future.result())
+            data_to_save[split_name] = data_list
+            print(f"{split_name} 集加载完成，共 {len(data_list)} 个项目。")
+    
+    # 确保保存目录存在
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    for split_name, data_list in tqdm(data_to_save.items(), desc="保存缓存文件"):
+        file_path = f"{CACHE_DIR}/{split_name}.pkl"
+        with open(file_path, 'wb') as f:
+            # 使用 pickle 序列化并保存数据
+            pickle.dump(data_list, f)
+        print(f"成功保存 {len(data_list)} 个 {split_name} 项目到 {file_path}")
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    # dataset = PPI5kBaselineCPDataset()
+
+    # idx = 101
+    # data = dataset[idx]
+    # for k, v in data.items():
+    #     print(f'{k}: {v}')
+
+    # split_ids = dataset.get_idx_split()
+    # for k, v in split_ids.items():
+    #     print(f'# {k}: {len(v)}')
+
+    cache_data()
