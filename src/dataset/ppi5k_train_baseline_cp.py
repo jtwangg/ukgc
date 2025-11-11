@@ -76,6 +76,15 @@ class PPI5kBaselineCPDataset(Dataset):
             test_indices = [int(line.strip()) for line in file]
 
         return {'train': train_indices, 'val': val_indices, 'test': test_indices}
+    
+    def load_data_from_pickle(self):
+        with open(f"{CACHE_DIR}/train.pkl", 'rb') as f:
+            train = pickle.load(f)
+        with open(f"{CACHE_DIR}/val.pkl", 'rb') as f:
+            val = pickle.load(f)
+        with open(f"{CACHE_DIR}/test.pkl", 'rb') as f:
+            test = pickle.load(f)
+        return train, val, test
 
 
 def get_data_item_by_index(dataset, index):
@@ -85,33 +94,18 @@ def get_data_item_by_index(dataset, index):
 def cache_data():
     dataset = PPI5kBaselineCPDataset()
     idx_split = dataset.get_idx_split()
-    # train_dataset = [dataset[i] for i in idx_split['train']]
-    # val_dataset = [dataset[i] for i in idx_split['val']]
-    # test_dataset = [dataset[i] for i in idx_split['test']]
 
-    # # 将数据和对应的文件名后缀存储在一个字典中
-    # data_to_save = {
-    #     'train': train_dataset,
-    #     'val': val_dataset,
-    #     'test': test_dataset
-    # }
+    train_dataset = [dataset[i] for i in tqdm(idx_split['train'], desc="构建训练集")]
+    val_dataset = [dataset[i] for i in tqdm(idx_split['val'], desc="构建验证集")]
+    test_dataset = [dataset[i] for i in tqdm(idx_split['test'], desc="构建测试集")]
 
-
-    splits_to_process = {
-        'train': idx_split['train'],
-        'val': idx_split['val'],
-        'test': idx_split['test']
+    # 将数据和对应的文件名后缀存储在一个字典中
+    data_to_save = {
+        'train': train_dataset,
+        'val': val_dataset,
+        'test': test_dataset
     }
-    print("开始使用 ProcessPoolExecutor 加载数据...")
-    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
-        data_to_save = {}
-        for split_name, indices in splits_to_process.items():
-            futures = [executor.submit(get_data_item_by_index, dataset, i) for i in indices]
-            for future in tqdm(futures, desc=f"加载 {split_name} 数据"):
-                data_list.append(future.result())
-            data_to_save[split_name] = data_list
-            print(f"{split_name} 集加载完成，共 {len(data_list)} 个项目。")
-    
+
     # 确保保存目录存在
     os.makedirs(CACHE_DIR, exist_ok=True)
     for split_name, data_list in tqdm(data_to_save.items(), desc="保存缓存文件"):

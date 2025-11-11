@@ -1,0 +1,31 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k, prompt tuning with random sampled 50 triples
+start load args ...
+end load args!
+start seed everything...
+end seed everything!
+Namespace(model_name='pt_llm', project='project_g_retriever', seed=0, dataset='nl27k_baseline', lr=1e-05, wd=0.05, patience=2, batch_size=8, grad_steps=2, num_epochs=5, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=2096, max_new_tokens=32, max_memory=[80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json')
+start load dataset...
+end load dataset!
+start load model...
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/nl27k_baseline/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_2096_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_5_seed0_notailingraph.csv
+Loading checkpoint from output/nl27k_baseline/model_name_pt_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_2096_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_5_seed0_checkpoint_best.pth.
+Test Acc 0.6271352409966271
+nl27k, graph prompt tuning with random sampled 50 triples
+start load args ...
+end load args!
+start seed everything...
+end seed everything!
+Namespace(model_name='graph_llm', project='project_g_retriever', seed=0, dataset='nl27k_baseline', lr=1e-05, wd=0.05, patience=2, batch_size=8, grad_steps=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=2096, max_new_tokens=32, max_memory=[80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json')
+start load dataset...
+end load dataset!
+start load model...
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/nl27k_baseline/model_name_graph_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_2096_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0_notailingraph.csv
+Loading checkpoint from output/nl27k_baseline/model_name_graph_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_2096_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0_checkpoint_best.pth.
+Test Acc 0.8005657708628006

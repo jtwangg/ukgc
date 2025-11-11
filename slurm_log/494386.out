@@ -1,0 +1,5 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+ppi5k cache data
+成功保存 230916 个 train 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache/train.pkl
+成功保存 19017 个 val 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache/val.pkl
+成功保存 21720 个 test 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache/test.pkl

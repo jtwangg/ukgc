@@ -1,0 +1,19 @@
+2025-11-11 15:28:46,654 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Current SDK version is 0.15.4
+2025-11-11 15:28:46,654 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Configure stats pid to 3239920
+2025-11-11 15:28:46,654 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Loading settings from /seu_share/home/qiguilin/220236147/.config/wandb/settings
+2025-11-11 15:28:46,654 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Loading settings from /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/settings
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'prompt_tuning', 'api_key': '***REDACTED***'}
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train_ds.py', 'program': '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_ds.py'}
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_init.py:_log_setup():507] Logging user logs to /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/offline-run-20251111_152846-9uy8g8n7/logs/debug.log
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_init.py:_log_setup():508] Logging internal logs to /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/offline-run-20251111_152846-9uy8g8n7/logs/debug-internal.log
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_init.py:init():547] calling init triggers
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {}
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_init.py:init():596] starting backend
+2025-11-11 15:28:46,655 INFO    MainThread:3239920 [wandb_init.py:init():600] setting up manager
+2025-11-11 15:28:46,660 INFO    MainThread:3239920 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-11-11 15:28:46,662 INFO    MainThread:3239920 [wandb_init.py:init():606] backend started and connected
+2025-11-11 15:28:46,665 INFO    MainThread:3239920 [wandb_init.py:init():703] updated telemetry
+2025-11-11 15:28:48,589 INFO    MainThread:3239920 [wandb_init.py:init():736] communicating run to backend with 60.0 second timeout
+2025-11-11 15:28:48,594 INFO    MainThread:3239920 [wandb_init.py:init():787] starting run threads in backend

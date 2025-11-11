@@ -23,6 +23,7 @@ wandb offline
 
 
 export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
+export WANDB_PROJECT="prompt_tuning"
 export PYTHONUNBUFFERED=1
 
 
@@ -53,11 +54,28 @@ export PYTHONUNBUFFERED=1
 
 
 
-echo "prompt tuning with pcst retrieval, llm_froze=False"
-deepspeed --num_gpus=2 --master_port 29503 train_ds.py --dataset ppi5k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
 
 
-echo "prompt tuning with random sampled 50 triples, llm_froze=False"
-deepspeed --num_gpus=2 --master_port 29504 train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --micro_batch_size 4 --max_txt_len 100 --max_memory 80,80 --llm_frozen False
+
+
+# echo "prompt tuning with pcst retrieval, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29503 train_ds.py --dataset ppi5k_cp --model_name pt_llm --num_epochs 3 --batch_size 2 --max_txt_len 1900 --max_memory 80,80 --llm_frozen False
+
+
+# echo "prompt tuning with random sampled 50 triples, llm_froze=False, fp16, zero2_nocpu, mbs=16"
+# deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --micro_batch_size 16 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed ds_config_zero2_nocpu.json
+# echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2_nocpu, mbs=8"
+# deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed "ds_config_zero2_nocpu.json"
+
+
+echo "ppi5k, prompt tuning, random sampled 50 triples, llm_frozen=false, fp32, zero2_nocpu, mbs=16"
+deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 32 --micro_batch_size 16 --max_txt_len 2000 --llm_frozen False --deepspeed ds_config_zero2_nocpu.json
+echo "ppi5k, prompt tuning, random sampled 50 triples, llm_frozen=false, fp32, zero2_nocpu, mbs=8"
+deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 32 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+echo "ppi5k, prompt tuning, random sampled 50 triples, llm_frozen=false, fp32, zero2_nocpu, mbs=4"
+deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 32 --micro_batch_size 4 --max_txt_len 2000 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+echo "ppi5k, prompt tuning, random sampled 50 triples, llm_frozen=false, fp32, zero2_nocpu, mbs=2"
+deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 32 --micro_batch_size 2 --max_txt_len 2000 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+
 
 # MASTER_PORT=29502 accelerate launch --num_processes=2 train_ds.py --dataset nl27k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 8 --max_txt_len 100 --max_memory 80,80 --llm_frozen False

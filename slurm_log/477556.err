@@ -1,51 +1,0 @@
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
-  import pynvml
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
-  import pynvml
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
-  import pynvml
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
-  import pynvml
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
-  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
-  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
-  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
-/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
-  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:20<00:20, 20.60s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:20<00:20, 20.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:37<00:00, 18.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:37<00:00, 18.87s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:37<00:00, 18.62s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:37<00:00, 18.95s/it]
-Using /seu_share/home/qiguilin/220236147/.cache/torch_extensions/py39_cu118 as PyTorch extensions root...
-Using /seu_share/home/qiguilin/220236147/.cache/torch_extensions/py39_cu118 as PyTorch extensions root...
-Detected CUDA files, patching ldflags
-Emitting ninja build file /seu_share/home/qiguilin/220236147/.cache/torch_extensions/py39_cu118/cpu_adam/build.ninja...
-Building extension module cpu_adam...
-Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
-Loading extension module cpu_adam...
-Loading extension module cpu_adam...
-  0%|          | 0/346374 [00:00<?, ?it/s]  0%|          | 0/346374 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_dsp.py", line 198, in <module>
-    main(args)
-  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_dsp.py", line 113, in main
-    loss = model_engine(batch) # DeepSpeed: 使用 model_engine 进行前向传播
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
-    return forward_call(*args, **kwargs)
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/utils/nvtx.py", line 15, in wrapped_fn
-    ret_val = func(*args, **kwargs)
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/runtime/engine.py", line 1814, in forward
-    loss = self.module(*inputs, **kwargs)
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
-    result = forward_call(*args, **kwargs)
-  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/model/llm.py", line 100, in forward
-    bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0].to(self.word_embedding.weight.device))
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1538, in _call_impl
-    result = forward_call(*args, **kwargs)
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/accelerate/hooks.py", line 175, in new_forward
-    output = module._old_forward(*args, **kwargs)
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/modules/sparse.py", line 162, in forward
-    return F.embedding(
-  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch/nn/functional.py", line 2210, in embedding
-    return torch.embedding(weight, input, padding_idx, scale_grad_by_freq, sparse)
-RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:1 and cuda:0! (when checking argument for argument index in method wrapper_CUDA__index_select)
-  0%|          | 0/346374 [00:38<?, ?it/s]

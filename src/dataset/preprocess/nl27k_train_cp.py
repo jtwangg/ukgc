@@ -11,7 +11,7 @@ import pandas as pd
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/train_50neighbor/confidence_prediction/nl27k'
+path = 'dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/nl27k'
 
 train_df = pd.read_json(f'{path}/train_1hop.json')
 val_df = pd.read_json(f'{path}/val_1hop.json')
@@ -131,7 +131,7 @@ def generate_split():
         file.write('\n'.join(map(str, test_indices)))
 
 if __name__ == '__main__':
-    # step_one()
+    step_one()
     step_two()
     generate_split()
 
