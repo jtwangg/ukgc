@@ -1,0 +1,24 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+Question-Only
+Textual Graph random sample 50 tripels + Question
+cn15k_baseline
+Namespace(model_name='inference_llm', project='project_g_retriever', seed=0, dataset='cn15k_baseline_cp', lr=1e-05, wd=0.05, patience=2, batch_size=8, micro_batch_size=2, num_epochs=10, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1200, max_new_tokens=50, max_memory=['80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/cn15k_baseline_cp/model_name_inference_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_1200_max_new_tokens_50_gnn_model_name_gt_patience_2_num_epochs_10_seed0.csv
+MSE: 0.07652
+MAE: 0.18769
+valid_ratio: 0.99948
+Test Acc 0.07651713120365088
+Textual Graph optimized by pcst + Question
+cn15k
+Namespace(model_name='inference_llm', project='project_g_retriever', seed=0, dataset='cn15k_cp', lr=1e-05, wd=0.05, patience=2, batch_size=8, micro_batch_size=2, grad_steps=2, num_epochs=10, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1200, max_new_tokens=50, max_memory=['80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+Loading LLAMA
+Freezing LLAMA!
+Finish loading LLAMA!
+path: output/cn15k_cp/model_name_inference_llm_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_1200_max_new_tokens_50_gnn_model_name_gt_patience_2_num_epochs_10_seed0.csv
+MSE: 0.06894
+MAE: 0.17217
+valid_ratio: 0.99933
+Test Acc 0.06894342935178677

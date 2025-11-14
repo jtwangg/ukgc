@@ -1,5 +1,5 @@
 import os
-
+import pickle
 import torch
 import wandb
 import gc
@@ -13,6 +13,8 @@ from src.model import load_model, llama_model_path
 from src.dataset import load_dataset
 from src.utils.evaluate import eval_funcs
 from src.utils.collate import collate_fn
+from torch.utils.data import Subset
+
 
 
 def main(args):
@@ -30,7 +32,11 @@ def main(args):
     idx_split = dataset.get_idx_split()
 
     # Step 2: Build Node Classification Dataset
-    test_dataset = [dataset[i] for i in idx_split['test']]
+    # test_dataset = [dataset[i] for i in idx_split['test']]
+    try:
+        test_dataset = dataset.load_test_data_from_pickle()
+    except:
+        test_dataset = Subset(dataset, idx_split['test'])
     test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn)
 
     # Step 3: Build Model

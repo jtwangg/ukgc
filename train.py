@@ -38,12 +38,13 @@ def main(args):
     # Step 2: Build Node Classification Dataset
     print('start load dataset...')
     start = time.time()
-    # train_dataset = [dataset[i] for i in idx_split['train']]
-    # val_dataset = [dataset[i] for i in idx_split['val']]
-    # test_dataset = [dataset[i] for i in idx_split['test']]
-    train_dataset = Subset(dataset, idx_split['train'])
-    val_dataset = Subset(dataset, idx_split['val'])
-    test_dataset = Subset(dataset, idx_split['test'])
+
+    try:
+        train_dataset, val_dataset, test_dataset = dataset.load_data_from_pickle()
+    except:
+        train_dataset = Subset(dataset, idx_split['train'])
+        val_dataset = Subset(dataset, idx_split['val'])
+        test_dataset = Subset(dataset, idx_split['test'])
     print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, drop_last=True, pin_memory=True, shuffle=True, collate_fn=collate_fn, num_workers=8)
@@ -72,6 +73,9 @@ def main(args):
     num_training_steps = args.num_epochs * len(train_loader)
     progress_bar = tqdm(range(num_training_steps))
     best_val_loss = float('inf')
+
+    # world_size = int(os.environ.get("WORLD_SIZE", 1))
+    # args.grad_steps = args.batch_size // world_size
 
     for epoch in range(args.num_epochs):
         model.train()

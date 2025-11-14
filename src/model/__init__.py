@@ -1,16 +1,20 @@
 from src.model.llm import LLM
-# from src.model.pt_llm import PromptTuningLLM
-from src.model.pt_llm_ds import PromptTuningLLM
-# from src.model.graph_llm import GraphLLM
-from src.model.graph_llm_ds import GraphLLM
+from src.model.llm_ds import LLMDS
+from src.model.pt_llm import PromptTuningLLM
+from src.model.pt_llm_ds import PromptTuningLLMDS
+from src.model.graph_llm import GraphLLM
+from src.model.graph_llm_ds import GraphLLMDS
 from src.model.llm_newloss import LLM_newloss
 
 
 load_model = {
     "llm": LLM,
+    "llm_ds": LLMDS,
     "inference_llm": LLM,
     "pt_llm": PromptTuningLLM,
+    "pt_llm_ds": PromptTuningLLMDS,
     "graph_llm": GraphLLM,
+    "graph_llm_ds": GraphLLMDS,
     "llm_newloss": LLM_newloss,
 }
 

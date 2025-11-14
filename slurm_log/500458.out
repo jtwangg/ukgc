@@ -1,0 +1,32 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+cn15k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  204984
+# val samples:  16881
+# test samples:  19293
+cn15k process retrival by pcst
+id: 101
+question: Question: What is the probability that the fact "an formof and" is true? Only output a number between 0 and 1 without any explanation.
+Answer: 
+label: 0.709
+graph: Data(x=[11, 1024], edge_index=[2, 11], edge_attr=[11, 1024], num_nodes=11, edge_weight=[11])
+desc: src,edge_attr,dst,weight
+not,relatedto,and,0.709
+an,relatedto,not,0.709
+and,relatedto,conjunction,1.0
+and,etymologicallyrelatedto,end,0.342
+ing,etymologicallyrelatedto,and,0.342
+ant,etymologicallyrelatedto,and,0.342
+and,distinctfrom,but,0.535
+astand,etymologicallyrelatedto,and,0.342
+and,antonym,but,0.152
+or,antonym,and,0.775
+rock_and_roll,etymologicallyrelatedto,and,0.342
+
+graph_path: dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/cn15k/graphs/101.pt
+# train: 204984
+# val: 16881
+# test: 19293

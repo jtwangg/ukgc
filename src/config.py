@@ -18,7 +18,7 @@ def parse_args_llama():
     # Model Training
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--micro_batch_size", type=int, default=2)
-    # parser.add_argument("--grad_steps", type=int, default=2)
+    parser.add_argument("--grad_steps", type=int, default=2)
 
     # Learning Rate Scheduler
     parser.add_argument("--num_epochs", type=int, default=10)

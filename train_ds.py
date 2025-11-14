@@ -15,7 +15,7 @@ from torch.nn.utils import clip_grad_norm_
 from torch.utils.data import Subset
 from torch_geometric.data import Batch
 
-from transformers import TrainingArguments, Trainer, DataCollatorWithPadding, DataCollatorForSeq2Seq
+from transformers import TrainingArguments, Trainer, DataCollatorWithPadding, DataCollatorForSeq2Seq, TrainerCallback
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from transformers import LlamaForCausalLM, LlamaTokenizer
 
@@ -37,8 +37,8 @@ from src.utils.collate import collate_fn
 from src.utils.seed import seed_everything
 from src.utils.lr_schedule import adjust_learning_rate
 from src.config import parse_args_llama
-from src.model.pt_llm_ds import PromptTuningLLM
-from src.model.graph_llm_ds import GraphLLM
+# from src.model.pt_llm_ds import PromptTuningLLM
+# from src.model.graph_llm_ds import GraphLLM
 print(f"end import from src! cost {(time.time()-start):.1f}s")
 
 
@@ -123,6 +123,25 @@ class GraphTextCollator(DataCollatorForSeq2Seq):
 
 
 
+class GpuCacheClearingCallback(TrainerCallback):
+    """
+    一个自定义的 Callback，用于在每个 epoch 结束时清除 GPU 缓存。
+    """
+    def on_epoch_end(self, **kwargs):
+        # 仅在 GPU 可用时执行清理操作
+        if torch.cuda.is_available():
+            print("\n*** cuda.empty_cache... ***")
+            # 1. 强制 Python 垃圾回收
+            gc.collect()
+            # 2. 清除 PyTorch 的 GPU 缓存
+            torch.cuda.empty_cache()
+            # 可选：打印当前的显存使用情况（仅供调试）
+            # print(f"当前分配显存: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
+            # print(f"当前缓存显存: {torch.cuda.memory_reserved() / 1024**2:.2f} MB")
+            print("*** end cuda.empty_cache ***\n")
+
+
+
 
 def main(args):
     # Step 1: Set up wandb
@@ -192,8 +211,7 @@ def main(args):
             task_type="CAUSAL_LM",
         )
         model = get_peft_model(model, config)
-
-    model.print_trainable_parameters()
+        model.print_trainable_parameters()
     
 
     dataset = load_dataset[args.dataset]()
@@ -232,7 +250,7 @@ def main(args):
             "attention_mask": [1 if token_id != tokenizer.pad_token_id else 0 for token_id in input_ids],
             "labels": label_input_ids,
             "graph": data_point["graph"],
-            "graph_path": data_point["graph_path"],
+            # "graph_path": data_point["graph_path"],
         }
 
 
@@ -240,15 +258,18 @@ def main(args):
     print('start load dataset...')
     start = time.time()
 
-    
+    try:
+        train_dataset, val_dataset = dataset.load_train_val_data_from_pickle()
+    except:
+        train_dataset = [dataset[i] for i in idx_split['train']]
+        val_dataset = [dataset[i] for i in idx_split['val']]
+    train_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(train_dataset, desc="train dataset tokenize...")]
+    val_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(val_dataset, desc="val dataset tokenize...")]
 
-    # train_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['train']]
-    # val_dataset = [generate_and_tokenize_prompt(dataset[i]) for i in idx_split['val']]
-    train_dataset, val_dataset, _ = dataset.load_data_from_pickle()
-    train_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(train_dataset, desc="generate_and_tokenize_prompt of train dataset...")]
-    val_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(val_dataset, desc="generate_and_tokenize_prompt of val dataset...")]
-
-    test_dataset = Subset(dataset, idx_split['test'])
+    try:
+        test_dataset = dataset.load_test_data_from_pickle()
+    except:
+        test_dataset = Subset(dataset, idx_split['test'])
     test_loader = DataLoader(test_dataset, batch_size=args.eval_batch_size, drop_last=False, pin_memory=True, shuffle=False, collate_fn=collate_fn, num_workers=8)
     print(f'end load dataset! cost {(time.time()-start):.1f}s')
 
@@ -273,11 +294,11 @@ def main(args):
         output_dir=output_path,
         num_train_epochs=args.num_epochs,
         per_device_train_batch_size=args.micro_batch_size,
-        gradient_accumulation_steps=max(1, args.grad_steps),
+        gradient_accumulation_steps=args.grad_steps,
         learning_rate=args.lr,
         weight_decay=args.wd,
         logging_strategy="steps",
-        logging_steps=max(1, args.grad_steps),
+        logging_steps=args.grad_steps,
         evaluation_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=1,
@@ -330,7 +351,7 @@ def main(args):
 
     # Step 5. Evaluating
     print('start testing...')
-    path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}_fp16_{args.fp16}/test_result.csv'
+    path = f'{output_path}test_result.csv'
     print(f'path: {path}')
 
     sp_model = _reload_best_model(sp_model, args)

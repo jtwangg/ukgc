@@ -7,6 +7,7 @@ from peft import (
     get_peft_model,
     prepare_model_for_kbit_training,
 )
+import os
 
 BOS = '<s>[INST]'
 EOS_USER = '[/INST]'
@@ -27,9 +28,18 @@ class LLM_newloss(torch.nn.Module):
         self.max_new_tokens = args.max_new_tokens
 
         print('Loading LLAMA')
+        world_size = int(os.environ.get("WORLD_SIZE", 1))
+        ddp = world_size != 1
+        print(f'world_size: {world_size}, ddp: {ddp}')
+        if ddp:  
+            device_map = {"": int(os.environ.get("LOCAL_RANK") or 0)}   # distributed data parallel
+        else:  
+            device_map = "auto"   # model parallel
+        print(f'device_map: {device_map}')
+
         kwargs = {
             "max_memory": {i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
-            "device_map": "auto",
+            "device_map": device_map,
             "revision": "main",
         }
         self.tokenizer = AutoTokenizer.from_pretrained(args.llm_model_path, use_fast=False, revision=kwargs["revision"])

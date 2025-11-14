@@ -20,7 +20,7 @@ EOS = '</s>'
 IGNORE_INDEX = -100
 
 
-class GraphLLM(PreTrainedModel):
+class GraphLLMDS(PreTrainedModel):
 
     def __init__(
         self,
@@ -29,7 +29,7 @@ class GraphLLM(PreTrainedModel):
         args,
         **kwargs
     ):
-        super(GraphLLM, self).__init__(model.config)
+        super(GraphLLMDS, self).__init__(model.config)
         self.model = model
         self.tokenizer = tokenizer
         self.max_txt_len = args.max_txt_len

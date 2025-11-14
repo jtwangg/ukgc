@@ -1,0 +1,36 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+[2025-11-13 16:13:47,467] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+start load args ...
+start load args ...
+end load args! cost 0.0s
+start import from src/ ...
+end load args! cost 0.0s
+start import from src/ ...
+end import from src! cost 181.8s
+Namespace(model_name='llm_newloss', project='project_g_retriever', seed=0, dataset='nl27k_baseline_tc', lr=1e-05, wd=0.05, patience=2, batch_size=8, micro_batch_size=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=1, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+start load dataset...
+end load dataset! cost 0.0s
+end load dataset! cost 0.0s
+start load model...
+Loading LLAMA
+world_size: 2, ddp: True
+device_map: {'': 1}
+end import from src! cost 185.2s
+Namespace(model_name='llm_newloss', project='project_g_retriever', seed=0, dataset='nl27k_baseline_tc', lr=1e-05, wd=0.05, patience=2, batch_size=8, micro_batch_size=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=1, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+start load dataset...
+end load dataset! cost 0.0s
+end load dataset! cost 0.0s
+start load model...
+Loading LLAMA
+world_size: 2, ddp: True
+device_map: {'': 0}
+Training LLAMA with LORA!
+Training LLAMA with LORA!
+Finish loading LLAMA!
+end load model! cost 72.2s
+trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start training...
+Finish loading LLAMA!
+end load model! cost 75.5s
+trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start training...

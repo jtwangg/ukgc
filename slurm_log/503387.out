@@ -1,0 +1,39 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k_train_baseline_cp cache data
+Starting to load and collect data for 175265 items...
+All graphs saved to dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/nl27k/all_cached_graphs.pt
+All edges saved to dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/nl27k/all_descs.pkl
+id: 101
+question: Question: What is the probability that the fact "tv agentcollaborateswithagent walter_cronkite" is true? Only output a number between 0 and 1 without any explanation.
+Answer: 
+label: 0.437
+graph: Data(x=[21, 1024], edge_index=[2, 24], edge_attr=[24, 1024], num_nodes=21, edge_weight=[24])
+desc: src,edge_attr,dst,weight
+walter_cronkite,controlledbyagent,tv,0.859
+bree_walker,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,catherine_bosley,0.437
+report,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,wife,0.859
+tv,agentcollaborateswithagent,tom_brokaw,0.437
+cbs_television,agentcollaborateswithagent,walter_cronkite,0.964
+cnn__pbs,agentcollaborateswithagent,walter_cronkite,0.437
+job,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,david_brinkley,0.437
+cbs_evening,agentcollaborateswithagent,walter_cronkite,0.859
+tv,agentcollaborateswithagent,job,0.437
+charlie_gibson,agentcollaborateswithagent,tv,0.437
+dan_rather,agentcollaborateswithagent,tv,0.859
+tv,agentcollaborateswithagent,karen_white,0.859
+tv,agentcollaborateswithagent,simon_hunt,0.437
+tv,agentcollaborateswithagent,jessica_savitch,0.437
+reports,agentcollaborateswithagent,tv,0.437
+simon_hunt,agentcollaborateswithagent,tv,0.437
+obama,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,john_roland,0.437
+tv,agentcollaborateswithagent,kent_brockman,0.437
+catherine_bosley,agentcollaborateswithagent,tv,0.437
+kent_brockman,agentcollaborateswithagent,tv,0.437
+
+# train: 148953
+# val: 12278
+# test: 14034

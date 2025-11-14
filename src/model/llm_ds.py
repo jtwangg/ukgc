@@ -15,7 +15,7 @@ EOS = '</s>'
 IGNORE_INDEX = -100
 
 
-class LLM(torch.nn.Module):
+class LLMDS(torch.nn.Module):
 
     def __init__(
         self,

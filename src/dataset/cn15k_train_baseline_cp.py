@@ -21,7 +21,7 @@ path_edges = f'{path}/edges'
 path_graphs= f'{path}/graphs'
 
 
-CACHE_DIR = f'{path}/cache'
+CACHE_DIR = f'{path}/graphs_pkl'
 
 
 class CN15kBaselineCPDataset(Dataset):
@@ -77,10 +77,27 @@ class CN15kBaselineCPDataset(Dataset):
 
         return {'train': train_indices, 'val': val_indices, 'test': test_indices}
 
+    def load_data_from_pickle(self):
+        with open(f"{CACHE_DIR}/train.pkl", 'rb') as f:
+            train = pickle.load(f)
+        with open(f"{CACHE_DIR}/val.pkl", 'rb') as f:
+            val = pickle.load(f)
+        with open(f"{CACHE_DIR}/test.pkl", 'rb') as f:
+            test = pickle.load(f)
+        return train, val, test
 
-def get_data_item_by_index(dataset, index):
-    return dataset[index]
+    def load_train_val_data_from_pickle(self):
+        with open(f"{CACHE_DIR}/train.pkl", 'rb') as f:
+            train = pickle.load(f)
+        with open(f"{CACHE_DIR}/val.pkl", 'rb') as f:
+            val = pickle.load(f)
+        return train, val
 
+    def load_test_data_from_pickle(self):
+        with open(f"{CACHE_DIR}/test.pkl", 'rb') as f:
+            test = pickle.load(f)
+        return test
+        
 
 def cache_data():
     dataset = CN15kBaselineCPDataset()
@@ -97,9 +114,9 @@ def cache_data():
         'test': test_dataset
     }
 
-
     # 确保保存目录存在
     os.makedirs(CACHE_DIR, exist_ok=True)
+    print(f'cache dir: {CACHE_DIR}')
     for split_name, data_list in tqdm(data_to_save.items(), desc="保存缓存文件"):
         file_path = f"{CACHE_DIR}/{split_name}.pkl"
         with open(file_path, 'wb') as f:
@@ -115,7 +132,7 @@ def cache_data():
 
 
 if __name__ == '__main__':
-    # dataset = PPI5kBaselineCPDataset()
+    # dataset = CN15kBaselineCPDataset()
 
     # idx = 101
     # data = dataset[idx]

@@ -1,0 +1,91 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+[2025-11-13 16:30:20,265] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+start load args ...
+start load args ...
+end load args! cost 0.0s
+start import from src/ ...
+end load args! cost 0.0s
+start import from src/ ...
+end import from src! cost 181.4s
+end import from src! cost 181.4s
+Namespace(model_name='llm_newloss', project='project_g_retriever', seed=0, dataset='nl27k_baseline_tc', lr=1e-05, wd=0.05, patience=2, batch_size=4, micro_batch_size=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=1, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)Namespace(model_name='llm_newloss', project='project_g_retriever', seed=0, dataset='nl27k_baseline_tc', lr=1e-05, wd=0.05, patience=2, batch_size=4, micro_batch_size=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=1, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+
+start load dataset...
+start load dataset...end load dataset! cost 0.0s
+
+end load dataset! cost 0.0s
+end load dataset! cost 0.0s
+start load model...
+end load dataset! cost 0.0s
+start load model...
+Loading LLAMA
+Loading LLAMA
+world_size: 2, ddp: True
+world_size: 2, ddp: Truedevice_map: {'': 1}
+
+device_map: {'': 0}
+Training LLAMA with LORA!
+Training LLAMA with LORA!
+Finish loading LLAMA!
+end load model! cost 73.1s
+trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start training...
+Finish loading LLAMA!
+end load model! cost 73.3s
+trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start training...
+[2025-11-13 16:35:58,356] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+start load args ...
+start load args ...
+end load args! cost 0.0s
+start import from src/ ...
+end load args! cost 0.0s
+start import from src/ ...
+end import from src! cost 182.0s
+end import from src! cost 182.0s
+Namespace(model_name='llm_newloss', project='project_g_retriever', seed=0, dataset='nl27k_baseline_tc', lr=1e-05, wd=0.05, patience=2, batch_size=2, micro_batch_size=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=1, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+Namespace(model_name='llm_newloss', project='project_g_retriever', seed=0, dataset='nl27k_baseline_tc', lr=1e-05, wd=0.05, patience=2, batch_size=2, micro_batch_size=2, num_epochs=3, warmup_epochs=1, eval_batch_size=16, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1700, max_new_tokens=1, max_memory=['80', '80'], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config.json', fp16=False)
+start load dataset...
+end load dataset! cost 0.0s
+start load dataset...
+end load dataset! cost 0.0s
+end load dataset! cost 0.0s
+start load model...
+end load dataset! cost 0.0sLoading LLAMA
+
+start load model...
+world_size: 2, ddp: True
+device_map: {'': 1}
+Loading LLAMA
+world_size: 2, ddp: True
+device_map: {'': 0}
+Training LLAMA with LORA!
+Training LLAMA with LORA!
+Finish loading LLAMA!
+end load model! cost 73.0s
+trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start training...
+Finish loading LLAMA!
+end load model! cost 73.3s
+trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start training...
+Lr: 0.0, Accum Loss: 12.366822242736816
+Lr: 0.0, Accum Loss: 12.366822242736816
+Lr: 1.341381623071764e-10, Accum Loss: 12.811172485351562
+Lr: 1.341381623071764e-10, Accum Loss: 12.811172485351562
+Lr: 2.682763246143528e-10, Accum Loss: 12.772716522216797
+Lr: 2.682763246143528e-10, Accum Loss: 12.772716522216797
+Lr: 4.024144869215292e-10, Accum Loss: 12.085742950439453
+Lr: 4.024144869215292e-10, Accum Loss: 12.085742950439453
+Lr: 5.365526492287056e-10, Accum Loss: 12.250864028930664
+Lr: 5.365526492287056e-10, Accum Loss: 12.250864028930664
+Lr: 6.70690811535882e-10, Accum Loss: 13.181255340576172
+Lr: 6.70690811535882e-10, Accum Loss: 13.181255340576172
+Lr: 8.048289738430584e-10, Accum Loss: 11.9965238571167
+Lr: 8.048289738430584e-10, Accum Loss: 11.9965238571167
+Lr: 9.389671361502348e-10, Accum Loss: 11.931449890136719
+Lr: 9.389671361502348e-10, Accum Loss: 11.931449890136719
+Lr: 1.0731052984574111e-09, Accum Loss: 12.679351806640625
+Lr: 1.0731052984574111e-09, Accum Loss: 12.679351806640625
+Lr: 1.2072434607645876e-09, Accum Loss: 12.285386085510254
+Lr: 1.2072434607645876e-09, Accum Loss: 12.285386085510254

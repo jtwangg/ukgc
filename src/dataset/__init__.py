@@ -28,6 +28,8 @@ from src.dataset.nl27k_train_baseline_cp import NL27kBaselineCPDataset
 from src.dataset.nl27k_train_cp import NL27kCPDataset
 from src.dataset.ppi5k_train_baseline_cp import PPI5kBaselineCPDataset
 from src.dataset.ppi5k_train_cp import PPI5kCPDataset
+from src.dataset.cn15k_train_baseline_cp import CN15kBaselineCPDataset
+from src.dataset.cn15k_train_cp import CN15kCPDataset
 
 
 load_dataset = {
@@ -57,6 +59,7 @@ load_dataset = {
     'nl27k_cp': NL27kCPDataset,
     'ppi5k_baseline_cp': PPI5kBaselineCPDataset,
     'ppi5k_cp': PPI5kCPDataset,
-
+    'cn15k_baseline_cp': CN15kBaselineCPDataset,
+    'cn15k_cp': CN15kCPDataset,
 
 }

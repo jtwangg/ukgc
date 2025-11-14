@@ -50,5 +50,11 @@ export WANDB_API_KEY='a8c8c5c8cec45afbb7ad0c32de74589e03155326'
 
 
 
-echo "ppi5k random sampled 50 triples, llm_frozen=false, fp16, zero2, mbs=8"
-stdbuf -o0 -e0 python3 -u test_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --fp16 --deepspeed "ds_config_zero2_nocpu.json"
+# echo "ppi5k_baseline_cp, pt_llm, random sampled 50 triples, llm_frozen=false, fp16=False, zero2, mbs=8"
+stdbuf -o0 -e0 python3 -u test_ds.py --dataset ppi5k_baseline_cp --model_name pt_llm --num_epochs 3 --batch_size 16 --micro_batch_size 8 --max_txt_len 2000 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+
+
+
+
+# echo "nl27k, random sampled 50 triples, graph_llm_ds, llm_frozen=false, fp16, zero2, mbs=8"
+# stdbuf -o0 -e0 python3 -u test_ds.py --dataset nl27k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 32 --micro_batch_size 8 --max_txt_len 1700 --llm_frozen False --eval_batch_size 8

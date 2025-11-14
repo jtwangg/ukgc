@@ -1,0 +1,10 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+ppi5k_train_baseline_cp cache data
+成功保存 230916 个 train 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_graphs/train.pkl
+成功保存 19017 个 val 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_graphs/val.pkl
+成功保存 21720 个 test 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_graphs/test.pkl
+ppi5k_train_cp cache data
+cache dir: dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_cache_graphs
+成功保存 230916 个 train 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_cache_graphs/train.pkl
+成功保存 19017 个 val 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_cache_graphs/val.pkl
+成功保存 21720 个 test 项目到 dataset/ukg/train_50neighbor/confidence_prediction_cleantraingraph/ppi5k/cache_cache_graphs/test.pkl

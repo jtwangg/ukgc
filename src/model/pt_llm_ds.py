@@ -17,7 +17,7 @@ EOS = '</s>'
 IGNORE_INDEX = -100
 
 
-class PromptTuningLLM(PreTrainedModel):
+class PromptTuningLLMDS(PreTrainedModel):
 
     def __init__(
         self,
@@ -27,7 +27,7 @@ class PromptTuningLLM(PreTrainedModel):
         args,
         **kwargs
     ):
-        super(PromptTuningLLM, self).__init__(model.config)
+        super(PromptTuningLLMDS, self).__init__(model.config)
         self.model = model
         self.tokenizer = tokenizer
         self.max_txt_len = args.max_txt_len

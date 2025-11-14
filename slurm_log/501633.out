@@ -1,0 +1,71 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k preprocess
+Loading dataset...
+inherit model weights from sentence-transformers/all-roberta-large-v1
+Encoding questions...
+Encoding graphs...
+# train samples:  148953
+# val samples:  12278
+# test samples:  14034
+nl27k_train_baseline_cp cache data
+id: 101
+question: Question: What is the probability that the fact "tv agentcollaborateswithagent walter_cronkite" is true?
+Only output a number between 0 and 1 without any explanation.
+Answer: 
+label: 0.437
+graph: Data(x=[35, 1024], edge_index=[2, 50], edge_attr=[50, 1024], num_nodes=35, edge_weight=[50])
+desc: src,edge_attr,dst,weight
+bree_walker,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,catherine_bosley,0.437
+report,agentcollaborateswithagent,tv,0.437
+cbs_radio,agentcompeteswithagent,tv,0.437
+tv,agentcollaborateswithagent,wife,0.859
+cnn__pbs,agentcontrols,walter_cronkite,0.999
+abc_news,agentcompeteswithagent,tv,0.437
+msnbc,agentcompeteswithagent,tv,0.437
+tv,agentcollaborateswithagent,tom_brokaw,0.437
+nbc_news,agentcompeteswithagent,tv,0.437
+cbs_television,agentcollaborateswithagent,walter_cronkite,0.964
+cnn__pbs,agentcollaborateswithagent,walter_cronkite,0.437
+job,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,david_brinkley,0.437
+cbs_evening,agentcollaborateswithagent,walter_cronkite,0.859
+television,worker,walter_cronkite,0.929
+tv,agentcollaborateswithagent,job,0.437
+tv,agentcompeteswithagent,fox_news,0.859
+cbs_news,worker,walter_cronkite,0.437
+charlie_gibson,agentcollaborateswithagent,tv,0.437
+dan_rather,agentcollaborateswithagent,tv,0.859
+tv,agentcollaborateswithagent,karen_white,0.859
+walter_cronkite,worksfor,television,0.929
+walter_cronkite,controlledbyagent,cnn__pbs,0.999
+walter_cronkite,controlledbyagent,tv,0.859
+tv,agentcollaborateswithagent,simon_hunt,0.437
+tv,agentcollaborateswithagent,jessica_savitch,0.437
+reports,agentcollaborateswithagent,tv,0.437
+oprah,agentcompeteswithagent,tv,0.437
+tv,agentcompeteswithagent,abc_news,0.437
+tv,agentcompeteswithagent,cbs_radio,0.437
+cnn_,agentcompeteswithagent,tv,0.437
+abc,agentcompeteswithagent,tv,0.437
+simon_hunt,agentcollaborateswithagent,tv,0.437
+obama,agentcollaborateswithagent,tv,0.437
+tv,agentcollaborateswithagent,john_roland,0.437
+tv,agentcollaborateswithagent,kent_brockman,0.437
+cnn,agentcompeteswithagent,tv,0.859
+catherine_bosley,agentcollaborateswithagent,tv,0.437
+walter_cronkite,worksfor,cbs_news,0.437
+tv,agentcompeteswithagent,oprah,0.437
+tv,agentcontrols,peter_jennings,0.437
+tv,agentcontrols,walter_cronkite,0.859
+tv,agentcompeteswithagent,search,0.437
+kent_brockman,agentcollaborateswithagent,tv,0.437
+search,agentcompeteswithagent,tv,0.437
+tv,agentcompeteswithagent,nbc_news,0.437
+cbs_evening_news,publicationjournalist,walter_cronkite,0.929
+walter_cronkite,personbelongstoorganization,cbs_evening,0.437
+walter_cronkite,journalistwritesforpublication,cnn__pbs,0.999
+
+# train: 148953
+# val: 12278
+# test: 14034
