@@ -1,0 +1,58 @@
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+Device 1 is not available, available devices are [0]
+Device 1 is not available, available devices are [0]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_ds.py", line 381, in <module>
+    main(args)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_ds.py", line 180, in main
+    model = LlamaForCausalLM.from_pretrained(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/modeling_utils.py", line 2881, in from_pretrained
+    ) = cls._load_pretrained_model(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/modeling_utils.py", line 3228, in _load_pretrained_model
+    new_error_msgs, offload_index, state_dict_index = _load_state_dict_into_meta_model(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/modeling_utils.py", line 720, in _load_state_dict_into_meta_model
+    set_module_tensor_to_device(model, param_name, param_device, **set_module_kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/accelerate/utils/modeling.py", line 337, in set_module_tensor_to_device
+    new_value = value.to(device)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+Device 1 is not available, available devices are [0]
+Device 1 is not available, available devices are [0]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_ds.py", line 381, in <module>
+    main(args)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_ds.py", line 180, in main
+    model = LlamaForCausalLM.from_pretrained(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/modeling_utils.py", line 2881, in from_pretrained
+    ) = cls._load_pretrained_model(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/modeling_utils.py", line 3228, in _load_pretrained_model
+    new_error_msgs, offload_index, state_dict_index = _load_state_dict_into_meta_model(
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/transformers/modeling_utils.py", line 720, in _load_state_dict_into_meta_model
+    set_module_tensor_to_device(model, param_name, param_device, **set_module_kwargs)
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/accelerate/utils/modeling.py", line 337, in set_module_tensor_to_device
+    new_value = value.to(device)
+RuntimeError: CUDA error: invalid device ordinal
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

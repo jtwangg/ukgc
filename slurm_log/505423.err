@@ -1,0 +1,15 @@
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/deepspeed/accelerator/cuda_accelerator.py:33: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:49<00:49, 49.29s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:49<00:49, 49.96s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:23<00:00, 40.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:23<00:00, 41.97s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [01:24<00:00, 40.90s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:24<00:00, 42.16s/it]
+slurmstepd: error: *** JOB 505423 ON h009 CANCELLED AT 2025-11-16T19:06:53 ***

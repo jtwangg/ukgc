@@ -1,7 +1,9 @@
+import math
 import contextlib
 import torch
 from torch.cuda.amp import autocast as autocast
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import PreTrainedModel
 from peft import (
     LoraConfig,
     get_peft_model,
@@ -15,63 +17,21 @@ EOS = '</s>'
 IGNORE_INDEX = -100
 
 
-class LLMDS(torch.nn.Module):
+class LLMDS(PreTrainedModel):
 
     def __init__(
         self,
+        model,
+        tokenizer,
+        init_prompt,
         args,
         **kwargs
     ):
-        super().__init__()
+        super(LLMDS, self).__init__(model.config)
+        self.model = model
+        self.tokenizer = tokenizer
         self.max_txt_len = args.max_txt_len
         self.max_new_tokens = args.max_new_tokens
-
-        print('Loading LLAMA')
-        kwargs = {
-            "max_memory": {i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
-            "device_map": "auto",
-            "revision": "main",
-        }
-        self.tokenizer = AutoTokenizer.from_pretrained(args.llm_model_path, use_fast=False, revision=kwargs["revision"])
-        self.tokenizer.pad_token_id = 0
-        self.tokenizer.padding_side = 'left'
-
-        model = AutoModelForCausalLM.from_pretrained(
-            args.llm_model_path,
-            torch_dtype=torch.float16,
-            low_cpu_mem_usage=True,
-            **kwargs
-        )
-
-        if args.llm_frozen == 'True':
-            print("Freezing LLAMA!")
-            for name, param in model.named_parameters():
-                param.requires_grad = False
-        else:
-            print("Training LLAMA with LORA!")
-            model = prepare_model_for_kbit_training(model)
-
-            lora_r: int = 8
-            lora_alpha: int = 16
-            lora_dropout: float = 0.05
-            lora_target_modules = [
-                "q_proj",
-                "v_proj",
-            ]
-            config = LoraConfig(
-                r=lora_r,
-                lora_alpha=lora_alpha,
-                target_modules=lora_target_modules,
-                lora_dropout=lora_dropout,
-                bias="none",
-                task_type="CAUSAL_LM",
-            )
-            model = get_peft_model(model, config)
-
-        self.model = model
-        self.config = self.model.config
-        print('Finish loading LLAMA!')
-
         self.word_embedding = self.model.model.get_input_embeddings()
 
     @property
@@ -88,24 +48,32 @@ class LLMDS(torch.nn.Module):
         else:
             return contextlib.nullcontext()
 
+    def forward(self, input_ids, attention_mask, labels, graph=None, graph_path=None):
+        batch_size, seq_len = input_ids.shape
+        token_embeds = self.word_embedding(input_ids)
+        bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0].to(self.model.device)).unsqueeze(0).repeat(batch_size, 1, 1).to(token_embeds.device)
 
-    def forward(self, input_ids=None, attention_mask=None, labels=None, **kwargs):
-        if input_ids is None:
-            raise ValueError("input_ids must be provided for training in llm_ds")
-
-        inputs_embeds = self.word_embedding(input_ids.to(self.word_embedding.weight.device))
-        attention_mask = attention_mask.to(self.word_embedding.weight.device) if attention_mask is not None else None
-        labels = labels.to(self.word_embedding.weight.device) if labels is not None else None
+        input_embeds = torch.cat((bos_embeds, token_embeds), dim=1)
+        prompt_length = bos_embeds.shape[1]
+        new_attention_mask = torch.cat((
+            torch.ones((batch_size, prompt_length), device=attention_mask.device),
+            attention_mask
+        ), dim=1)
+        # 创建新的标签，prompt部分设为IGNORE_INDEX（表示忽略），原始输入部分使用传入的labels
+        new_labels = torch.cat((
+            torch.full((batch_size, prompt_length), IGNORE_INDEX, dtype=labels.dtype, device=labels.device),
+            labels
+        ), dim=1)
 
         with self.maybe_autocast():
             outputs = self.model(
-                inputs_embeds=inputs_embeds,
-                attention_mask=attention_mask,
+                inputs_embeds=input_embeds,
+                attention_mask=new_attention_mask,
                 return_dict=True,
-                labels=labels,
+                labels=new_labels,
             )
+        return outputs
 
-        return outputs.loss
 
 
 
