@@ -354,7 +354,7 @@ def main(args):
     path = f'{output_path}test_result.csv'
     print(f'path: {path}')
 
-    sp_model = _reload_best_model(sp_model, args)
+    # sp_model = _reload_best_model(sp_model, args)
     sp_model.eval()
     progress_bar_test = tqdm(range(len(test_loader)))
     with open(path, "w") as f:

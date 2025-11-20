@@ -200,6 +200,25 @@ def get_ukg_tc_acc(path):
     return acc
 
 
+def get_ukg_tc_mse_mae(path):
+    df = pd.read_json(path, lines=True)
+    pred_confs = []
+    true_confs = []
+    for pred, label in zip(df['true_prob'], df['confidence']):
+        pred, label = float(pred), float(label)
+        pred_confs.append(pred)
+        true_confs.append(label)
+
+    if len(pred_confs) == 0:
+        return 0.0
+    else:
+        mse, mae = mean_squared_error(true_confs, pred_confs), mean_absolute_error(true_confs, pred_confs)
+        valid_ratio = len(pred_confs) / len(df)
+        print(f"MSE: {mse:.5f}")
+        print(f"MAE: {mae:.5f}")
+        print(f"valid_ratio: {valid_ratio:.5f}")
+        return mse
+
 
 eval_funcs = {
     # "expla_graphs": get_accuracy_expla_graphs,
@@ -230,7 +249,8 @@ eval_funcs = {
     'ppi5k_baseline_cp': get_ukg_cp_mse_mae,
 
 
-    'nl27k_baseline_tc': get_ukg_tc_acc,
+    # 'nl27k_baseline_tc': get_ukg_tc_acc,
+    'nl27k_tc': get_ukg_tc_mse_mae,
 
 
 }

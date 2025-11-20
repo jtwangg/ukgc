@@ -92,7 +92,7 @@ def main(args):
         device_map=device_map,
         max_memory={i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
     )
-    model.gradient_checkpointing_enable()
+    # model.gradient_checkpointing_enable()
     model.config.use_cache = False
     
     if args.llm_frozen == 'True':

@@ -5,6 +5,7 @@ from src.model.pt_llm_ds import PromptTuningLLMDS
 from src.model.graph_llm import GraphLLM
 from src.model.graph_llm_ds import GraphLLMDS
 from src.model.llm_newloss import LLM_newloss
+from src.model.graph_llm_ds_customtrainer import GraphLLMDSCT
 
 
 load_model = {
@@ -16,6 +17,7 @@ load_model = {
     "graph_llm": GraphLLM,
     "graph_llm_ds": GraphLLMDS,
     "llm_newloss": LLM_newloss,
+    'graph_llm_ds_customtrainer': GraphLLMDSCT,
 }
 
 # Replace the following with the model paths

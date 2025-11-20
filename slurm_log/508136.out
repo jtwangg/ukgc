@@ -1,0 +1,44 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k_baseline_cp, llm_ds, llm_frozen=false, zero2
+start import from src/ ...
+end import from src! cost 173.6s
+start load args ...
+end load args! cost 0.0s
+Namespace(model_name='llm_ds', project='project_g_retriever', seed=0, dataset='nl27k_baseline_cp', lr=1e-05, wd=0.05, patience=2, batch_size=64, micro_batch_size=8, grad_steps=2, num_epochs=3, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1800, max_new_tokens=32, max_memory=[80, 80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config_zero2_nocpu.json', fp16=False, bf16=False)
+start load model...
+world_size: 1, ddp: False
+device_map: auto
+Training LLAMA with LORA!
+init cost 346.2 s
+end load model! cost 416.3s
+sp_model trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start load dataset...
+end load dataset! cost 0.0s
+start testing...
+path: output/nl27k_baseline_cp/model_name_llm_ds_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1800_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0_fp16_False/test_result.csv
+Loading checkpoint from output/nl27k_baseline_cp/model_name_llm_ds_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1800_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0_fp16_False/checkpoint_best.pth.
+MSE: 0.05581
+MAE: 0.12275
+valid_ratio: 1.00000
+Test Acc 0.05581169338748754
+nl27k_cp, llm_ds, llm_frozen=false, zero2
+start import from src/ ...
+end import from src! cost 173.3s
+start load args ...
+end load args! cost 0.0s
+Namespace(model_name='llm_ds', project='project_g_retriever', seed=0, dataset='nl27k_cp', lr=1e-05, wd=0.05, patience=2, batch_size=64, micro_batch_size=16, grad_steps=2, num_epochs=3, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1800, max_new_tokens=32, max_memory=[80, 80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=-1, deepspeed='ds_config_zero2_nocpu.json', fp16=False, bf16=False)
+start load model...
+world_size: 1, ddp: False
+device_map: auto
+Training LLAMA with LORA!
+end load model! cost 254.0s
+sp_model trainable params: 4194304 || all params: 6742609920 || trainable%: 0.06220594176090199
+start load dataset...
+end load dataset! cost 0.0s
+start testing...
+path: output/nl27k_cp/model_name_llm_ds_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1800_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0_fp16_False/test_result.csv
+Loading checkpoint from output/nl27k_cp/model_name_llm_ds_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1800_max_new_tokens_32_gnn_model_name_gt_patience_2_num_epochs_3_seed0_fp16_False/checkpoint_best.pth.
+MSE: 0.05934
+MAE: 0.13023
+valid_ratio: 1.00000
+Test Acc 0.05934288499358701

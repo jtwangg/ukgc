@@ -50,6 +50,11 @@ def parse_args_llama():
     parser.add_argument('--deepspeed', type=str, default='ds_config.json', help='deepspeed_config path')
 
     parser.add_argument('--fp16', action='store_true', default=False, help='mix precision training')
+    parser.add_argument('--bf16', action='store_true', default=False, help='mix precision training')
+
+    parser.add_argument("--exp_name", type=str, default='')
+    parser.add_argument("--kl_weight", type=float, default=0.5)
+    parser.add_argument("--ce_weight", type=float, default=1.0)
 
 
     args = parser.parse_args()
