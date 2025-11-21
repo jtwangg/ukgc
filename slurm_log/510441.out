@@ -1,0 +1,60 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k_tc, llm_frozen=False, zero2_nocpu, mbs=8 
+[2025-11-20 19:47:46,855] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-20 19:47:49,386] [WARNING] [runner.py:203:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected CUDA_VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2025-11-20 19:47:49,399] [INFO] [runner.py:570:main] cmd = /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/bin/python3.9 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=29513 --enable_each_rank_log=None train_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss6 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen False --deepspeed ds_config_zero2_nocpu.json --eval_batch_size 8 --max_new_tokens 2
+[2025-11-20 19:47:50,910] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-20 19:47:52,150] [INFO] [launch.py:145:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-11-20 19:47:52,151] [INFO] [launch.py:151:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-11-20 19:47:52,151] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-11-20 19:47:52,151] [INFO] [launch.py:163:main] dist_world_size=2
+[2025-11-20 19:47:52,151] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1
+start import from src/ ...start import from src/ ...
+
+end import from src! cost 175.2s
+end import from src! cost 175.2s
+start load args ...
+start load args ...
+end load args! cost 0.0s
+end load args! cost 0.0s
+Namespace(model_name='graph_llm_ds_customtrainer', project='project_g_retriever', seed=0, dataset='nl27k_tc', lr=1e-05, wd=0.05, patience=2, batch_size=32, micro_batch_size=8, grad_steps=2, num_epochs=1, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1500, max_new_tokens=2, max_memory=[80, 80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=0, deepspeed='ds_config_zero2_nocpu.json', fp16=False, bf16=False, exp_name='loss6', kl_weight=0.5, ce_weight=1.0)
+start load model...
+Namespace(model_name='graph_llm_ds_customtrainer', project='project_g_retriever', seed=0, dataset='nl27k_tc', lr=1e-05, wd=0.05, patience=2, batch_size=32, micro_batch_size=8, grad_steps=2, num_epochs=1, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='False', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1500, max_new_tokens=2, max_memory=[80, 80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=1, deepspeed='ds_config_zero2_nocpu.json', fp16=False, bf16=False, exp_name='loss6', kl_weight=0.5, ce_weight=1.0)
+start load model...
+world_size: 2, ddp: True
+device_map: {'': 0}
+world_size: 2, ddp: True
+device_map: {'': 1}
+Training LLAMA with LORA!
+Training LLAMA with LORA!
+trainable params: 4,194,304 || all params: 6,742,609,920 || trainable%: 0.06220594176090199
+start init dataset class...
+trainable params: 4,194,304 || all params: 6,742,609,920 || trainable%: 0.06220594176090199
+start init dataset class...
+end init dataset class! cost 286.0 s
+end init dataset class! cost 286.4 s
+True token id: 5852, False token id: 7700
+end load model! cost 358.9s
+sp_model trainable params: 35680256 || all params: 6774095872 || trainable%: 0.5267161356171607
+True token id: 5852, False token id: 7700start load dataset...
+
+end load model! cost 358.9s
+sp_model trainable params: 35680256 || all params: 6774095872 || trainable%: 0.5267161356171607
+start load dataset...
+end load dataset! cost 629.9s
+start training...
+output_path: output/nl27k_tc/model_name_graph_llm_ds_customtrainer_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1500_max_new_tokens_2_gnn_model_name_gt_patience_2_num_epochs_1_seed0_fp16_False_loss6/
+batch_size: 32, micro_batch_size: 8, grad_steps: 2, world_size: 2
+end load dataset! cost 632.9s
+start training...
+output_path: output/nl27k_tc/model_name_graph_llm_ds_customtrainer_llm_model_name_7b_chat_llm_frozen_False_max_txt_len_1500_max_new_tokens_2_gnn_model_name_gt_patience_2_num_epochs_1_seed0_fp16_False_loss6/
+batch_size: 32, micro_batch_size: 8, grad_steps: 2, world_size: 2
+[2025-11-20 20:07:42,771] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-20 20:07:44,979] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-20 20:07:46,587] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-11-20 20:07:46,587] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2025-11-20 20:07:47,279] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-11-20 20:09:38,462] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 2718659
+[2025-11-20 20:09:38,732] [INFO] [launch.py:315:sigkill_handler] Killing subprocess 2718660
+[2025-11-20 20:09:38,732] [ERROR] [launch.py:321:sigkill_handler] ['/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/bin/python3.9', '-u', 'train_ds_customtrainer.py', '--local_rank=1', '--dataset', 'nl27k_tc', '--model_name', 'graph_llm_ds_customtrainer', '--exp_name', 'loss6', '--num_epochs', '1', '--batch_size', '32', '--micro_batch_size', '8', '--max_txt_len', '1500', '--llm_frozen', 'False', '--deepspeed', 'ds_config_zero2_nocpu.json', '--eval_batch_size', '8', '--max_new_tokens', '2'] exits with return code = 1

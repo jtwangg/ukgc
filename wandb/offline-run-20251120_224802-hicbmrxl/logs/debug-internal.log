@@ -1,0 +1,3 @@
+2025-11-20 22:48:02,678 INFO    StreamThr :2869427 [internal.py:wandb_internal():86] W&B internal server running at pid: 2869427, started at: 2025-11-20 22:48:02.677615
+2025-11-20 22:48:02,679 DEBUG   HandlerThread:2869427 [handler.py:handle_request():144] handle_request: status
+2025-11-20 22:48:02,682 INFO    WriterThread:2869427 [datastore.py:open_for_write():85] open: /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/offline-run-20251120_224802-hicbmrxl/run-hicbmrxl.wandb

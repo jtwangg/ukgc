@@ -1,0 +1,79 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k_tc, llm_frozen=False, zero2_nocpu, mbs=8 
+[2025-11-21 11:30:06,857] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-21 11:30:09,564] [WARNING] [runner.py:203:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+Detected CUDA_VISIBLE_DEVICES=0,1 but ignoring it because one or several of --include/--exclude/--num_gpus/--num_nodes cl args were used. If you want to use CUDA_VISIBLE_DEVICES don't pass any of these arguments to deepspeed.
+[2025-11-21 11:30:09,578] [INFO] [runner.py:570:main] cmd = /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/bin/python3.9 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMCwgMV19 --master_addr=127.0.0.1 --master_port=29514 --enable_each_rank_log=None train_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen True --deepspeed ds_config_zero2_nocpu.json --eval_batch_size 8 --max_new_tokens 10
+[2025-11-21 11:30:11,407] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-21 11:30:12,652] [INFO] [launch.py:145:main] WORLD INFO DICT: {'localhost': [0, 1]}
+[2025-11-21 11:30:12,652] [INFO] [launch.py:151:main] nnodes=1, num_local_procs=2, node_rank=0
+[2025-11-21 11:30:12,652] [INFO] [launch.py:162:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2025-11-21 11:30:12,652] [INFO] [launch.py:163:main] dist_world_size=2
+[2025-11-21 11:30:12,652] [INFO] [launch.py:165:main] Setting CUDA_VISIBLE_DEVICES=0,1
+start import from src/ ...start import from src/ ...
+
+end import from src! cost 174.2s
+end import from src! cost 174.2s
+start load args ...
+start load args ...
+end load args! cost 0.0s
+end load args! cost 0.0s
+Namespace(model_name='graph_llm_ds_customtrainer', project='project_g_retriever', seed=0, dataset='nl27k_tc', lr=1e-05, wd=0.05, patience=2, batch_size=32, micro_batch_size=8, grad_steps=2, num_epochs=1, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1500, max_new_tokens=10, max_memory=[80, 80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=0, deepspeed='ds_config_zero2_nocpu.json', fp16=False, bf16=False, exp_name='loss7', kl_weight=0.5, ce_weight=1.0)
+Namespace(model_name='graph_llm_ds_customtrainer', project='project_g_retriever', seed=0, dataset='nl27k_tc', lr=1e-05, wd=0.05, patience=2, batch_size=32, micro_batch_size=8, grad_steps=2, num_epochs=1, warmup_epochs=1, eval_batch_size=8, llm_model_name='7b_chat', llm_model_path='', llm_frozen='True', llm_num_virtual_tokens=10, output_dir='output', max_txt_len=1500, max_new_tokens=10, max_memory=[80, 80], gnn_model_name='gt', gnn_num_layers=4, gnn_in_dim=1024, gnn_hidden_dim=1024, gnn_num_heads=4, gnn_dropout=0.0, local_rank=1, deepspeed='ds_config_zero2_nocpu.json', fp16=False, bf16=False, exp_name='loss7', kl_weight=0.5, ce_weight=1.0)start load model...
+
+start load model...
+world_size: 2, ddp: True
+device_map: {'': 0}
+world_size: 2, ddp: True
+device_map: {'': 1}
+Freezing LLAMA!
+start init dataset class...
+Freezing LLAMA!
+start init dataset class...
+end init dataset class! cost 340.3 s
+end init dataset class! cost 340.3 s
+True token id: 5852, False token id: 7700
+True token id: 5852, False token id: 7700
+end load model! cost 409.5s
+sp_model trainable params: 1055533952 || all params: 7793949568 || trainable%: 13.542991814237
+start load dataset...
+end load model! cost 409.5s
+sp_model trainable params: 1055533952 || all params: 7793949568 || trainable%: 13.542991814237
+start load dataset...
+end load dataset! cost 624.2s
+start training...
+output_path: output/nl27k_tc/model_name_graph_llm_ds_customtrainer_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_1500_max_new_tokens_10_gnn_model_name_gt_patience_2_num_epochs_1_seed0_fp16_False_loss7
+batch_size: 32, micro_batch_size: 8, grad_steps: 2, world_size: 2
+end load dataset! cost 626.8s
+start training...
+output_path: output/nl27k_tc/model_name_graph_llm_ds_customtrainer_llm_model_name_7b_chat_llm_frozen_True_max_txt_len_1500_max_new_tokens_10_gnn_model_name_gt_patience_2_num_epochs_1_seed0_fp16_False_loss7
+batch_size: 32, micro_batch_size: 8, grad_steps: 2, world_size: 2
+[2025-11-21 11:50:41,906] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-21 11:50:44,210] [INFO] [real_accelerator.py:158:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-11-21 11:50:44,466] [INFO] [comm.py:637:init_distributed] cdb=None
+[2025-11-21 11:50:44,466] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2025-11-21 11:50:46,473] [INFO] [comm.py:637:init_distributed] cdb=None
+True token id: 5852
+False token id: 7700
+ce_loss_weight: 1.0
+kl_loss_weight: 0.5
+mse_loss_weight: 0.5
+True token id: 5852
+False token id: 7700
+ce_loss_weight: 1.0
+kl_loss_weight: 0.5
+mse_loss_weight: 0.5
+Step 0 - Original loss: 10.0241, KL loss: 9.5625, MSE loss: 0.6016, Total loss: 15.1062
+Step 0 - Original loss: 9.4538, KL loss: 9.7500, MSE loss: 0.8789, Total loss: 14.7683
+Step 0 - Original loss: 9.4069, KL loss: 9.7500, MSE loss: 0.8477, Total loss: 14.7057
+Step 0 - Original loss: 9.8254, KL loss: 9.6875, MSE loss: 0.6953, Total loss: 15.0168
+{'loss': 14.927, 'learning_rate': 2.1482277121374867e-08, 'epoch': 0.0}
+{'loss': 14.9222, 'learning_rate': 4.2964554242749734e-08, 'epoch': 0.0}
+{'loss': 14.8885, 'learning_rate': 6.44468313641246e-08, 'epoch': 0.0}
+{'loss': 14.8752, 'learning_rate': 8.592910848549947e-08, 'epoch': 0.0}
+{'loss': 14.5104, 'learning_rate': 1.0741138560687433e-07, 'epoch': 0.0}
+{'loss': 14.2778, 'learning_rate': 1.288936627282492e-07, 'epoch': 0.0}
+{'loss': 14.3729, 'learning_rate': 1.5037593984962406e-07, 'epoch': 0.0}
+{'loss': 14.1281, 'learning_rate': 1.7185821697099894e-07, 'epoch': 0.0}
+{'loss': 13.8573, 'learning_rate': 1.9334049409237381e-07, 'epoch': 0.0}
+{'loss': 13.7944, 'learning_rate': 2.1482277121374867e-07, 'epoch': 0.0}

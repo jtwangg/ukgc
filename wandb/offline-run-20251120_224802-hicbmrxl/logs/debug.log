@@ -1,0 +1,17 @@
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Current SDK version is 0.15.4
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Configure stats pid to 2851812
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Loading settings from /seu_share/home/qiguilin/220236147/.config/wandb/settings
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Loading settings from /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/settings
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'graph_prompt_tuning', 'api_key': '***REDACTED***'}
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'train_ds_customtrainer.py', 'program': '/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/train_ds_customtrainer.py'}
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_init.py:_log_setup():507] Logging user logs to /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/offline-run-20251120_224802-hicbmrxl/logs/debug.log
+2025-11-20 22:48:02,671 INFO    MainThread:2851812 [wandb_init.py:_log_setup():508] Logging internal logs to /seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/wandb/offline-run-20251120_224802-hicbmrxl/logs/debug-internal.log
+2025-11-20 22:48:02,672 INFO    MainThread:2851812 [wandb_init.py:init():547] calling init triggers
+2025-11-20 22:48:02,672 INFO    MainThread:2851812 [wandb_init.py:init():554] wandb.init called with sweep_config: {}
+config: {}
+2025-11-20 22:48:02,672 INFO    MainThread:2851812 [wandb_init.py:init():596] starting backend
+2025-11-20 22:48:02,672 INFO    MainThread:2851812 [wandb_init.py:init():600] setting up manager
+2025-11-20 22:48:02,675 INFO    MainThread:2851812 [backend.py:_multiprocessing_setup():106] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2025-11-20 22:48:02,678 INFO    MainThread:2851812 [wandb_init.py:init():606] backend started and connected
+2025-11-20 22:48:02,681 INFO    MainThread:2851812 [wandb_init.py:init():703] updated telemetry

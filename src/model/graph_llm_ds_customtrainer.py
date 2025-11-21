@@ -56,6 +56,13 @@ class GraphLLMDSCT(PreTrainedModel):
         self.false_token_id = self.tokenizer.encode("False", add_special_tokens=False)[0]
         print(f"True token id: {self.true_token_id}, False token id: {self.false_token_id}")
 
+        vocab_size = self.model.config.vocab_size
+        self.calibration_head = nn.Sequential(
+            nn.Linear(vocab_size, vocab_size // 2),  
+            nn.GELU(), 
+            nn.Linear(vocab_size // 2, vocab_size) 
+        ).to(self.model.device)
+
     @property
     def device(self):
         return list(self.parameters())[0].device
@@ -133,73 +140,6 @@ class GraphLLMDSCT(PreTrainedModel):
 
         return outputs
 
-    # def inference(self, samples):
-
-    #     # encode description and questions
-    #     questions = self.tokenizer(samples["question"], add_special_tokens=False)
-    #     descriptions = self.tokenizer(samples["desc"], add_special_tokens=False)
-
-    #     # encode special tokens
-    #     eos_user_tokens = self.tokenizer(EOS_USER, add_special_tokens=False)
-    #     bos_embeds = self.word_embedding(self.tokenizer(BOS, add_special_tokens=False, return_tensors='pt').input_ids[0].to(self.model.device))
-    #     pad_embeds = self.word_embedding(torch.tensor(self.tokenizer.pad_token_id).to(self.model.device)).unsqueeze(0)
-
-    #     # encode graphs
-    #     if samples.get("graph") is not None:
-    #         graph_embeds = self.encode_graphs(samples["graph"])
-    #     elif samples.get("graph_path") is not None:
-    #         graph_list = []
-    #         for gp in samples["graph_path"]:
-    #             graph = torch.load(gp)
-    #             graph_list.append(graph)
-    #         batched_graph = Batch.from_data_list(graph_list)
-    #         # 类型转换，for 混合精度训练
-    #         target_dtype = self.graph_encoder.convs[0].lin_query.weight.dtype
-    #         if hasattr(batched_graph, 'x') and batched_graph.x is not None:
-    #             batched_graph.x = batched_graph.x.to(target_dtype)
-    #         if hasattr(batched_graph, 'edge_attr') and batched_graph.edge_attr is not None:
-    #             if batched_graph.edge_attr.is_floating_point():
-    #                 batched_graph.edge_attr = batched_graph.edge_attr.to(target_dtype)
-    #         graph_embeds = self.encode_graphs(batched_graph)
-    #     # graph_embeds = self.encode_graphs_inference(samples)
-    #     graph_embeds = self.projector(graph_embeds)
-
-    #     batch_size = len(samples['id'])
-    #     batch_inputs_embeds = []
-    #     batch_attention_mask = []
-    #     for i in range(batch_size):
-    #         # Add bos & eos token
-    #         input_ids = descriptions.input_ids[i][:self.max_txt_len] + questions.input_ids[i] + eos_user_tokens.input_ids
-    #         inputs_embeds = self.word_embedding(torch.tensor(input_ids).to(self.model.device))
-    #         inputs_embeds = torch.cat([bos_embeds, graph_embeds[i].unsqueeze(0), inputs_embeds], dim=0)
-    #         batch_inputs_embeds.append(inputs_embeds)
-    #         batch_attention_mask.append([1] * inputs_embeds.shape[0])
-
-    #     # pad inputs_embeds
-    #     max_length = max([x.shape[0] for x in batch_inputs_embeds])
-    #     for i in range(batch_size):
-    #         pad_length = max_length-batch_inputs_embeds[i].shape[0]
-    #         batch_inputs_embeds[i] = torch.cat([pad_embeds.repeat(pad_length, 1), batch_inputs_embeds[i]])
-    #         batch_attention_mask[i] = [0]*pad_length+batch_attention_mask[i]
-
-    #     inputs_embeds = torch.stack(batch_inputs_embeds, dim=0).to(self.model.device)
-    #     attention_mask = torch.tensor(batch_attention_mask).to(self.model.device)
-
-    #     with self.maybe_autocast():
-    #         outputs = self.model.generate(
-    #             inputs_embeds=inputs_embeds,
-    #             max_new_tokens=self.max_new_tokens,
-    #             attention_mask=attention_mask,
-    #             # do_sample=True,
-    #             use_cache=True  # IMPORTANT!
-    #         )
-    #     pred = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
-
-    #     return {'id': samples['id'],
-    #             'pred': pred,
-    #             'label': samples['label'],
-    #             'question': samples['question'],
-    #             'desc': samples['desc'], }
 
     def inference_customloss(self, samples):
         # encode description and questions
@@ -266,14 +206,11 @@ class GraphLLMDSCT(PreTrainedModel):
                 return_dict=True,
             )
             first_token_logits = outputs.logits[:, -1, :]
-            # true_probs = first_token_logits[:, self.true_token_id].cpu().tolist()  # list of length batch_size
-            # false_probs = first_token_logits[:, self.false_token_id].cpu().tolist()  # list of length batch_size
-
-            logits_pair = first_token_logits[:, [self.true_token_id, self.false_token_id]]
-            normalized_probs = torch.softmax(logits_pair, dim=-1)
-            true_probs = normalized_probs[:, 0].cpu().tolist()
-            false_probs = normalized_probs[:, 1].cpu().tolist()
-            
+            calibrated_logits = self.calibration_head(first_token_logits)
+            all_token_probs = torch.softmax(calibrated_logits, dim=-1) # shape: (batch_size, vocab_size)
+            # 直接取出 True 和 False 对应的概率
+            true_probs = all_token_probs[:, self.true_token_id].cpu().tolist() # shape: (batch_size, 1)
+            false_probs = all_token_probs[:, self.false_token_id].cpu().tolist()
 
             # 然后进行正常的生成
             outputs = self.model.generate(

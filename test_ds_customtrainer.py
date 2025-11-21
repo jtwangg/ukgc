@@ -244,8 +244,8 @@ def main(args):
 
 
     sp_model = load_model[args.model_name](model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
-    # sp_model = GraphLLMDS(model=model, tokenizer=tokenizer, graph_type=dataset.graph_type, args=args, init_prompt=dataset.prompt)
     print(f'end load model! cost {(time.time()-start):.1f}s')
+    """
     trainable_params, all_param = sp_model.print_trainable_params()
     print(f"sp_model trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param}")
 
@@ -278,19 +278,20 @@ def main(args):
             # "graph_path": data_point["graph_path"],
             "confidence": data_point.get("confidence", None),
         }
+    """
 
 
     # Step 3: Build  Dataset
     print('start load dataset...')
     start = time.time()
 
-    try:
-        train_dataset, val_dataset = dataset.load_train_val_data_from_pickle()
-    except:
-        train_dataset = [dataset[i] for i in idx_split['train']]
-        val_dataset = [dataset[i] for i in idx_split['val']]
-    train_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(train_dataset, desc="train dataset tokenize...")]
-    val_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(val_dataset, desc="val dataset tokenize...")]
+    # try:
+    #     train_dataset, val_dataset = dataset.load_train_val_data_from_pickle()
+    # except:
+    #     train_dataset = [dataset[i] for i in idx_split['train']]
+    #     val_dataset = [dataset[i] for i in idx_split['val']]
+    # train_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(train_dataset, desc="train dataset tokenize...")]
+    # val_dataset = [generate_and_tokenize_prompt(i) for i in tqdm(val_dataset, desc="val dataset tokenize...")]
 
     try:
         test_dataset = dataset.load_test_data_from_pickle()
@@ -308,13 +309,14 @@ def main(args):
 
     
     # Step 5. Training
-    print('start training...')
+    # print('start training...')
 
     # args.micro_batch_size = args.batch_size // args.grad_steps
     output_path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}_fp16_{args.fp16}_{args.exp_name}'
     os.makedirs(output_path, exist_ok=True)
     args.output_path = output_path
     print(f'output_path: {output_path}')
+    """
     print(f'batch_size: {args.batch_size}, micro_batch_size: {args.micro_batch_size}, grad_steps: {args.grad_steps}, world_size: {world_size}')
     
     
@@ -386,6 +388,7 @@ def main(args):
 
     trainer.train()
     _save_checkpoint_nooptim(sp_model, args)
+    """
     
 
 
