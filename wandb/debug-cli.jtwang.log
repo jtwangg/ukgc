@@ -1,0 +1,319 @@
+2025-11-21 11:37:00 INFO open for scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/run-zl9sh0uw.wandb
+2025-11-21 11:37:04 INFO watching files in: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files
+2025-11-21 11:37:04 INFO run started: zl9sh0uw with start time 1763560878.35975
+2025-11-21 11:37:04 INFO saving file wandb-metadata.json with policy now
+2025-11-21 11:37:04 WARNING Seen metric with glob (shouldn't happen)
+2025-11-21 11:37:05 INFO file/dir created: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:06 INFO Uploaded file /tmp/tmpqgw319dbwandb/fg9z361i-wandb-metadata.json
+2025-11-21 11:37:07 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:37:07 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/wandb-summary.json
+2025-11-21 11:37:07 INFO handling exit code: 1
+2025-11-21 11:37:07 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:07 INFO handling runtime: 22210
+2025-11-21 11:37:07 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:37:07 INFO send defer
+2025-11-21 11:37:07 INFO handle sender defer: 0
+2025-11-21 11:37:07 INFO send defer: 1
+2025-11-21 11:37:07 INFO handle sender defer: 1
+2025-11-21 11:37:07 INFO send defer: 2
+2025-11-21 11:37:07 INFO handle sender defer: 2
+2025-11-21 11:37:07 INFO send defer: 3
+2025-11-21 11:37:07 INFO handle sender defer: 3
+2025-11-21 11:37:07 INFO send defer: 4
+2025-11-21 11:37:07 INFO handle sender defer: 4
+2025-11-21 11:37:07 INFO send defer: 5
+2025-11-21 11:37:07 INFO handle sender defer: 5
+2025-11-21 11:37:07 INFO send defer: 6
+2025-11-21 11:37:07 INFO handle sender defer: 6
+2025-11-21 11:37:08 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/wandb-summary.json
+2025-11-21 11:37:09 INFO send defer: 7
+2025-11-21 11:37:09 INFO handle sender defer: 7
+2025-11-21 11:37:09 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/config.yaml
+2025-11-21 11:37:09 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:10 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:11 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:12 WARNING Terminal output too large. Logging without processing.
+2025-11-21 11:37:12 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:13 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:13 INFO send defer: 8
+2025-11-21 11:37:13 INFO handle sender defer: 8
+2025-11-21 11:37:13 INFO Attempting to build job artifact
+2025-11-21 11:37:13 INFO is repo sourced job
+2025-11-21 11:37:13 INFO adding wandb-job metadata file
+2025-11-21 11:37:13 INFO send defer: 9
+2025-11-21 11:37:14 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:17 INFO Skipped uploading /home/jtwang/.local/share/wandb/artifacts/staging/tmphugo9t0x
+2025-11-21 11:37:18 INFO Uploaded file /home/jtwang/.local/share/wandb/artifacts/staging/tmp2bhvtpdt
+2025-11-21 11:37:21 INFO sent artifact job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py - {'id': 'QXJ0aWZhY3Q6MjI3MDUxMTE2Mg==', 'digest': 'cc7871e555c843671ddf9abf33f08358', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjc5NzA1OTg2NQ==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MjI2NTcwOTU4MA==', 'versionIndex': 0}}, 'version': 'latest'}
+2025-11-21 11:37:21 INFO handle sender defer: 9
+2025-11-21 11:37:21 INFO shutting down directory watcher
+2025-11-21 11:37:21 INFO scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files
+2025-11-21 11:37:21 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/wandb-summary.json wandb-summary.json
+2025-11-21 11:37:21 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/conda-environment.yaml conda-environment.yaml
+2025-11-21 11:37:21 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/config.yaml config.yaml
+2025-11-21 11:37:21 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/requirements.txt requirements.txt
+2025-11-21 11:37:21 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/wandb-metadata.json wandb-metadata.json
+2025-11-21 11:37:21 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log output.log
+2025-11-21 11:37:21 INFO send defer: 10
+2025-11-21 11:37:21 INFO handle sender defer: 10
+2025-11-21 11:37:21 INFO shutting down file pusher
+2025-11-21 11:37:21 INFO shutting down sender
+2025-11-21 11:37:21 INFO shutting down file pusher
+2025-11-21 11:37:21 INFO waiting for file pusher
+2025-11-21 11:37:22 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/wandb-summary.json
+2025-11-21 11:37:23 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/config.yaml
+2025-11-21 11:37:24 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/output.log
+2025-11-21 11:37:25 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/requirements.txt
+2025-11-21 11:37:28 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_220118-zl9sh0uw/files/conda-environment.yaml
+2025-11-21 11:37:29 INFO send defer: 11
+2025-11-21 11:47:00 INFO open for scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/run-vwr8godk.wandb
+2025-11-21 11:47:02 INFO watching files in: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files
+2025-11-21 11:47:02 INFO run started: vwr8godk with start time 1763562779.630115
+2025-11-21 11:47:02 INFO saving file wandb-metadata.json with policy now
+2025-11-21 11:47:02 WARNING Seen metric with glob (shouldn't happen)
+2025-11-21 11:47:03 INFO file/dir created: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:04 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:47:04 INFO handling exit code: 0
+2025-11-21 11:47:04 INFO handling runtime: 22277
+2025-11-21 11:47:04 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:47:04 INFO send defer
+2025-11-21 11:47:04 INFO handle sender defer: 0
+2025-11-21 11:47:04 INFO send defer: 1
+2025-11-21 11:47:04 INFO handle sender defer: 1
+2025-11-21 11:47:04 INFO send defer: 2
+2025-11-21 11:47:04 INFO handle sender defer: 2
+2025-11-21 11:47:04 INFO send defer: 3
+2025-11-21 11:47:04 INFO handle sender defer: 3
+2025-11-21 11:47:04 INFO send defer: 4
+2025-11-21 11:47:04 INFO handle sender defer: 4
+2025-11-21 11:47:04 INFO send defer: 5
+2025-11-21 11:47:04 INFO handle sender defer: 5
+2025-11-21 11:47:04 INFO send defer: 6
+2025-11-21 11:47:04 INFO handle sender defer: 6
+2025-11-21 11:47:05 INFO Uploaded file /tmp/tmp0ukigrk3wandb/hcm1jdfj-wandb-metadata.json
+2025-11-21 11:47:05 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/wandb-summary.json
+2025-11-21 11:47:05 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:06 INFO send defer: 7
+2025-11-21 11:47:06 INFO handle sender defer: 7
+2025-11-21 11:47:06 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/config.yaml
+2025-11-21 11:47:06 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:09 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:09 WARNING Terminal output too large. Logging without processing.
+2025-11-21 11:47:10 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:10 INFO send defer: 8
+2025-11-21 11:47:10 INFO handle sender defer: 8
+2025-11-21 11:47:10 INFO Attempting to build job artifact
+2025-11-21 11:47:10 INFO is repo sourced job
+2025-11-21 11:47:10 INFO adding wandb-job metadata file
+2025-11-21 11:47:10 INFO send defer: 9
+2025-11-21 11:47:11 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:13 INFO sent artifact job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py - {'id': 'QXJ0aWZhY3Q6MjI3MDUxMTE2Mg==', 'digest': 'cc7871e555c843671ddf9abf33f08358', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py', 'alias': 'latest'}, {'artifactCollectionName': 'job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py', 'alias': 'v1'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjc5NzA1OTg2NQ==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MjI3MDUxMTE2Mg==', 'versionIndex': 1}}, 'version': 'v1'}
+2025-11-21 11:47:13 INFO handle sender defer: 9
+2025-11-21 11:47:13 INFO shutting down directory watcher
+2025-11-21 11:47:14 INFO scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files
+2025-11-21 11:47:14 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/wandb-summary.json wandb-summary.json
+2025-11-21 11:47:14 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/conda-environment.yaml conda-environment.yaml
+2025-11-21 11:47:14 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/config.yaml config.yaml
+2025-11-21 11:47:14 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/requirements.txt requirements.txt
+2025-11-21 11:47:14 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/wandb-metadata.json wandb-metadata.json
+2025-11-21 11:47:14 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log output.log
+2025-11-21 11:47:14 INFO send defer: 10
+2025-11-21 11:47:14 INFO handle sender defer: 10
+2025-11-21 11:47:14 INFO shutting down file pusher
+2025-11-21 11:47:14 INFO shutting down sender
+2025-11-21 11:47:14 INFO shutting down file pusher
+2025-11-21 11:47:14 INFO waiting for file pusher
+2025-11-21 11:47:15 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/wandb-summary.json
+2025-11-21 11:47:15 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/conda-environment.yaml
+2025-11-21 11:47:16 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/requirements.txt
+2025-11-21 11:47:17 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/config.yaml
+2025-11-21 11:47:18 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251119_223259-vwr8godk/files/output.log
+2025-11-21 11:47:18 INFO send defer: 11
+2025-11-21 11:48:07 INFO open for scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/run-zl2f63db.wandb
+2025-11-21 11:48:10 INFO watching files in: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files
+2025-11-21 11:48:10 INFO run started: zl2f63db with start time 1763586445.767293
+2025-11-21 11:48:10 INFO saving file wandb-metadata.json with policy now
+2025-11-21 11:48:10 WARNING Seen metric with glob (shouldn't happen)
+2025-11-21 11:48:11 INFO file/dir created: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log
+2025-11-21 11:48:13 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log
+2025-11-21 11:48:13 INFO Uploaded file /tmp/tmp81ej7k85wandb/cc13gqfn-wandb-metadata.json
+2025-11-21 11:48:13 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:48:13 INFO handling exit code: 0
+2025-11-21 11:48:13 INFO handling runtime: 22426
+2025-11-21 11:48:13 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:48:13 INFO send defer
+2025-11-21 11:48:13 INFO handle sender defer: 0
+2025-11-21 11:48:13 INFO send defer: 1
+2025-11-21 11:48:13 INFO handle sender defer: 1
+2025-11-21 11:48:13 INFO send defer: 2
+2025-11-21 11:48:13 INFO handle sender defer: 2
+2025-11-21 11:48:13 INFO send defer: 3
+2025-11-21 11:48:13 INFO handle sender defer: 3
+2025-11-21 11:48:13 INFO send defer: 4
+2025-11-21 11:48:13 INFO handle sender defer: 4
+2025-11-21 11:48:13 INFO send defer: 5
+2025-11-21 11:48:13 INFO handle sender defer: 5
+2025-11-21 11:48:13 INFO send defer: 6
+2025-11-21 11:48:13 INFO handle sender defer: 6
+2025-11-21 11:48:14 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/wandb-summary.json
+2025-11-21 11:48:15 INFO send defer: 7
+2025-11-21 11:48:15 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/config.yaml
+2025-11-21 11:48:15 INFO handle sender defer: 7
+2025-11-21 11:48:15 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log
+2025-11-21 11:48:16 WARNING Terminal output too large. Logging without processing.
+2025-11-21 11:48:17 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log
+2025-11-21 11:48:19 INFO send defer: 8
+2025-11-21 11:48:19 INFO handle sender defer: 8
+2025-11-21 11:48:19 INFO Attempting to build job artifact
+2025-11-21 11:48:19 INFO is repo sourced job
+2025-11-21 11:48:19 INFO adding wandb-job metadata file
+2025-11-21 11:48:19 INFO send defer: 9
+2025-11-21 11:48:19 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log
+2025-11-21 11:48:23 INFO sent artifact job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py - {'id': 'QXJ0aWZhY3Q6MjI3MDUxMTE2Mg==', 'digest': 'cc7871e555c843671ddf9abf33f08358', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py', 'alias': 'latest'}, {'artifactCollectionName': 'job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py', 'alias': 'v1'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjc5NzA1OTg2NQ==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MjI3MDUxMTE2Mg==', 'versionIndex': 1}}, 'version': 'v1'}
+2025-11-21 11:48:23 INFO handle sender defer: 9
+2025-11-21 11:48:23 INFO shutting down directory watcher
+2025-11-21 11:48:23 INFO scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files
+2025-11-21 11:48:23 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/wandb-summary.json wandb-summary.json
+2025-11-21 11:48:23 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/conda-environment.yaml conda-environment.yaml
+2025-11-21 11:48:23 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/config.yaml config.yaml
+2025-11-21 11:48:23 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/requirements.txt requirements.txt
+2025-11-21 11:48:23 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/wandb-metadata.json wandb-metadata.json
+2025-11-21 11:48:23 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log output.log
+2025-11-21 11:48:23 INFO send defer: 10
+2025-11-21 11:48:23 INFO handle sender defer: 10
+2025-11-21 11:48:23 INFO shutting down file pusher
+2025-11-21 11:48:23 INFO shutting down sender
+2025-11-21 11:48:23 INFO shutting down file pusher
+2025-11-21 11:48:23 INFO waiting for file pusher
+2025-11-21 11:48:24 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/wandb-summary.json
+2025-11-21 11:48:26 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/conda-environment.yaml
+2025-11-21 11:48:26 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/requirements.txt
+2025-11-21 11:48:26 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/config.yaml
+2025-11-21 11:48:26 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_050725-zl2f63db/files/output.log
+2025-11-21 11:48:27 INFO send defer: 11
+2025-11-21 11:56:59 INFO open for scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/run-lypkpyfg.wandb
+2025-11-21 11:57:01 INFO watching files in: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files
+2025-11-21 11:57:01 INFO run started: lypkpyfg with start time 1763644893.300288
+2025-11-21 11:57:01 INFO saving file wandb-metadata.json with policy now
+2025-11-21 11:57:01 WARNING Seen metric with glob (shouldn't happen)
+2025-11-21 11:57:02 INFO file/dir created: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:04 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:05 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:57:05 INFO handling exit code: 1
+2025-11-21 11:57:05 INFO handling runtime: 20657
+2025-11-21 11:57:05 INFO Uploaded file /tmp/tmp0nppu_c8wandb/5q8y7ux5-wandb-metadata.json
+2025-11-21 11:57:05 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:57:05 INFO send defer
+2025-11-21 11:57:05 INFO handle sender defer: 0
+2025-11-21 11:57:05 INFO send defer: 1
+2025-11-21 11:57:05 INFO handle sender defer: 1
+2025-11-21 11:57:05 INFO send defer: 2
+2025-11-21 11:57:05 INFO handle sender defer: 2
+2025-11-21 11:57:05 INFO send defer: 3
+2025-11-21 11:57:05 INFO handle sender defer: 3
+2025-11-21 11:57:05 INFO send defer: 4
+2025-11-21 11:57:05 INFO handle sender defer: 4
+2025-11-21 11:57:05 INFO send defer: 5
+2025-11-21 11:57:05 INFO handle sender defer: 5
+2025-11-21 11:57:05 INFO send defer: 6
+2025-11-21 11:57:05 INFO handle sender defer: 6
+2025-11-21 11:57:06 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/wandb-summary.json
+2025-11-21 11:57:06 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:06 INFO send defer: 7
+2025-11-21 11:57:06 INFO handle sender defer: 7
+2025-11-21 11:57:07 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/config.yaml
+2025-11-21 11:57:08 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:09 WARNING Terminal output too large. Logging without processing.
+2025-11-21 11:57:09 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:10 INFO send defer: 8
+2025-11-21 11:57:10 INFO handle sender defer: 8
+2025-11-21 11:57:10 INFO Attempting to build job artifact
+2025-11-21 11:57:10 INFO is repo sourced job
+2025-11-21 11:57:10 INFO adding wandb-job metadata file
+2025-11-21 11:57:10 INFO send defer: 9
+2025-11-21 11:57:10 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:14 INFO Skipped uploading /home/jtwang/.local/share/wandb/artifacts/staging/tmpqfm76o9h
+2025-11-21 11:57:15 INFO Uploaded file /home/jtwang/.local/share/wandb/artifacts/staging/tmpuaiwzj1_
+2025-11-21 11:57:18 INFO sent artifact job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py - {'id': 'QXJ0aWZhY3Q6MjI3MDU0NzYwMA==', 'digest': '925136bc3d8410f618f585898b999d83', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjc5NzA1OTg2NQ==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MjI3MDUxMTE2Mg==', 'versionIndex': 1}}, 'version': 'latest'}
+2025-11-21 11:57:18 INFO handle sender defer: 9
+2025-11-21 11:57:18 INFO shutting down directory watcher
+2025-11-21 11:57:18 INFO scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files
+2025-11-21 11:57:18 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/wandb-summary.json wandb-summary.json
+2025-11-21 11:57:18 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/conda-environment.yaml conda-environment.yaml
+2025-11-21 11:57:18 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/config.yaml config.yaml
+2025-11-21 11:57:18 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/requirements.txt requirements.txt
+2025-11-21 11:57:18 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/wandb-metadata.json wandb-metadata.json
+2025-11-21 11:57:18 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log output.log
+2025-11-21 11:57:18 INFO send defer: 10
+2025-11-21 11:57:18 INFO handle sender defer: 10
+2025-11-21 11:57:18 INFO shutting down file pusher
+2025-11-21 11:57:18 INFO shutting down sender
+2025-11-21 11:57:18 INFO shutting down file pusher
+2025-11-21 11:57:18 INFO waiting for file pusher
+2025-11-21 11:57:20 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/conda-environment.yaml
+2025-11-21 11:57:21 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/wandb-summary.json
+2025-11-21 11:57:22 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/config.yaml
+2025-11-21 11:57:25 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/output.log
+2025-11-21 11:57:25 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_212133-lypkpyfg/files/requirements.txt
+2025-11-21 11:57:26 INFO send defer: 11
+2025-11-21 11:58:42 INFO open for scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/run-ff0dztr7.wandb
+2025-11-21 11:58:44 INFO watching files in: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files
+2025-11-21 11:58:44 INFO run started: ff0dztr7 with start time 1763651964.437528
+2025-11-21 11:58:44 INFO saving file wandb-metadata.json with policy now
+2025-11-21 11:58:44 WARNING Seen metric with glob (shouldn't happen)
+2025-11-21 11:58:45 INFO file/dir created: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/output.log
+2025-11-21 11:58:46 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:58:46 INFO handling exit code: 1
+2025-11-21 11:58:46 INFO handling runtime: 18997
+2025-11-21 11:58:46 INFO saving file wandb-summary.json with policy end
+2025-11-21 11:58:46 INFO send defer
+2025-11-21 11:58:46 INFO handle sender defer: 0
+2025-11-21 11:58:46 INFO send defer: 1
+2025-11-21 11:58:46 INFO handle sender defer: 1
+2025-11-21 11:58:46 INFO send defer: 2
+2025-11-21 11:58:46 INFO handle sender defer: 2
+2025-11-21 11:58:46 INFO send defer: 3
+2025-11-21 11:58:46 INFO handle sender defer: 3
+2025-11-21 11:58:46 INFO send defer: 4
+2025-11-21 11:58:46 INFO handle sender defer: 4
+2025-11-21 11:58:46 INFO send defer: 5
+2025-11-21 11:58:46 INFO handle sender defer: 5
+2025-11-21 11:58:46 INFO send defer: 6
+2025-11-21 11:58:46 INFO handle sender defer: 6
+2025-11-21 11:58:46 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/wandb-summary.json
+2025-11-21 11:58:47 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/output.log
+2025-11-21 11:58:47 INFO Uploaded file /tmp/tmpfsdkot0zwandb/h3s5wsml-wandb-metadata.json
+2025-11-21 11:58:49 INFO send defer: 7
+2025-11-21 11:58:49 INFO handle sender defer: 7
+2025-11-21 11:58:49 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/config.yaml
+2025-11-21 11:58:50 WARNING Terminal output too large. Logging without processing.
+2025-11-21 11:58:51 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/output.log
+2025-11-21 11:58:53 INFO send defer: 8
+2025-11-21 11:58:53 INFO handle sender defer: 8
+2025-11-21 11:58:53 INFO Attempting to build job artifact
+2025-11-21 11:58:53 INFO is repo sourced job
+2025-11-21 11:58:53 INFO adding wandb-job metadata file
+2025-11-21 11:58:53 INFO send defer: 9
+2025-11-21 11:58:53 INFO file/dir modified: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/output.log
+2025-11-21 11:58:56 INFO sent artifact job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py - {'id': 'QXJ0aWZhY3Q6MjI3MDU0NzYwMA==', 'digest': '925136bc3d8410f618f585898b999d83', 'state': 'COMMITTED', 'aliases': [{'artifactCollectionName': 'job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py', 'alias': 'latest'}, {'artifactCollectionName': 'job-https___github.com_jtwangg_ukgc.git_train_ds_customtrainer.py', 'alias': 'v2'}], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjc5NzA1OTg2NQ==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6MjI3MDU0NzYwMA==', 'versionIndex': 2}}, 'version': 'v2'}
+2025-11-21 11:58:56 INFO handle sender defer: 9
+2025-11-21 11:58:56 INFO shutting down directory watcher
+2025-11-21 11:58:57 INFO scan: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files
+2025-11-21 11:58:57 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/wandb-summary.json wandb-summary.json
+2025-11-21 11:58:57 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/conda-environment.yaml conda-environment.yaml
+2025-11-21 11:58:57 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/config.yaml config.yaml
+2025-11-21 11:58:57 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/requirements.txt requirements.txt
+2025-11-21 11:58:57 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/wandb-metadata.json wandb-metadata.json
+2025-11-21 11:58:57 INFO scan save: /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/output.log output.log
+2025-11-21 11:58:57 INFO send defer: 10
+2025-11-21 11:58:57 INFO handle sender defer: 10
+2025-11-21 11:58:57 INFO shutting down file pusher
+2025-11-21 11:58:57 INFO shutting down sender
+2025-11-21 11:58:57 INFO shutting down file pusher
+2025-11-21 11:58:57 INFO waiting for file pusher
+2025-11-21 11:58:58 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/wandb-summary.json
+2025-11-21 11:58:59 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/config.yaml
+2025-11-21 11:59:00 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/requirements.txt
+2025-11-21 11:59:02 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/output.log
+2025-11-21 11:59:03 INFO Uploaded file /data/jtwang/G-Retriever-Github/ukgc/wandb/offline-run-20251120_231924-ff0dztr7/files/conda-environment.yaml
+2025-11-21 11:59:03 INFO send defer: 11
