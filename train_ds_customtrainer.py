@@ -377,6 +377,7 @@ def main(args):
         ce_loss_weight=args.ce_weight,
         true_token_id=sp_model.true_token_id,
         false_token_id=sp_model.false_token_id,
+        if_calibration=args.if_calibration,
     )
 
 
@@ -387,11 +388,8 @@ def main(args):
     trainer.train()
     _save_checkpoint_nooptim(sp_model, args)
     
-
-
-
-
-
+    
+    """
     torch.cuda.empty_cache()
     torch.cuda.reset_max_memory_allocated()
 
@@ -416,6 +414,7 @@ def main(args):
     acc = eval_funcs[args.dataset](path)
     print(f'Test Acc {acc}')
     # wandb.log({'Test Acc': acc})
+    """
 
 
 if __name__ == "__main__":

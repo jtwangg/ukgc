@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --job-name=graph_llm_tuning    # 作业在调度系统中的作业名为myFirstJob
+#SBATCH --job-name=test_customtrainer    # 作业在调度系统中的作业名为myFirstJob
 #SBATCH --partition=qigl     # 作业提交的指定队列/分区为normal_test
 #SBATCH --nodes=1                   # 申请节点数为1,如果作业不能跨节点(MPI)运行, 申请的节点数应不超过1
 #SBATCH --ntasks-per-node=1         # 每节点任务数，GPU任务不需要修改
@@ -29,21 +29,15 @@ export PYTHONUNBUFFERED=1
 
 
 
-# 510578
+
 # echo "nl27k_tc, llm_frozen=False, zero2_nocpu, mbs=8 "
-# deepspeed --num_gpus=2 --master_port 29513 train_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss6 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
-
-
-# 510726 511227
+# stdbuf -o0 -e0 python3 -u test_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
 # echo "nl27k_tc, llm_frozen=False, zero2_nocpu, mbs=8 "
-# deepspeed --num_gpus=2 --master_port 29514 train_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
-
-# 510761 511228
-# echo "nl27k_tc, llm_frozen=False, zero2_nocpu, mbs=8 "
-# deepspeed --num_gpus=2 --master_port 29515 train_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
+# stdbuf -o0 -e0 python3 -u test_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
 
 
 
-# loss6
-echo "nl27k_tc, llm_frozen=False, loss6, if_calibration=false"
-
+echo "nl27k_tc, llm_frozen=True, zero2_nocpu, mbs=8 "
+deepspeed --num_gpus=2 --master_port 29520 test_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
+echo "nl27k_tc, llm_frozen=False, zero2_nocpu, mbs=8 "
+deepspeed --num_gpus=2 --master_port 29521 test_ds_customtrainer.py --dataset nl27k_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10

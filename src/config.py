@@ -55,7 +55,7 @@ def parse_args_llama():
     parser.add_argument("--exp_name", type=str, default='')
     parser.add_argument("--kl_weight", type=float, default=0.5)
     parser.add_argument("--ce_weight", type=float, default=1.0)
-
+    parser.add_argument('--if_calibration', action='store_true', default=False, help='calibration head')
 
     args = parser.parse_args()
     return args

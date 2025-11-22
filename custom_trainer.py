@@ -6,7 +6,7 @@ from typing import Dict, Optional, Tuple, Union
 
 
 class CustomTrainer(Trainer):
-    def __init__(self, *args, kl_loss_weight=0.5, ce_loss_weight=1.0, mse_loss_weight=0.5, true_token_id, false_token_id, **kwargs):
+    def __init__(self, true_token_id, false_token_id, if_calibration, *args, kl_loss_weight=0.5, ce_loss_weight=1.0, mse_loss_weight=0.5, **kwargs):
         super().__init__(*args, **kwargs)
         self.kl_loss_weight = kl_loss_weight
         self.ce_loss_weight = ce_loss_weight
@@ -21,6 +21,8 @@ class CustomTrainer(Trainer):
 
         self.kl_criterion = nn.KLDivLoss(reduction='batchmean')
         self.mse_criterion = nn.MSELoss(reduction='mean')
+
+        self.if_calibration = if_calibration
 
     def compute_loss(self, model, inputs, return_outputs=False):
         confidence = inputs.pop("confidence", None)
@@ -67,6 +69,7 @@ class CustomTrainer(Trainer):
 
         # 2. 确定有效的样本索引
         valid_samples_indices = [i for i, pos in enumerate(first_token_positions) if pos >= 0]
+        print(f"len(valid_samples_indices)==len(batch_size): {len(valid_samples_indices)==len(batch_size)}")
         
         if len(valid_samples_indices) == 0:
             zero = torch.tensor(0.0, device=logits.device)
@@ -78,15 +81,19 @@ class CustomTrainer(Trainer):
             for i in valid_samples_indices
         ])  # shape: (num_valid_samples, vocab_size)
         
-        if hasattr(model, "module"):
-            calibration_head = model.module.calibration_head
+        if self.if_calibration:
+            if hasattr(model, "module"):
+                calibration_head = model.module.calibration_head
+            else:
+                calibration_head = model.calibration_head
+            target_dtype = first_token_logits.dtype
+            # 3. 显式地将 Calibration Head 的权重移动到目标数据类型
+            calibration_head = calibration_head.to(target_dtype)
+            # 将原始 logits 通过 FFN 映射
+            print('use calibration_head')
+            calibrated_logits = calibration_head(first_token_logits)
         else:
-            calibration_head = model.calibration_head
-        target_dtype = first_token_logits.dtype
-        # 3. 显式地将 Calibration Head 的权重移动到目标数据类型
-        calibration_head = calibration_head.to(target_dtype)
-        # 将原始 logits 通过 FFN 映射
-        calibrated_logits = calibration_head(first_token_logits)
+            calibrated_logits = first_token_logits
 
         # 提取有效样本的 confidence
         valid_confidence = confidence[valid_samples_indices] # shape: (num_valid_samples,)

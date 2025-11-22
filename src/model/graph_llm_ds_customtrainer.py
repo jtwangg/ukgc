@@ -57,11 +57,14 @@ class GraphLLMDSCT(PreTrainedModel):
         print(f"True token id: {self.true_token_id}, False token id: {self.false_token_id}")
 
         vocab_size = self.model.config.vocab_size
-        self.calibration_head = nn.Sequential(
-            nn.Linear(vocab_size, vocab_size // 2),  
-            nn.GELU(), 
-            nn.Linear(vocab_size // 2, vocab_size) 
-        ).to(self.model.device)
+
+        self.if_calibration = args.if_calibration
+        if self.if_calibration:
+            self.calibration_head = nn.Sequential(
+                nn.Linear(vocab_size, vocab_size // 2),  
+                nn.GELU(), 
+                nn.Linear(vocab_size // 2, vocab_size) 
+            ).to(self.model.device)
 
     @property
     def device(self):
@@ -206,7 +209,12 @@ class GraphLLMDSCT(PreTrainedModel):
                 return_dict=True,
             )
             first_token_logits = outputs.logits[:, -1, :]
-            calibrated_logits = self.calibration_head(first_token_logits)
+
+            if self.if_calibration:
+                calibrated_logits = self.calibration_head(first_token_logits)
+            else:
+                calibrated_logits = first_token_logits
+
             all_token_probs = torch.softmax(calibrated_logits, dim=-1) # shape: (batch_size, vocab_size)
             # 直接取出 True 和 False 对应的概率
             true_probs = all_token_probs[:, self.true_token_id].cpu().tolist() # shape: (batch_size, 1)
