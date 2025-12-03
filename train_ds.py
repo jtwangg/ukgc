@@ -286,6 +286,7 @@ def main(args):
 
     # args.micro_batch_size = args.batch_size // args.grad_steps
     output_path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}_fp16_{args.fp16}/'
+    args.output_path = output_path
     os.makedirs(output_path, exist_ok=True)
     print(f'output_path: {output_path}')
     print(f'batch_size: {args.batch_size}, micro_batch_size: {args.micro_batch_size}, grad_steps: {args.grad_steps}, world_size: {world_size}')

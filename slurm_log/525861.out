@@ -1,0 +1,64 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k_train_baseline_tc
+id: 100
+question: Question: Determine the correctness of the fact "tv agentcollaborateswithagent jessica_savitch".
+Answer by "True" or "False" without any explanation.
+Answer: 
+label: False
+confidence: 0.437
+graph: Data(x=[32, 1024], edge_index=[2, 50], edge_attr=[50, 1024], num_nodes=32, edge_weight=[50])
+desc: src,edge_attr,dst,weight
+dan_rather,agentcollaborateswithagent,tv,True
+search,agentcompeteswithagent,tv,False
+tv,agentcollaborateswithagent,simon_hunt,False
+tv,agentcompeteswithagent,fox_news,True
+tom_brokaw,agentcollaborateswithagent,tv,False
+tv,agentcollaborateswithagent,obama,False
+tv,agentcollaborateswithagent,bree_walker,False
+catherine_bosley,agentcollaborateswithagent,tv,False
+tv,agentcompeteswithagent,msnbc,False
+tv,agentcompeteswithagent,npr,False
+tv,agentcollaborateswithagent,catherine_bosley,False
+janet_peckinpaugh,agentcollaborateswithagent,tv,False
+tv,agentcollaborateswithagent,walter_cronkite,False
+tv,agentcollaborateswithagent,position,False
+tv,agentcollaborateswithagent,report,False
+tv,agentcompeteswithagent,cnn_,False
+kent_brockman,agentcollaborateswithagent,tv,False
+tv,agentcollaborateswithagent,john_roland,False
+walter_cronkite,controlledbyagent,tv,True
+david_brinkley,agentcollaborateswithagent,tv,False
+report,agentcollaborateswithagent,tv,False
+tv,agentcollaborateswithagent,karen_white,True
+cbs_radio,agentcompeteswithagent,tv,False
+obama,agentcollaborateswithagent,tv,False
+tv,agentcontrols,peter_jennings,False
+npr,agentcompeteswithagent,tv,False
+tv,agentcollaborateswithagent,reports,False
+nbc_universal,agentcollaborateswithagent,jessica_savitch,False
+tv,agentcollaborateswithagent,tom_brokaw,False
+abc_news,agentcompeteswithagent,tv,False
+tv,agentcompeteswithagent,abc,False
+tv,agentcompeteswithagent,abc_news,False
+tv,agentcollaborateswithagent,job,False
+charlie_gibson,agentcollaborateswithagent,tv,False
+tv,agentcollaborateswithagent,kent_brockman,False
+simon_hunt,agentcollaborateswithagent,tv,False
+tv,agentcompeteswithagent,cnn,True
+job,agentcollaborateswithagent,tv,False
+jessica_savitch,agentcollaborateswithagent,nbc_universal,False
+tv,agentcompeteswithagent,search,False
+walter_cronkite,agentcollaborateswithagent,tv,False
+jessica_savitch,agentcollaborateswithagent,tv,False
+tv,agentcompeteswithagent,cbs_radio,False
+tv,agentcompeteswithagent,oprah,False
+tv,agentcollaborateswithagent,peter_jennings,False
+cnn_,agentcompeteswithagent,tv,False
+john_roland,agentcollaborateswithagent,tv,False
+nbc_news,agentcompeteswithagent,tv,False
+tv,agentcollaborateswithagent,charlie_gibson,False
+karen_white,agentcollaborateswithagent,tv,True
+
+# train: 148953
+# val: 12278
+# test: 14034

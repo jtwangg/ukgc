@@ -164,9 +164,18 @@ export PYTHONUNBUFFERED=1
 # echo "cn15k_baseline_cp, llm_frozen=True, fp32, zero2_nocpu, mbs=8"
 # deepspeed --num_gpus=2 --master_port 29506 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1200 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json"
 # 503522
-echo "cn15k_baseline_cp, llm_frozen=False, fp32, zero2_nocpu, mbs=32"
-deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 32 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
-echo "cn15k_baseline_cp, llm_frozen=True, fp32, zero2_nocpu, mbs=16"
-deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
-echo "cn15k_baseline_cp, llm_frozen=True, fp32, zero2_nocpu, mbs=8"
-deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "cn15k_baseline_cp, llm_frozen=False, fp32, zero2_nocpu, mbs=32"
+# deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 32 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "cn15k_baseline_cp, llm_frozen=True, fp32, zero2_nocpu, mbs=16"
+# deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "cn15k_baseline_cp, llm_frozen=True, fp32, zero2_nocpu, mbs=8"
+# deepspeed --num_gpus=2 --master_port 29505 train_ds.py --dataset cn15k_baseline_cp --model_name graph_llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+
+
+
+
+
+echo "nl27k_baseline_cp, llm_frozen=true, fp32, zero2_nocpu, mbs=8"
+deepspeed --num_gpus=2 --master_port 29536 train_ds.py --dataset nl27k_baseline_cp --model_name graph_llm_ds --num_epochs 1 --batch_size 64 --micro_batch_size 8 --max_txt_len 1700 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8
+echo "nl27k_cp, llm_frozen=true, fp32, zero2_nocpu, mbs=8"
+deepspeed --num_gpus=2 --master_port 29536 train_ds.py --dataset nl27k_cp --model_name graph_llm_ds --num_epochs 1 --batch_size 64 --micro_batch_size 8 --max_txt_len 1700 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8

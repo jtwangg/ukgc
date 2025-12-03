@@ -37,12 +37,12 @@ export PYTHONUNBUFFERED=1
 # echo "nl27k_cp, llm_froze=False"
 # deepspeed --num_gpus=2 --master_port 29504 train_ds.py --dataset nl27k_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
 # 505553
-echo "nl27k, instruction tuning with random sampled 50 triples, llm_froze=False"
-deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_baseline_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
-echo "nl27k_cp, llm_froze=False"
-deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 16 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
-echo "nl27k_cp, llm_froze=False"
-deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "nl27k, instruction tuning with random sampled 50 triples, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_baseline_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "nl27k_cp, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 16 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "nl27k_cp, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
 
 
 
@@ -56,3 +56,15 @@ deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset nl27k_cp --mode
 # echo "cn15k_cp, llm_froze=False"
 # deepspeed --num_gpus=2 --master_port 29502 train_ds.py --dataset cn15k_cp --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
 
+
+# echo "nl27k, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29521 train_ds.py --dataset nl27k --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "nl27k_baseline, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29521 train_ds.py --dataset nl27k_baseline --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+stdbuf -o0 -e0 python3 -u test_ds.py --dataset nl27k_baseline --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8
+
+
+# echo "cn15k, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29522 train_ds.py --dataset cn15k --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "cn15k_baseline, llm_froze=False"
+# deepspeed --num_gpus=2 --master_port 29522 train_ds.py --dataset cn15k_baseline --model_name llm_ds --num_epochs 3 --batch_size 64 --micro_batch_size 8 --max_txt_len 1800 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"

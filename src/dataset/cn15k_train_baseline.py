@@ -49,7 +49,7 @@ class CN15kBaselineDataset(Dataset):
         sampled_edges = edges.sample(n=min(50, len(edges)), random_state=42)
 
         desc = sampled_edges.to_csv(index=False, columns=['src', 'edge_attr', 'dst'])
-        filtered_edges = sampled_edges[~((sampled_edges['src'] == label) | (sampled_edges['dst'] == label))]
+        # filtered_edges = sampled_edges[~((sampled_edges['src'] == label) | (sampled_edges['dst'] == label))]
         if isinstance(data['answer'], list):
             label = ('|').join(data['answer']).lower()
         else:

@@ -69,7 +69,7 @@ class CustomTrainer(Trainer):
 
         # 2. 确定有效的样本索引
         valid_samples_indices = [i for i, pos in enumerate(first_token_positions) if pos >= 0]
-        print(f"len(valid_samples_indices)==len(batch_size): {len(valid_samples_indices)==len(batch_size)}")
+        # print(f"len(valid_samples_indices)==batch_size: {len(valid_samples_indices)==batch_size}")
         
         if len(valid_samples_indices) == 0:
             zero = torch.tensor(0.0, device=logits.device)
@@ -90,7 +90,7 @@ class CustomTrainer(Trainer):
             # 3. 显式地将 Calibration Head 的权重移动到目标数据类型
             calibration_head = calibration_head.to(target_dtype)
             # 将原始 logits 通过 FFN 映射
-            print('use calibration_head')
+            # print('use calibration_head')
             calibrated_logits = calibration_head(first_token_logits)
         else:
             calibrated_logits = first_token_logits
@@ -99,21 +99,22 @@ class CustomTrainer(Trainer):
         valid_confidence = confidence[valid_samples_indices] # shape: (num_valid_samples,)
         valid_confidence = valid_confidence.to(dtype=logits.dtype)
 
-        # 构建目标概率分布 (仅用于 KLDivLoss)
+        # 构建目标概率分布 (仅用于 KLDivLoss)，dim=vocab_size
         target_dist = torch.zeros(len(valid_samples_indices), vocab_size, device=logits.device, dtype=logits.dtype)
         target_dist[:, self.true_token_id] = valid_confidence
         target_dist[:, self.false_token_id] = 1.0 - valid_confidence
+        # 构建目标概率分布 (仅用于 KLDivLoss)，dim=2
+        # target_dist = torch.zeros(len(valid_samples_indices), 2, device=logits.device, dtype=logits.dtype)
+        # target_dist[:, 0] = valid_confidence
+        # target_dist[:, 1] = 1.0 - valid_confidence
         
         # 4. 计算 KL 散度损失 (D_KL(P || Q))
         log_probs = F.log_softmax(calibrated_logits, dim=-1)
         kl_loss = self.kl_criterion(log_probs, target_dist)
-        
+
         # 5. 计算 MSE 损失
-        # 提取 true_token_id 对应的概率
-        # P(true_token | first_token_logits)
         true_token_probs = F.softmax(calibrated_logits, dim=-1)[:, self.true_token_id] # shape: (num_valid_samples,)
-        # MSE(P(true_token) - confidence)
-        # valid_confidence 相当于目标值，true_token_probs 相当于预测值
+        # true_token_probs = F.softmax(calibrated_logits, dim=-1)[:, 0] # shape: (num_valid_samples,)
         mse_loss = self.mse_criterion(true_token_probs, valid_confidence)
         
         return kl_loss, mse_loss

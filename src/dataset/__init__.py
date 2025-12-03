@@ -31,6 +31,7 @@ from src.dataset.cn15k_train_baseline_cp import CN15kBaselineCPDataset
 from src.dataset.cn15k_train_cp import CN15kCPDataset
 
 from src.dataset.nl27k_train_tc import NL27kTCDataset
+from src.dataset.nl27k_train_baseline_tc import NL27kBaselineTCDataset
 
 
 load_dataset = {
@@ -64,5 +65,6 @@ load_dataset = {
 
 
     'nl27k_tc': NL27kTCDataset,
+    'nl27k_baseline_tc': NL27kBaselineTCDataset,
 
 }

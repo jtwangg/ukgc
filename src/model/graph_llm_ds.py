@@ -119,13 +119,13 @@ class GraphLLMDS(PreTrainedModel):
         new_attention_mask = torch.cat((torch.ones((batch_size, soft_prompt_length), device=attention_mask.device), attention_mask), dim=1)
         new_labels = torch.cat((torch.full((batch_size, soft_prompt_length), IGNORE_INDEX, dtype=labels.dtype, device=labels.device), labels), dim=1)
 
-        # with self.maybe_autocast():
-        outputs = self.model(
-            inputs_embeds=input_embeds,
-            attention_mask=new_attention_mask,
-            return_dict=True,
-            labels=new_labels,
-        )
+        with self.maybe_autocast():
+            outputs = self.model(
+                inputs_embeds=input_embeds,
+                attention_mask=new_attention_mask,
+                return_dict=True,
+                labels=new_labels,
+            )
 
         return outputs
 

@@ -26,4 +26,6 @@ llama_model_path = {
     "7b_chat": "/seu_share/home/qiguilin/220236147/huggingface_models/Llama-2-7b-chat-hf",
     "13b": "meta-llama/Llama-2-13b-hf",
     "13b_chat": "meta-llama/Llama-2-13b-chat-hf",
+    "8b": "/seu_share/home/qiguilin/220236147/huggingface_models/Llama-3.1-8B-Instruct",
+    "3b": "/seu_share/home/qiguilin/220236147/huggingface_models/Llama-3.2-3B-Instruct",
 }

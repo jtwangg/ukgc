@@ -63,7 +63,8 @@ class GraphLLMDSCT(PreTrainedModel):
             self.calibration_head = nn.Sequential(
                 nn.Linear(vocab_size, vocab_size // 2),  
                 nn.GELU(), 
-                nn.Linear(vocab_size // 2, vocab_size) 
+                nn.Linear(vocab_size // 2, vocab_size)
+                # nn.Linear(vocab_size // 2, 2)  
             ).to(self.model.device)
 
     @property
@@ -219,6 +220,9 @@ class GraphLLMDSCT(PreTrainedModel):
             # 直接取出 True 和 False 对应的概率
             true_probs = all_token_probs[:, self.true_token_id].cpu().tolist() # shape: (batch_size, 1)
             false_probs = all_token_probs[:, self.false_token_id].cpu().tolist()
+            # when calibration head output dim=2
+            # true_probs = all_token_probs[:, 0].cpu().tolist() # shape: (batch_size, 1)
+            # false_probs = all_token_probs[:, 1].cpu().tolist()
 
             # 然后进行正常的生成
             outputs = self.model.generate(

@@ -4,7 +4,7 @@
 #SBATCH --partition=qigl     # 作业提交的指定队列/分区为normal_test
 #SBATCH --nodes=1                   # 申请节点数为1,如果作业不能跨节点(MPI)运行, 申请的节点数应不超过1
 #SBATCH --ntasks-per-node=1         # 每节点任务数，GPU任务不需要修改
-#SBATCH --cpus-per-task=12           # V100一张卡默认配置3个CPU核心，gpuB一张卡默认配置12个CPU核心,MIG资源一张卡默认配置6个CPU核心(根据卡数自行调整)
+#SBATCH --cpus-per-task=10           # V100一张卡默认配置3个CPU核心，gpuB一张卡默认配置12个CPU核心,MIG资源一张卡默认配置6个CPU核心(根据卡数自行调整)
 #SBATCH --gres=gpu:0                # 申请一块GPU卡
 #SBATCH -o slurm_log/%J.out                   # 脚本执行的输出将被保存在当 %J.out文件下，%j表示作业号
 #SBATCH -e slurm_log/%J.err                   # 脚本执行的错误日志将被保存在当 %J.err文件下，%j表示作业号
@@ -60,5 +60,5 @@ wandb offline
 
 
 
-echo "nl27k_train_tc max_desc_length"
-stdbuf -o0 -e0 python3 -u -m src.dataset.nl27k_train_tc
+echo "nl27k_train_baseline_tc"
+stdbuf -o0 -e0 python3 -u -m src.dataset.nl27k_train_baseline_tc

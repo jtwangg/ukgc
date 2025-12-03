@@ -208,6 +208,7 @@ def main(args):
         low_cpu_mem_usage=True,
         device_map=device_map,
         max_memory={i: f'{size}GiB' for i, size in enumerate(args.max_memory)},
+        trust_remote_code=True,
     )
     model.gradient_checkpointing_enable()
     model.config.use_cache = False
@@ -328,9 +329,9 @@ def main(args):
         logging_strategy="steps",
         logging_steps=args.grad_steps,
         evaluation_strategy="steps",
-        eval_steps=1000,
+        eval_steps=200,
         save_strategy="steps",
-        save_steps=1000,
+        save_steps=200,
         save_total_limit=1,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
@@ -375,6 +376,7 @@ def main(args):
         # tokenizer=tokenizer,  # 添加tokenizer参数
         kl_loss_weight=args.kl_weight,  # 自定义损失的权重，可以根据需要调整
         ce_loss_weight=args.ce_weight,
+        mse_loss_weight=args.mse_weight,
         true_token_id=sp_model.true_token_id,
         false_token_id=sp_model.false_token_id,
         if_calibration=args.if_calibration,
@@ -387,6 +389,16 @@ def main(args):
 
     trainer.train()
     _save_checkpoint_nooptim(sp_model, args)
+
+    # try:
+    #     best_model = trainer.model
+    #     # Optional but recommended: Unwrap the model just in case it's still wrapped (e.g. if using DeepSpeed or DataParallel)
+    #     if hasattr(trainer, "unwrap_model"):
+    #         best_model = trainer.unwrap_model(trainer.model)
+    #     _save_checkpoint_nooptim(best_model, args)
+    # except:
+    #     print('best_model = trainer.model error')
+
     
     
     """

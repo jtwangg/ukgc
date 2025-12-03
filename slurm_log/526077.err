@@ -1,0 +1,20 @@
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:18: UserWarning: An issue occurred while importing 'pyg-lib'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'pyg-lib'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/torch_geometric/typing.py:42: UserWarning: An issue occurred while importing 'torch-sparse'. Disabling its usage. Stacktrace: /lib64/libm.so.6: version `GLIBC_2.29' not found (required by /seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/site-packages/libpyg.so)
+  warnings.warn(f"An issue occurred while importing 'torch-sparse'. "
+/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/runpy.py:127: RuntimeWarning: 'src.dataset.nl27k_train_tc' found in sys.modules after import of package 'src.dataset', but prior to execution of 'src.dataset.nl27k_train_tc'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+Traceback (most recent call last):
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/seu_share/home/qiguilin/220236147/.conda/envs/g_retriever/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/dataset/nl27k_train_tc.py", line 184, in <module>
+    get_max_desc_length()
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/dataset/nl27k_train_tc.py", line 134, in get_max_desc_length
+    train_dataset = [dataset[i] for i in idx_split['train']]
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/dataset/nl27k_train_tc.py", line 134, in <listcomp>
+    train_dataset = [dataset[i] for i in idx_split['train']]
+  File "/seu_share/home/qiguilin/220236147/wjt_gretriever/g_retriever_ukg/src/dataset/nl27k_train_tc.py", line 78, in __getitem__
+    data = self.dataset.iloc[index]
+AttributeError: 'NL27kTCDataset' object has no attribute 'iloc'

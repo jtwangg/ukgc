@@ -78,13 +78,13 @@ class PromptTuningLLMDS(PreTrainedModel):
             labels
         ), dim=1)
 
-        # with self.maybe_autocast():
-        outputs = self.model(
-            inputs_embeds=input_embeds,
-            attention_mask=new_attention_mask,
-            return_dict=True,
-            labels=new_labels,
-        )
+        with self.maybe_autocast():
+            outputs = self.model(
+                inputs_embeds=input_embeds,
+                attention_mask=new_attention_mask,
+                return_dict=True,
+                labels=new_labels,
+            )
         return outputs
 
 

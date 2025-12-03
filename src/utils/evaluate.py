@@ -249,7 +249,7 @@ eval_funcs = {
     'ppi5k_baseline_cp': get_ukg_cp_mse_mae,
 
 
-    # 'nl27k_baseline_tc': get_ukg_tc_acc,
+    'nl27k_baseline_tc': get_ukg_tc_mse_mae,
     'nl27k_tc': get_ukg_tc_mse_mae,
 
 

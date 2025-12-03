@@ -5,7 +5,7 @@ import datasets
 
 
 model_name = 'sbert'
-path = 'dataset/ukg/train_50neighbor/confidence_prediction/nl27k'
+path = 'dataset/ukg/train_50neighbor/confidence_prediction_conffilter/nl27k'
 
 train_df = pd.read_json(f'{path}/train_1hop.json')
 val_df = pd.read_json(f'{path}/val_1hop.json')

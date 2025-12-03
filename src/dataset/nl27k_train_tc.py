@@ -76,7 +76,7 @@ class NL27kTCDataset(Dataset):
         prompt设计
         """
         data = self.dataset.iloc[index]
-        question = f'Question: Determine the correctness of the fact "{data["question"].lower()}".\nOnly output "True" or "False" without any explanation.\nAnswer: '
+        question = f'Question: Determine the correctness of the fact "{data["question"].lower()}".\nAnswer by "True" or "False" without any explanation.\nAnswer: '
         # graph = torch.load(f'{cached_graph}/{index}.pt')
         graph = self.all_cached_graphs[index]
         # desc = open(f'{cached_desc}/{index}.txt', 'r').read()  # description
@@ -170,15 +170,15 @@ if __name__ == '__main__':
 
     # cache_data_per_item()
 
-    # dataset = NL27kTCDataset()
+    dataset = NL27kTCDataset()
 
-    # idx = 101
-    # data = dataset[idx]
-    # for k, v in data.items():
-    #     print(f'{k}: {v}')
+    idx = 100
+    data = dataset[idx]
+    for k, v in data.items():
+        print(f'{k}: {v}')
 
-    # split_ids = dataset.get_idx_split()
-    # for k, v in split_ids.items():
-    #     print(f'# {k}: {len(v)}')
+    split_ids = dataset.get_idx_split()
+    for k, v in split_ids.items():
+        print(f'# {k}: {len(v)}')
 
     get_max_desc_length()
