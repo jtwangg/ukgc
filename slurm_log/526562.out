@@ -1,0 +1,18 @@
+W&B offline. Running your script from this directory will only write metadata locally. Use wandb disabled to completely turn off W&B.
+nl27k_train_baseline_cp
+init cost 500.9 s
+train dataset max length: 1817
+val dataset max length: 1630
+test dataset max length: 1799
+nl27k_train_cp
+train dataset max length: 1421
+val dataset max length: 1320
+test dataset max length: 1472
+cn15k_train_cp
+train dataset max length: 1022
+val dataset max length: 931
+test dataset max length: 971
+cn15k_train_baseline_cp
+train dataset max length: 1102
+val dataset max length: 1102
+test dataset max length: 1177

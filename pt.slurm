@@ -113,7 +113,24 @@ export PYTHONUNBUFFERED=1
 # deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_baseline_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 32 --micro_batch_size 8 --max_txt_len 1700 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
 
 
-echo "cn15k_cp, prompt tuning, llm_frozen=false, zero2_nocpu, mbs=16"
-deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
-echo "cn15k_baseline_cp, prompt tuning, llm_frozen=false, zero2_nocpu, mbs=16"
-deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_baseline_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "cn15k_cp, prompt tuning, llm_frozen=false, zero2_nocpu, mbs=16"
+# deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# echo "cn15k_baseline_cp, prompt tuning, llm_frozen=false, zero2_nocpu, mbs=16"
+# deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_baseline_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json"
+# 526490
+# echo "cn15k_baseline_cp, prompt tuning test, llm_frozen=false, zero2_nocpu, mbs=16"
+# stdbuf -o0 -e0 python3 -u test_ds.py --dataset cn15k_baseline_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1200 --llm_frozen False --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8
+
+
+# 526550
+echo "cn15k_cp, prompt tuning, llm_frozen=true, zero2_nocpu, mbs=16"
+deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8
+echo "cn15k_baseline_cp, prompt tuning, llm_frozen=true, zero2_nocpu, mbs=16"
+deepspeed --num_gpus=2 --master_port 29501 train_ds.py --dataset cn15k_baseline_cp --model_name pt_llm_ds --num_epochs 2 --batch_size 64 --micro_batch_size 16 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8
+
+
+
+
+
+
+

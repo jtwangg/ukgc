@@ -60,5 +60,11 @@ wandb offline
 
 
 
-echo "nl27k_train_baseline_tc"
-stdbuf -o0 -e0 python3 -u -m src.dataset.nl27k_train_baseline_tc
+echo "nl27k_train_baseline_cp"
+stdbuf -o0 -e0 python3 -u -m src.dataset.nl27k_train_baseline_cp
+echo "nl27k_train_cp"
+stdbuf -o0 -e0 python3 -u -m src.dataset.nl27k_train_cp
+echo "cn15k_train_cp"
+stdbuf -o0 -e0 python3 -u -m src.dataset.cn15k_train_cp
+echo "cn15k_train_baseline_cp"
+stdbuf -o0 -e0 python3 -u -m src.dataset.cn15k_train_baseline_cp

@@ -127,7 +127,17 @@ def cache_data():
 
 
 
-
+def get_max_desc_length():
+    from transformers import LlamaTokenizer
+    tokenizer = LlamaTokenizer.from_pretrained("/seu_share/home/qiguilin/220236147/huggingface_models/Llama-2-7b-chat-hf")
+    dataset = CN15kBaselineCPDataset()
+    train_dataset, val_dataset, test_dataset = dataset.load_data_from_pickle()
+    train_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in train_dataset]
+    val_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in val_dataset]
+    test_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in test_dataset]
+    print(f'train dataset max length: {max(train_dataset_desc_length)}')
+    print(f'val dataset max length: {max(val_dataset_desc_length)}')
+    print(f'test dataset max length: {max(test_dataset_desc_length)}')
 
 
 
@@ -143,4 +153,6 @@ if __name__ == '__main__':
     # for k, v in split_ids.items():
     #     print(f'# {k}: {len(v)}')
 
-    cache_data()
+    # cache_data()
+
+    get_max_desc_length()

@@ -155,6 +155,7 @@ def main(args):
 
     output_path = f'{args.output_dir}/{args.dataset}/model_name_{args.model_name}_llm_model_name_{args.llm_model_name}_llm_frozen_{args.llm_frozen}_max_txt_len_{args.max_txt_len}_max_new_tokens_{args.max_new_tokens}_gnn_model_name_{args.gnn_model_name}_patience_{args.patience}_num_epochs_{args.num_epochs}_seed{seed}_fp16_{args.fp16}/'
     os.makedirs(output_path, exist_ok=True)
+    args.output_path = output_path
 
     torch.cuda.empty_cache()
     torch.cuda.reset_max_memory_allocated()

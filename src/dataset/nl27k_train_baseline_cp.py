@@ -121,11 +121,26 @@ def cache_data_per_item():
     print(f"All edges saved to {path}/all_edges.pkl")
 
 
+def get_max_desc_length():
+    from transformers import LlamaTokenizer
+    tokenizer = LlamaTokenizer.from_pretrained("/seu_share/home/qiguilin/220236147/huggingface_models/Llama-2-7b-chat-hf")
+    dataset = NL27kBaselineCPDataset()
+    idx_split = dataset.get_idx_split()
+    train_dataset = [dataset[i] for i in idx_split['train']]
+    val_dataset = [dataset[i] for i in idx_split['val']]
+    test_dataset = [dataset[i] for i in idx_split['test']]
+    train_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in train_dataset]
+    val_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in val_dataset]
+    test_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in test_dataset]
+    print(f'train dataset max length: {max(train_dataset_desc_length)}')
+    print(f'val dataset max length: {max(val_dataset_desc_length)}')
+    print(f'test dataset max length: {max(test_dataset_desc_length)}')
+
 
 if __name__ == '__main__':
     # cache_data_per_item()
 
-    dataset = NL27kBaselineCPDataset()
+    # dataset = NL27kBaselineCPDataset()
 
     # idx = 101
     # data = dataset[idx]
@@ -136,8 +151,10 @@ if __name__ == '__main__':
     # for k, v in split_ids.items():
     #     print(f'# {k}: {len(v)}')
 
-    dataset.get_train()
-    end = time.time()
-    print(f'cost {(end - start):.1f} s')
+    # dataset.get_train()
+    # end = time.time()
+    # print(f'cost {(end - start):.1f} s')
+
+    get_max_desc_length()
 
 

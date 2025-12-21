@@ -137,19 +137,38 @@ def cache_data_per_item():
 
 
 
+def get_max_desc_length():
+    from transformers import LlamaTokenizer
+    tokenizer = LlamaTokenizer.from_pretrained("/seu_share/home/qiguilin/220236147/huggingface_models/Llama-2-7b-chat-hf")
+    dataset = NL27kCPDataset()
+    idx_split = dataset.get_idx_split()
+    train_dataset = [dataset[i] for i in idx_split['train']]
+    val_dataset = [dataset[i] for i in idx_split['val']]
+    test_dataset = [dataset[i] for i in idx_split['test']]
+    train_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in train_dataset]
+    val_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in val_dataset]
+    test_dataset_desc_length = [len(tokenizer(i["desc"], add_special_tokens=False).input_ids) for i in test_dataset]
+    print(f'train dataset max length: {max(train_dataset_desc_length)}')
+    print(f'val dataset max length: {max(val_dataset_desc_length)}')
+    print(f'test dataset max length: {max(test_dataset_desc_length)}')
+
+
+
 if __name__ == '__main__':
 
     # preprocess()
 
-    cache_data_per_item()
+    # cache_data_per_item()
 
-    dataset = NL27kCPDataset()
+    # dataset = NL27kCPDataset()
 
-    idx = 101
-    data = dataset[idx]
-    for k, v in data.items():
-        print(f'{k}: {v}')
+    # idx = 101
+    # data = dataset[idx]
+    # for k, v in data.items():
+    #     print(f'{k}: {v}')
 
-    split_ids = dataset.get_idx_split()
-    for k, v in split_ids.items():
-        print(f'# {k}: {len(v)}')
+    # split_ids = dataset.get_idx_split()
+    # for k, v in split_ids.items():
+    #     print(f'# {k}: {len(v)}')
+
+    get_max_desc_length()

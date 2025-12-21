@@ -68,8 +68,8 @@ export PYTHONUNBUFFERED=1
 
 
 
-# 522886 loss7, calibration head dim = vocab_size
+
 echo "nl27k_tc, llm_frozen=False, loss7, if_calibration=true, llm_frozen=true"
-deepspeed --num_gpus=2 --master_port 29514 train_ds_customtrainer.py --dataset nl27k_baseline_tc --model_name graph_llm_ds_customtrainer --exp_name loss7_repeat --if_calibration --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
-stdbuf -o0 -e0 python3 -u test_ds_customtrainer.py --dataset nl27k_baseline_tc --model_name graph_llm_ds_customtrainer --exp_name loss7_repeat --if_calibration --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1500 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
+deepspeed --num_gpus=2 --master_port 29514 train_ds_customtrainer.py --dataset cn15k_baseline_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --if_calibration --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1200 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
+stdbuf -o0 -e0 python3 -u test_ds_customtrainer.py --dataset cn15k_baseline_tc --model_name graph_llm_ds_customtrainer --exp_name loss7 --if_calibration --num_epochs 1 --batch_size 32 --micro_batch_size 8 --max_txt_len 1200 --llm_frozen True --deepspeed "ds_config_zero2_nocpu.json" --eval_batch_size 8 --max_new_tokens 10
 
